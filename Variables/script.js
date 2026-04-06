@@ -22,7 +22,7 @@ let student = true
 console.log(student);
 
 
-// Undefined mean the value is not defined
+// * Undefined mean the value is not defined
 
 
 let married;
@@ -60,4 +60,7 @@ console.log(typeof vichles);
 
 
 
-// with type of when i print the same variable i got problem that you can't declare the same variable so i just change the name and solve the problem
+// ! with type of when i print the same variable i got problem that you can't declare the same variable so i just change the name and solve the problem
+
+
+console.log ("Hello World")

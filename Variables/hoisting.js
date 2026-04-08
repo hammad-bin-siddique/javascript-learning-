@@ -45,3 +45,10 @@ console.table([marks,grade]);
 // let examScore = 95;           // ✅ meaningful
 // let isLoggedIn = true;        // ✅ boolean ke liye is
 // const MAX_SCORE = 100;        // ✅ constant ke liye SCREAMING_SNAKE
+
+
+const firstName = "Asad"
+let rollNum = 124
+let passed = true
+let grades = "A"
+console.table([firstName,rollNum,passed,grades]);

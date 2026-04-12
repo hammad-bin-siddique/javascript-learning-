@@ -25,7 +25,7 @@
 
 let name = "Hammad"; //with double qoutes
 let city = 'Abbottabd'; // with single quotes
-let age = 23  // with backtick
+let age = 23  
 console.log(name);
 // to uppercase
 console.log(name.toUpperCase());// upper case kar dia sab letters

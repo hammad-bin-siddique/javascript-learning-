@@ -11,9 +11,7 @@ Yeh har baar ek alag number deta hai — 0 se 1 ke beech:
 1. Hamesha 0 se 1 ke beech aata hai
 2. 0 aa sakta hai — lekin 1 kabhi nahi aata*/
 
-
 // ! Dice Using this Math Object
-
 
 let dice = Math.floor(Math.random() * 6) + 1;
 console.log(`Dice Number is ${dice}`);
@@ -23,6 +21,6 @@ console.log(`Dice Number is ${dice}`);
 let otp = Math.floor(Math.random() * 900000) + 100000;
 console.log(`Your OTP: ${otp}`);
 
-//! Luck Draw 
+//! Luck Draw
 let luckyDraw = Math.floor(Math.random() * 90) + 1;
 console.log(`The Luck Number is:${luckyDraw}`);

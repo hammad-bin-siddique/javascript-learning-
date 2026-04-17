@@ -2,14 +2,13 @@
 // Socho tumhare paas ek chota calculator hai — woh sirf 15-16 digit tak sahi kaam karta hai. Isse zyada karo toh galat jawab deta hai!
 // JavaScript ka normal Number bhi aisa hi hai:
 
-console.log(Number.MAX_SAFE_INTEGER + 5); // ab ye sahi calculate nahi kar raha is se age 
+console.log(Number.MAX_SAFE_INTEGER + 5); // ab ye sahi calculate nahi kar raha is se age
 
 // Normal Number = Choti almari → sirf 9007199254740991 tak
 // BigInt        = Badi almari  → jitna chahو rakho!
 
 let bigNum = 495820858209582058n;
-console.log(bigNum + 90090n);//! bigint ke sath ap unlimited numbers add kar sakte ho 
-
+console.log(bigNum + 90090n); //! bigint ke sath ap unlimited numbers add kar sakte ho
 
 // BigInt Ka typeof:
 
@@ -17,7 +16,7 @@ let a = 49029409580295n;
 console.log(typeof a, a); // typeof BIGINT ai ga
 
 let b = Number.MAX_SAFE_INTEGER;
-console.log(typeof b, b); // typeof Number ai ga 
+console.log(typeof b, b); // typeof Number ai ga
 
 // BigInt Pe Maths — Bilkul Normal:
 
@@ -37,15 +36,14 @@ let d = 490;
 // console.log(c + d); // TypeError: Cannot mix BigInt and other types, use explicit conversions
 // ye wala error ai ga is lia dono ko mix nahi kar sakte;
 
-// ! Ha convert kar sakte ho 
+// ! Ha convert kar sakte ho
 
 let e = 390n;
 let f = 400;
-console.log(e + BigInt(f)); // ab ye proper kam kare ga ham ne normal number ko bigint bana dia 
+console.log(e + BigInt(f)); // ab ye proper kam kare ga ham ne normal number ko bigint bana dia
 console.log(f + Number(e)); // ye bhi proper kam kare ga yaha bigint ko number bana dia normal
 
-
-// yaha number ko bigint kia 
+// yaha number ko bigint kia
 let num = 500;
 let big = BigInt(num);
 console.log(typeof big, big);
@@ -56,10 +54,9 @@ let bigNumber = 500n;
 let normalNumber = Number(bigNumber);
 console.log(typeof normalNumber, normalNumber);
 
+//! Decimal BigInt Mein Nahi Hota!
 
-//! Decimal BigInt Mein Nahi Hota! 
-
-// let g = 390.5n; // SyntaxError: Invalid or unexpected token ye sirf whole number leta ha decimal nahi 
+// let g = 390.5n; // SyntaxError: Invalid or unexpected token ye sirf whole number leta ha decimal nahi
 
 // Real Life Use Cases:
 // 1. Bank — big Transactions:
@@ -69,7 +66,7 @@ let deposit = 94959029584444029502n;
 let newBalance = bankBalance + deposit;
 console.log(`New Balance is: ${newBalance}`);
 
-// 2. Space Science — Distance Measure 
+// 2. Space Science — Distance Measure
 
 let sunDistance = 1496000000084859020000n;
 console.log(`Sun Distance From Earth is: ${sunDistance} Kilo Meter`);
@@ -78,4 +75,26 @@ console.log(`Sun Distance From Earth is: ${sunDistance} Kilo Meter`);
 
 let userId1 = 9340248001840194n;
 let userId2 = 9010480138049029n;
-console.table([typeof userId1,userId1,typeof userId2, userId2]);
+console.table([typeof userId1, userId1, typeof userId2, userId2]);
+
+// ! All in one place
+
+// Normal number ki problem
+let normal = 9007199254740991;
+console.log(normal + 2); // ❌ galat
+
+// BigInt ka solution
+let biger = 9007199254740991n;
+console.log(biger + 2n); // ✅ sahi
+
+// typeof
+console.log(typeof normal); // "number"
+console.log(typeof biger); // "bigint"
+
+// Convert
+console.log(BigInt(100)); // 100n
+console.log(Number(100n)); // 100
+
+// Mix nahi hota
+// console.log(biger + normal); // ❌ TypeError
+console.log(biger + BigInt(normal)); // ✅

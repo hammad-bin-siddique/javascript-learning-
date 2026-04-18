@@ -21,7 +21,7 @@ const user1 = {
   }
 };
 console.log(user1); // Pure Object ka access
-console.log(user1.address.province); // object ke nested object ke key ka access 
+console.log(user1.address.province); // object ke nested object ka access 
 
 
 // ! Array Value object ke andar 
@@ -40,7 +40,7 @@ console.log(car.color[2]); // yaha ham ne marzi ke color ka access lia yani sirf
 
 // ! Function Value — (Method)
 
-let person = {
+const person = {
     name: "Hammad Siddique",
     age: 23,
     city: "Pehsawer",
@@ -53,3 +53,43 @@ console.log(`my name is ${person.name} i'm ${person.age} year old and i live in 
 
 
 // ! Sab Ek Saath — Complete Object
+
+const student = {
+  // string
+  name: "Hammad Siddique",
+  "fatherName":   "Siddique Zaman",
+  // number
+  age: 23,
+  rollNumber: 2202,
+  // boolean
+  isStudent: true,
+  isMarried: false,
+  // Arrays
+  hobbies: ["Coding", "Chess", "Gaming", "Reading"],
+  // Nested Object
+  subjectsMarks: {
+    math: 88,
+    english: 95,
+    physics: 39,
+    chemistry: 90,
+    computerScience: 94,
+  },
+  // Function
+  introduce: function() {
+    console.log("My Name is Hammad Siddique");
+    
+  }
+}
+
+//! Object Se Data Nikalna (Access) With Dot Notation
+
+console.table([student]); // ! whole data of object with table 
+console.log(student); //! whole data of object 
+console.log(student.name,student.fatherName); //! object se specific data ka access karna 
+console.log(`Array ka Data: ${student.hobbies}`); // ! Arrays ka data access karna 
+console.log(`Specific Array ka Data: ${student.hobbies[0]}`); //! Specific Array ka data 
+console.log("Nested Object ka Data:", student.subjectsMarks); //! Nested object ka data nikalna 
+console.log(`Specific Nested Object ka Data: ${student.subjectsMarks.computerScience}`);//! Specific Nested Object ka Data Nikalna
+student.introduce(); //! Funciton ka data Nikalna
+
+ 

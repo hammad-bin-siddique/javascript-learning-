@@ -81,6 +81,9 @@ const student = {
   }
 }
 
+// Object ka dynamic Variable Banana
+let x = "isStudent";
+
 //! Object Se Data Nikalna (Access) With Dot Notation
 
 console.table([student]); // ! whole data of object with table 
@@ -89,7 +92,25 @@ console.log(student.name,student.fatherName); //! object se specific data ka acc
 console.log(`Array ka Data: ${student.hobbies}`); // ! Arrays ka data access karna 
 console.log(`Specific Array ka Data: ${student.hobbies[0]}`); //! Specific Array ka data 
 console.log("Nested Object ka Data:", student.subjectsMarks); //! Nested object ka data nikalna 
+
+/*Kyun? Template literal mein poora object daalo — JS use string banana chahta hai — toh likh deta hai [object Object] — actual data nahi dikhata! is lia nested main template literal ka use nahi kia*/
+
 console.log(`Specific Nested Object ka Data: ${student.subjectsMarks.computerScience}`);//! Specific Nested Object ka Data Nikalna
 student.introduce(); //! Funciton ka data Nikalna
+
+
+// ! Object se data nikalna with Bracket Notation
+
+// bracket notation
+console.log(student["fatherName"]);
+console.log(student["isMarried"]);
+
+// Array print kia seedha bracket mein
+console.log(student["hobbies"][2]);
+console.log(student["hobbies"][1]);
+
+// Dynamic — variable mein key
+console.log(`Student ke isStudent ko Dynamic way main nikalna: ${student[x]}`);
+
 
  

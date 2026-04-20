@@ -113,4 +113,32 @@ console.log(student["hobbies"][1]);
 console.log(`Student ke isStudent ko Dynamic way main nikalna: ${student[x]}`);
 
 
- 
+// ! Object Ko Print Karna — Kaunsa Method Kab?
+// Poora object dekhna
+console.log(user1);   //  Pura Object Pring ho gia ha 
+
+// !  Ek specific value
+console.log(student.name);
+console.log(user1.address.street);
+
+// ! Table format mein dekhna
+console.table([student]);
+console.table([user1]);
+
+//! Sirf keys dekhna
+console.log(Object.keys(student)); // yaha sirf keys show ho ge objects ki values nahi 
+
+// ! Sirf Values Dekhna 
+console.log(Object.values(user1)); // Yaha sirf Values show ho gi without keys 
+console.log(Object.values(user1.address)); // Agar nested object ke khali values dikhani ho to 
+
+
+//! Loop Se Value Print Karna 
+// for...in loop — object ki har key pe ek ek kar ke jata hai
+// jaise teacher register mein har student ka naam parhta hai
+// har baar "key" variable mein alag key aati hai
+// student[key] se us key ki value milti hai
+
+for (let key in student) {
+  console.log(`Loop ka use kar ke print karna ${key} : ${student[key]}`);
+}

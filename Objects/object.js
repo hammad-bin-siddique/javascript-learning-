@@ -142,3 +142,30 @@ console.log(Object.values(user1.address)); // Agar nested object ke khali values
 for (let key in student) {
   console.log(`Loop ka use kar ke print karna ${key} : ${student[key]}`);
 }
+
+//!  Object Mein Baad Mein Cheezein Add/Update/Delete Karna
+
+let user2 = {
+  name: "Fahad",
+  rollNumber: 49493,
+}
+
+// Bad main Keys add karna 
+
+user2.class = "BS Biology";
+user2.age = 20;
+
+console.log(user2);
+
+// Update karna koi value
+
+user2.name = "Hammad Siddique"; // ab ye updated value uthai ga
+user2.age = 24;
+
+console.log(user2.age, user2.name); // Ye do values ab update ho gai ha 
+
+// ! Delete karna 
+
+delete user2.rollNumber;
+
+console.log(user2); // yaha ab ye wali key delete ho gai ha 

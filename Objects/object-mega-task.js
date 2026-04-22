@@ -204,3 +204,54 @@ Object.freeze(character1); // yaha per ye freeze kia character one
 character1.name = "Hind"; // value change ki 
 character1.isAlive = false; // yaha bhi 
 console.log(character1); // print kia result same aya keuke object freeze kia hua tha 
+
+// ! Task 4 School System
+
+// Object Literal banao school ka jisme ho:
+// - schoolName
+// - city
+// - established (year)
+// - isPrivate (true/false)
+// - classes array: ["9th", "10th", "11th", "12th"]
+// - principal (nested object):
+//     - name
+//     - experience
+//     - qualification
+// - topStudents (nested array):
+//     ["Hammad", "Ali", "Ahmed"]
+
+// Phir:
+// 1. Dot notation se schoolName print karo
+// 2. Bracket notation se city print karo
+// 3. Dynamic notation se — variable mein 
+//    "principal" store karo — phir name access karo
+// 4. classes array ka 3rd element print karo
+// 5. topStudents ka 1st student print karo
+// 6. for...in loop se poora school object print karo
+
+const SchoolSystem = {
+    schoolName: "KIPS PKK",
+    city: "Abbottabad",
+    established: 2000,
+    isPrivate: true,
+    classes: ["9th", "10th", "11th", "12th"],
+    principal: {
+        name: "Rasheed",
+        experience: 8,
+        qualification: "Master in English",
+        topStudent: ["Hammad", "Ali", "Ahmed"],
+    },
+};
+console.log(SchoolSystem.schoolName); // Dot Notation se School Name print kia 
+console.log(SchoolSystem["city"]); // Bracket Notation se City Print kia
+
+let x = "principal";
+console.log(SchoolSystem[x]); // Principle ko dynamic Variable main dal ke print kia 
+console.log(SchoolSystem.classes[2]); // Classes ke array ka 3 element print kia 
+console.log(SchoolSystem["principal"]["topStudent"][0]);
+for (let key in SchoolSystem) {
+    console.log(`loop ka use kar ke School System  print karna ${key} : ${SchoolSystem[key]}`);    
+};
+// yaha nested object print nahi ho ga is lia use alada print karo ga 
+console.log(SchoolSystem.principal);
+

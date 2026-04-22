@@ -69,3 +69,45 @@ doctor2.describe(); //! yaha dono function call kia
 for (let key in doctor1) {
   console.log(`${key} : ${doctor1[key]}`); //! yaha doctor 1 ke keys khali print ki
 }
+
+
+//! Task 2
+
+// Product ka Object Literal banao jisme ho:
+// - name, category, price, quantity, isExpired
+// - expiryDate (nested object): day, month, year
+// - tags array: ["fresh", "organic", "local"]
+
+// Phir:
+// 1. Price update karo
+// 2. "discount" property add karo
+// 3. isExpired delete karo
+// 4. Object.keys() print karo
+// 5. Object.values() print karo
+// 6. for...in se print karo
+
+const product = {
+    name: "Apple",
+    category: "Fruit",
+    price: 300,
+    quantity: 2900,
+    isExpired: false,
+    expiryDate: {
+        day: 30,
+        month: 12,
+        year: 2029
+    },
+    tags: ["fresh","organic","local"],
+}
+product.price = 400;
+product.discount = "10 Percent";
+delete product.isExpired;
+
+console.log(Object.keys(product)); // product object ke keys print ki 
+console.log(Object.values(product)); // product object ke values print ki 
+for (let key in product) {
+    console.log(`loop ka use kar ke product print karna ${key} : ${product[key]}`);
+} // for in se print kia product object ko 
+
+console.log(product.expiryDate); /* yaha nested object ko print kia ha filhal arzi tor per keuke template litaral main print naho hota*/
+

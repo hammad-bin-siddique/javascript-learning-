@@ -111,3 +111,96 @@ for (let key in product) {
 
 console.log(product.expiryDate); /* yaha nested object ko print kia ha filhal arzi tor per keuke template litaral main print naho hota*/
 
+//! Task 3 Game Characters
+
+// Character ka Constructor banao jisme ho:
+// - name
+// - level
+// - health
+// - weapons array (3 weapons)
+// - stats (nested object):
+//     - attack
+//     - defense
+//     - speed
+// - isAlive (true/false)
+
+// Method: status() jo print kare:
+// "___ | Level: ___ | Health: ___ | Alive: ___"
+
+// 3 characters banao apni marzi se
+// Har character ka status() call karo
+// console.table se print karo
+// Object.freeze() karo Character 1 ko
+// Phir change karne ki koshish karo — verify karo ke nahi badla
+
+function Character(name,level,health,weapons,stats,isAlive){
+    this.name = name;
+    this.level = level;
+    this.health = health;
+    this.weapons = weapons;
+    this.stats = stats;
+    this.isAlive = isAlive;
+
+    this.status = function(){
+        console.log(`hello i'm ${this.name} and my level is ${this.level} and my health is ${this.health} and i'm alive ${this.isAlive}`);
+    }
+}
+//  Character 1
+let character1 = new Character(
+    "Luks",
+    5,
+    70,
+    ["AKM", "M416","AWM"],
+    {
+        attack: 40,
+        defence: 80,
+        speed: 59
+    },
+    true
+    
+);
+// character 2
+let character2 = new Character(
+    "Luna",
+    50,
+    30,
+    ["AKM", "M416","scarl"],
+    {
+        attack: 70,
+        defence: 70,
+        speed: 50
+    },
+    false
+    
+);
+// character 3
+let character3 = new Character(
+    "Sid",
+    59,
+    79,
+    ["AKM", "UZI","AWM"],
+    {
+        attack: 80,
+        defence: 90,
+        speed: 50
+    },
+    true
+    
+);
+
+character1.status();
+character2.status();
+character3.status();
+
+//! Yaha 3no ke status print kar dia hain 
+
+console.table([character1,character2,character3]);
+// yaha nested object print nahi ho ga is lia use neache alada print karta ho 
+
+console.log("Character 1 ke stats", character1.stats,"Character 2 ke stats", character2.stats,"Character 3 ke stats", character3.stats); // yaha nested object ko phir se print kar dia ha 
+
+Object.freeze(character1); // yaha per ye freeze kia character one
+
+character1.name = "Hind"; // value change ki 
+character1.isAlive = false; // yaha bhi 
+console.log(character1); // print kia result same aya keuke object freeze kia hua tha 

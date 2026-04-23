@@ -255,3 +255,97 @@ for (let key in SchoolSystem) {
 // yaha nested object print nahi ho ga is lia use alada print karo ga 
 console.log(SchoolSystem.principal);
 
+// !Task 5 — 🍕 Restaurant Menu
+
+// MenuItem ka Constructor banao jisme ho:
+// - itemName
+// - category ("Fast Food" / "Desi" / "Drink")
+// - price
+// - isAvailable (true/false)
+// - ingredients array (4 ingredients)
+// - nutrition (nested object):
+//     - calories
+//     - protein
+//     - carbs
+
+// Method: order() jo print kare:
+// "___ order ho gaya! Price: ___ | Calories: ___"
+
+// 4 menu items banao
+// Har item ka order() call karo
+// console.table se print karo
+// Object.values() se pehle item ki values print karo
+
+function MenuItem(itemMenu,category,price,isAvailable,ingredients,nutrition,){
+    this.itemMenu = itemMenu;
+    this.category = category;
+    this.price = price;
+    this.isAvailable = isAvailable;
+    this.ingredients = ingredients;
+    this.nutrition = nutrition;
+    this.order = function(){
+        console.log(`${this.itemMenu} order ho giya! Price: ${this.price} or Calories: ${this.nutrition.calories} hain`);
+    }
+}
+
+let item1 = new MenuItem(
+    "Turnip",
+    "Vegetable",
+    500,
+    true,
+    ["Protine","Fiber","Calcium","Sugar"], // yara ye main ne arzi tor per dale hain 
+    {
+        calories: 39,
+        protien: 90,
+        carbs: 49,
+    },
+);
+// Item 2
+let item2 = new MenuItem(
+    "Apple",
+    "Fruit",
+    300,
+    true,
+    ["Protine","Fiber","Calcium","Sugar"], // yara ye main ne arzi tor per dale hain 
+    {
+        calories: 59,
+        protien: 90,
+        carbs: 99,
+    },
+);
+
+// Item 3
+let item3 = new MenuItem(
+    "Banana",
+    "Fruit",
+    1000,
+    true,
+    ["Protine","Fiber","Calcium","Sugar"], // yara ye main ne arzi tor per dale hain 
+    {
+        calories: 89,
+        protien: 93,
+        carbs: 59,
+    },
+);
+
+// Item 4
+let item4 = new MenuItem(
+    "Potato",
+    "Vegetable",
+    100,
+    true,
+    ["Protine","Fiber","Calcium","Sugar"], // yara ye main ne arzi tor per dale hain 
+    {
+        calories: 100,
+        protien: 93,
+        carbs: 99,
+    },
+);
+
+item1.order();
+item2.order();
+item3.order();
+item4.order();
+
+console.table([item1,item2,item3,item4]);
+console.log(Object.values(item1));

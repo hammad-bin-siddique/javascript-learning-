@@ -349,3 +349,136 @@ item4.order();
 
 console.table([item1,item2,item3,item4]);
 console.log(Object.values(item1));
+
+
+//! Task 6 — 🏦 Bank System 
+
+// BankAccount ka Constructor banao jisme ho:
+// - accountHolder
+// - accountNumber
+// - balance
+// - accountType ("Saving" / "Current")
+// - isActive (true/false)
+// - transactions array 
+//   (3 transactions — any amounts)
+// - branch (nested object):
+//     - branchName
+//     - city
+//     - code
+
+// Methods:
+// 1. deposit(amount) — balance mein amount add kare
+//    aur print kare: "Deposit: ___ | New Balance: ___"
+
+// 2. withdraw(amount) — balance se amount minus kare
+//    aur print kare: "Withdrawal: ___ | New Balance: ___"
+
+// 3. accountInfo() — print kare:
+//    "Account: ___ | Holder: ___ | Balance: ___ | Type: ___"
+
+// 3 accounts banao
+// Har account pe:
+// - accountInfo() call karo
+// - deposit() karo
+// - withdraw() karo
+// console.table se sab print karo
+// for...in se account 1 ki saari details print karo
+
+function BankAccount(accountHolder,accountNumber,balance,accountType,isActive,transactions,branch) {
+    this.accountHolder = accountHolder;
+    this.accountNumber = accountNumber;
+    this.balance = balance;
+    this.accountType = accountType;
+    this.isActive = isActive;
+    this.transactions = transactions;
+    this.branch = branch;
+
+    this.deposit = function(amount){
+        this.balance = this.balance + amount
+        console.log(`Deposit:${amount} New Balance: ${this.balance}`);
+    },
+    this.withdraw = function(amount){
+        this.balance = this.balance - amount;
+        console.log(`Withdraw: ${amount} New Balance: ${this.balance}`);
+    },
+    
+    this.accountInfo = function(){
+        console.log(`Account: ${this.accountNumber} Acount Holder: ${this.accountHolder} Account Balance: ${this.balance} Account Type: ${this.accountType}`);
+    
+    }
+
+
+};
+
+let account1 = new BankAccount(
+    "Muhammad Hammad Siddique",
+    2394018402194,
+    34000,
+    "Current",
+    true,
+    [5000, 39022, 388403],
+    {
+        branchName: "HBL",
+        city: "Abbottabad",
+        code: 3842
+    }
+);
+
+account1.accountInfo();
+account1.deposit(3000);
+account1.withdraw(5000);
+
+console.table([account1]); // account one table se print kia
+console.log(account1.branch); // nested object print kia wo table main show nahi hota 
+
+
+// 2nd Account
+let account2 = new BankAccount(
+    "Saba Khan",
+    239401840249404,
+    500000,
+    "Saving",
+    true,
+    [20000, 50000, 300000],
+    {
+        branchName: "MCB",
+        city: "Karachi",
+        code: 1239
+    }
+);
+
+account2.accountInfo();
+account2.deposit(3000);
+account2.withdraw(5000);
+
+console.table([account2]);  // account two table se print kia
+console.log(account2.branch); // nested object print kia wo table main show nahi hota 
+
+// 3rd Account
+
+let account3 = new BankAccount(
+    "Fiza Khan",
+    239401829402404,
+    100000,
+    "Current",
+    true,
+    [20000, 50000, 300000],
+    {
+        branchName: "ABL",
+        city: "Lahore",
+        code: 1234
+    }
+);
+
+
+account3.accountInfo();
+account3.deposit(200000);
+account3.withdraw(40000);
+
+console.table([account3]);  // account three table se print kia
+console.log(account3.branch); // nested object print kia wo table main show nahi hota 
+
+
+for (let key in account1) {
+  console.log(`${key} : ${JSON.stringify(account1[key])}`); // yaha per account one ko loop main print kia 
+};

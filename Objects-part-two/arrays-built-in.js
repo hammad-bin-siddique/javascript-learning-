@@ -126,3 +126,28 @@ let fruitAndVegetable = fruits.concat(vegetables);
 console.log(fruitAndVegetable); // ab yaha per fruits or vegetable dono combine ho gay hain
 
 //! Original arrays change nahi hoti!
+
+
+ // ADD karna
+// arr.push("x")      // end mein
+// arr.unshift("x")   // start mein
+
+ // REMOVE karna
+// arr.pop()          // end se
+// arr.shift()        // start se
+
+ // DHUNDHNA
+// arr.indexOf("x")   // position (ya -1)
+// arr.includes("x")  // true/false
+
+ // KAAT-CHHAANT
+// arr.splice(1,2)    // original change hota hai
+// arr.slice(1,3)     // copy milti hai, original same
+
+ // BAAKI
+// arr.reverse()      // ulta karo
+// arr.join("-")      // string banao
+// arr.concat(arr2)   // jodo
+// arr.flat()         // nested seedha karo
+// arr.fill(0)        // fill karo
+// Array.isArray(arr) // check karo

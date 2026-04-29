@@ -144,7 +144,6 @@ console.log(fruitAndVegetable); // ab yaha per fruits or vegetable dono combine 
 // arr.splice(1,2)    // original change hota hai
 // arr.slice(1,3)     // copy milti hai, original same
 
- // BAAKI
 // arr.reverse()      // ulta karo
 // arr.join("-")      // string banao
 // arr.concat(arr2)   // jodo

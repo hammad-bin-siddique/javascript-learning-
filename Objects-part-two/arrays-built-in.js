@@ -103,7 +103,7 @@ console.log(webSeries); // apni orignal halat per wapis ai ga
 //? splice() → original array change karta hai
 //? slice()  → original array same rehta hai, copy deta hai
 
-// 🔟 reverse() — Ulta Karo
+//! 🔟 reverse() — Ulta Karo
 let num = [1,2,3,4,5,6];
 num.reverse();
 console.log(num); // ab ye 6 se count ho ge 
@@ -127,6 +127,104 @@ console.log(fruitAndVegetable); // ab yaha per fruits or vegetable dono combine 
 
 //! Original arrays change nahi hoti!
 
+
+//! 13. forEach()
+
+// Socho tumhare paas 5 students ki list hai — aur tumhe har ek ka naam board pe likhna hai.
+// Tum ek ek karke uthoge — likhoge — agla uthoge.
+// Yahi forEach karta hai — array ke har element pe ek ek karke kaam karta hai.
+
+let myFamily = ["Fahad", "Sara", "Friha", "Faizan"];
+
+myFamily.forEach(function(myFamily) {
+    console.log(myFamily);
+});
+
+//? Doosra Example — Index Ke Saath
+
+myFamily.forEach(function(myFamily, index) {
+    console.log(`${index + 1}: ${myFamily}`);
+});
+
+//? Teesra Example — Objects Array Pe
+
+const mainProduct = [
+    {name: "Shirt", price: 233.33},
+    {name: "Pant", price: 500.99},
+    {name: "Jeans", price: 900.99}
+];
+
+mainProduct.forEach(function(mainProduct, index) {
+    console.log(`${index + 1}: Product Name: ${mainProduct.name} Price: ${mainProduct.price}`);
+});
+
+
+//? Sabse Zaroori Baat — forEach Return Nahi Karta!
+
+let nums = [1,2,3];
+let results = nums.forEach(function(n) {
+    return n * 3;
+});
+console.log(results); // undefined!
+
+
+// forEach sirf kaam karta hai — kuch deta nahi wapas
+// Jaise tumne board pe likha — board ne tumhe kuch nahi diya wapas!
+
+//!  14 map() — Transform Karo, Naya Array Lo
+
+// Socho tumhare paas kachcha aam ka dabba hai — tum har aam ko pakka karte ho aur naye dabbe mein rakhte ho.
+// Purana dabba same rehta hai — naya dabba milta hai!
+
+// forEach se Farq — Yeh Samjho!
+// forEach  →  kaam karta hai, kuch return nahi karta
+// map      →  kaam karta hai + NAYA ARRAY return karta hai
+
+let mark = [90, 70, 80, 68,95];
+
+let newMarks = mark.map(function(mark, index) {
+    console.log(`${index + 1} : ${mark + 5}`);
+    return mark + 5;
+    
+});
+console.log(mark);
+console.log(newMarks);
+
+//? Doosra Example — String Transform
+
+let friends = ["Ali", "Haris", "Sara"];
+let upperFriends = friends.map(function(x){
+
+    return x.toUpperCase();
+});
+console.log(friends);
+console.log(upperFriends);
+
+//? Teesra Example — Objects Se Sirf Naam Nikalo
+
+let names = mainProduct.map(function(name) {
+    return name.name;
+});
+console.log(names); // ye main ne main product uper se uthaya ha for each wali example se 
+
+//? Chautha Example — Object Transform
+ 
+let favFruits = [
+    {name: "Mango", price: 500},
+    {name: "Banana", price: 499},
+    {name: "Peach", price: 999}
+];
+
+// 10 percent Discount 
+
+let discountPrice = favFruits.map(function(fruits) {
+    return {
+        name: fruits.name,
+        price: fruits.price * 0.9
+    };
+});
+console.log(favFruits); // Original Price 
+console.log(discountPrice); // Discounted Price
 
  // ADD karna
 // arr.push("x")      // end mein

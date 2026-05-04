@@ -226,6 +226,57 @@ let discountPrice = favFruits.map(function(fruits) {
 console.log(favFruits); // Original Price 
 console.log(discountPrice); // Discounted Price
 
+
+//! 15. filter() — Chhanno!
+
+// Kya Hota Hai?
+// Socho chawal chhan rahe ho — kankad alag, chawal alag.
+// filter() wahi chalni hai — jo condition pass kare woh rakho, baaki phenko.
+
+
+//? Pehla Example — Numbers Filter
+
+let ages = [12,18,20,39,25,21,15,16,34];
+
+let adults = ages.filter(function(age) {
+    return age >= 18;
+});
+console.log(adults); // 18 se uper wale add ho ge 
+console.log(ages); // yaha sab print ho ge 
+
+//? Doosra Example — String Filter
+
+
+let favNames = ["Ali", "Ahad", "Fahad", "Fizza", "Ahsan", "Faizan"];
+ // sirf f name se start hone wale selct karo 
+ let fNames = favNames.filter(function(name) {
+    return name.startsWith("F");
+ });
+ console.log(fNames);
+ // sirf A se start hone wale name select karo 
+
+ let aNames = favNames.filter(function(name) {
+    return name.startsWith("A");
+ });
+ console.log(aNames);
+
+ console.log(favNames);
+
+//?  Teesra Example — Objects Filter
+
+let topStudents = [
+    {name: "Fahad", marks: 80, city: "Abbottabad"},
+    {name: "Ali", marks: 70, city: "Lahore"},
+    {name: "Momina", marks: 50, city: "Peshawer"},
+    {name: "Farhan", marks: 40, city: "Manshera"}
+];
+
+let passedStudent = topStudents.filter(function(pass) {
+    return pass.marks >= 60;
+});
+console.log(passedStudent);
+
+
  // ADD karna
 // arr.push("x")      // end mein
 // arr.unshift("x")   // start mein

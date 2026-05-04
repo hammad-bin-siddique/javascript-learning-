@@ -276,6 +276,104 @@ let passedStudent = topStudents.filter(function(pass) {
 });
 console.log(passedStudent);
 
+//? map + filter Saath
+
+let bestStudent = [
+    {name: "Fahad", marks: 79},
+    {name: "Umair", marks: 90},
+    {name: "Maqsood", marks: 80},
+    {name: "Farhan", marks: 60}
+];
+let topNames = bestStudent.filter(function(s){
+    return s.marks >= 80; // 80 or 90 ai ge
+})
+.map(function(s) {
+    return `${s.name}: ${s.marks}`; // maqsood or umair ai ge with number 
+});
+console.log(topNames);
+
+
+//! 4. sort() — Terteeb Lagao
+
+// Kya Hota Hai?
+// Socho tumhari almari mein kapray ulte seedhe pade hain — tum unhe size ke hisaab se lagaate ho.
+// sort() wahi kaam karta hai — array ko order mein lagata hai.
+
+//? Strings Sort — Simple
+
+let bestFriends = ["ALi", "Hassan", "Usama", "Ahmad", "Fahad", "Hamza"];
+bestFriends.sort(); // ye alphabatically sort ho jate hain simply
+console.log(bestFriends);
+
+
+//? Numbers Sort — TRAP! ⚠️
+
+let studentNums = [10, 100, 20, 22, 30, 59, 49, 39, 50];
+studentNums.sort();
+console.log(studentNums); // wrong ai ga wo 1 se start kare ga to 10 100 phir so on jo ke sahi nahi ha
+
+// sort() default mein sab kuch string samajhta hai!
+// "10" aur "2" string mein compare karo — "1" comes before "2" — toh 10 pehle!
+
+// Numbers Sort — Sahi Tarika
+
+// Acending chote se bare ke taraf
+studentNums.sort(function(x, y){
+    return x - y;
+});
+console.log(studentNums); //10 20 22 30 39 49 50 59 100
+
+// Decending bare se chota 
+studentNums.sort(function(x, y) {
+    return y - x;
+});
+console.log(studentNums); // 100 59 50 49 39 30 22 20 10
+
+// a - b  →  Ascending  (chota pehle)
+// b - a  →  Descending (bara pehle)
+
+// Bas yeh 2 cheezein yaad rakho!
+// Naam kuch bhi do — logic same rehta hai!
+
+
+//? Objects Sort — Marks Ke Hisaab Se
+
+const studentData = [
+    {name: "Fiza", marks: 90},
+    {name: "Laiba", marks: 50},
+    {name: "Hammad", marks: 97},
+    {name: "Maryam", marks: 60},
+    {name: "Maria", marks: 80}
+];
+
+// chote se bare ke taraf
+
+studentData.sort(function(x, y) {
+    return x.marks - y.marks;
+});
+console.log(studentData);
+
+// bare se chote ke taraf 
+
+studentData.sort(function(x, y) {
+    return y.marks - x.marks;
+});
+console.log(studentData);
+
+//? Sort Original Array Badal Deta Hai — Yaad Rakho!
+
+let original = [1,4,6,9,3];
+// let sorted =  original.sort(function(x,y){
+//     return x - y;
+//  });   //? ye dono ab same he ho jai ge ham ne referance nahi lia balke direct orignal ko copy kia sai way neache likhta ho 
+// console.log(original);  
+// console.log(sorted); 
+
+let sortedd = [...original].sort(function(x, y) {
+    return x - y;
+});
+console.log(original); // ab orignal same rahe ga 
+console.log(sortedd); // or ye change ho ga
 
  // ADD karna
 // arr.push("x")      // end mein

@@ -293,7 +293,7 @@ let topNames = bestStudent.filter(function(s){
 console.log(topNames);
 
 
-//! 4. sort() — Terteeb Lagao
+//! 16. sort() — Terteeb Lagao
 
 // Kya Hota Hai?
 // Socho tumhari almari mein kapray ulte seedhe pade hain — tum unhe size ke hisaab se lagaate ho.
@@ -374,6 +374,78 @@ let sortedd = [...original].sort(function(x, y) {
 });
 console.log(original); // ab orignal same rahe ga 
 console.log(sortedd); // or ye change ho ga
+
+//! 17. reduce() — Sab Milao, Ek Value Lo
+
+// Kya Hota Hai?
+// Socho tumhare paas 5 dost hain — har dost ke paas kuch rupay hain. Tum sabke rupay ek jaga jamaa karte ho — aakhir mein total milta hai.
+// reduce() wahi kaam karta hai — array ke saare elements ko milata hai aur ek value deta hai.
+
+
+// Syntax Samjho
+
+//? array.reduce(function(accumulator, currentValue) {
+//?     return accumulator + currentValue;
+//? }, startingValue);
+
+// accumulator  →  running total (jama hua amount)
+// currentValue →  abhi wala element
+// startingValue → shuru mein accumulator ki value
+
+
+let examMarks = [50, 100, 500, 300, 85, 90,94];
+
+let totalMarks = examMarks.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue;
+}, 0);
+console.log(totalMarks);
+
+
+//? Doosra Example — Shopping Cart Total
+
+let cart = [
+    {item: "Shirt", price: 1200},
+    {item: "Jeans", price: 2500},
+    {item: "Laptop", price: 50000},
+    {item: "Iphone", price: 140000}
+];
+
+let cartTotal = cart.reduce(function(accumulator, currentValue){
+    return accumulator + currentValue.price;
+}, 0);
+console.log(`Total RS: ${cartTotal}`);
+
+
+//? Teesra Example — Maximum Value Dhundho
+
+let numberss = [23, 595, 25, 569, 91, 9639, 95, 6];
+let maxNum = numberss.reduce(function(accumulator, currentValue){
+    return currentValue > accumulator ? currentValue : accumulator;
+}, 0);
+
+console.log(`Max Num is ${maxNum}`);
+
+
+
+// forEach  →  Har element pe kaam karo
+//              Return nahi karta
+//              Use: print, display, side effects
+
+// map      →  Har element transform karo
+//              NAYA array return karta hai
+//              Use: data badalna, nikalna
+
+// filter   →  Condition se chhanno
+//              NAYA array return karta hai (sirf matching)
+//              Use: specific data nikalna
+
+// sort     →  Terteeb lagao
+//              ORIGINAL array badalta hai
+//              Strings: seedha, Numbers: (a,b) => a-b
+
+// reduce   →  Sab milao ek value mein
+//              Single value return karta hai
+//              Use: total, max, min, count
 
  // ADD karna
 // arr.push("x")      // end mein

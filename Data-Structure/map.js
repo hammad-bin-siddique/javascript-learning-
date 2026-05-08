@@ -178,32 +178,27 @@ myMap2.set("age", 23);
 
 // Ya ek saath chain mein — dono same kaam karte hain!
 
-myMap2.set("name", "Umer")
-.set("city", "Abbottabad")
-.set("age", 23);
+myMap2.set("name", "Umer").set("city", "Abbottabad").set("age", 23);
 
 // Kyun chain hota hai? Kyunki .set() kaam karne ke baad Map ko wapas return karta hai — isliye us pe dobara .set() laga sakte hain!
-
 
 console.log(myMap2);
 console.log(myMap2.size);
 
-
 // task
 
 const myMap3 = new Map();
-myMap3.set("username", "hammad123")
-.set("score", 100)
-.set("active", true)
-.set("username", "ali456"); // username hammad se change ho jai ga keuke same key name ha or pehle wale ko overwrite kar de ga 
+myMap3
+  .set("username", "hammad123")
+  .set("score", 100)
+  .set("active", true)
+  .set("username", "ali456"); // username hammad se change ho jai ga keuke same key name ha or pehle wale ko overwrite kar de ga
 console.log(myMap3);
 console.log(myMap3.size);
 
-
 //! 🗺️ Topic 4 — .get()
 
-//? 1️⃣ Basic — Value Nikalna  
-
+//? 1️⃣ Basic — Value Nikalna
 
 const myMap4 = new Map();
 
@@ -212,23 +207,23 @@ myMap4.set("accountName", "Muhammad Hammad Siddique");
 myMap4.set("isActive", true);
 myMap4.set("accountBalance", 23488);
 
-console.log(myMap4.get("accountNumber")); // ye map main keys ke values nikalne ke lia use hota ha 
+console.log(myMap4.get("accountNumber")); // ye map main keys ke values nikalne ke lia use hota ha
 
 //? 2️⃣ Object Key Se Value Nikalna
 
-myMap4.set({"b": 394}, "Kpk");
-console.log(myMap4.get({"b": 394})); // undefined ai ga 
+myMap4.set({ b: 394 }, "Kpk");
+console.log(myMap4.get({ b: 394 })); // undefined ai ga
 // Kyun? Kyunki yeh NAYA object hai — alag hai memory mein!
 
-// ✅ Variable mein rakho sahi way ha 
+// ✅ Variable mein rakho sahi way ha
 
-const branch = {"branch": "name"}; // variable banaya us ke andar object ko rakha
+const branch = { branch: "name" }; // variable banaya us ke andar object ko rakha
 myMap4.set(branch, "Bank Al Habib");
-console.log(myMap4.get(branch)); // ab yaha per branch name ai ga keuke ab ye alada object nahi ha 
+console.log(myMap4.get(branch)); // ab yaha per branch name ai ga keuke ab ye alada object nahi ha
 
 //? 3️⃣ Key Na Mile Toh — undefined
 
-console.log(myMap4.get("transactions")); // undefined ai ga keuke ye key exist he nahi  karti 
+console.log(myMap4.get("transactions")); // undefined ai ga keuke ye key exist he nahi  karti
 
 //? 4️⃣ Type Match Zaroori Hai
 
@@ -248,33 +243,30 @@ const finalPrice = price - discount;
 console.log(finalPrice);
 console.log(myMap5);
 
-
 //? 6️⃣ Nested Map Se Value Nikalna
 // Map ke andar Map bhi ho sakti hai!
 
-const bankingSystemMap = new Map(); // ye main map jo parent ha 
-const accountInfo = new Map(); // Nested map banaya 
+const bankingSystemMap = new Map(); // ye main map jo parent ha
+const accountInfo = new Map(); // Nested map banaya
 
 accountInfo.set("accountHolder", "Hammad Siddique");
 accountInfo.set("accountNumber", 384021084010);
 accountInfo.set("isActive", true);
-accountInfo.set("accountType", "Current"); // ye sab nested map ka data ha 
+accountInfo.set("accountType", "Current"); // ye sab nested map ka data ha
 
-// ab parent map ka data dale ga 
+// ab parent map ka data dale ga
 
 bankingSystemMap.set("accountBlc", 500000);
 bankingSystemMap.set("bankName", "Bank Al Habib");
 bankingSystemMap.set("bankLocation", "Mandia Supply Abbottabad");
 
-// nested map ko parent ke sath link kare ga or pura map 1 value ban jai ga key ka 
+// nested map ko parent ke sath link kare ga or pura map 1 value ban jai ga key ka
 
 bankingSystemMap.set("bankDetails", accountInfo);
 
-
-console.log(bankingSystemMap); // pura map print ho ga with nested 
-console.log(bankingSystemMap.get("bankDetails")); // sirf nested map ka data print ho ga 
-console.log(bankingSystemMap.get("bankDetails").get("isActive")); // nested map ke specific key ke value print ho gi  is ko chaining kehte hian 
-
+console.log(bankingSystemMap); // pura map print ho ga with nested
+console.log(bankingSystemMap.get("bankDetails")); // sirf nested map ka data print ho ga
+console.log(bankingSystemMap.get("bankDetails").get("isActive")); // nested map ke specific key ke value print ho gi  is ko chaining kehte hian
 
 //! Shop Task
 
@@ -284,7 +276,7 @@ shop.set("price", 100000);
 shop.set("company", "Iphone");
 shop.set("inStock", true);
 shop.set(1, "First Item"); // number use in map key
-shop.set("1", "Category One"); // string use in map key 
+shop.set("1", "Category One"); // string use in map key
 shop.set("deliveryCharges", "Free"); // ye sab parent map ka data ha
 
 const location = new Map();
@@ -303,21 +295,135 @@ shop.set("location", location);
 // 5. "1" (string) se get karo
 // 6. location ki city nikalo — nested Map se!
 
-
-console.log(shop.get("item")); // sirf item ke value nikle gi 
+console.log(shop.get("item")); // sirf item ke value nikle gi
 const itemPrice = shop.get("price");
 const discountedPrice = 5000;
 const itemFinalPrice = itemPrice - discountedPrice;
-console.log(itemFinalPrice); // 95000 ai ga 
+console.log(itemFinalPrice); // 95000 ai ga
 
-console.log(shop.get("ITEM")); // undefiend ai ga case sensitive ha 
+console.log(shop.get("ITEM")); // undefiend ai ga case sensitive ha
 
-console.log(shop.get("location").get("city")); // abbottabad ai ga 
+console.log(shop.get("location").get("city")); // abbottabad ai ga
 
-console.log(shop.get(1)); // first item ai ga 
-console.log(shop.get("1")); // categroy 1 ai ga 
+console.log(shop.get(1)); // first item ai ga
+console.log(shop.get("1")); // categroy 1 ai ga
 
-console.log(shop.get("1") === shop.get(1)); // false ai ga 
+console.log(shop.get("1") === shop.get(1)); // false ai ga
 
-console.log(shop); // pura shop print ho ga 
+console.log(shop); // pura shop print ho ga
 
+//? 🗺️ Topic 5 — .has()
+
+// Kaam kya karta hai?
+// Key exist karti hai ya nahi — check karta hai!
+// Returns: true ya false
+
+// myMap.has(key)
+//         ^^^
+//         woh key jo dhundhni ha
+
+const cartMap = new Map();
+cartMap.set("item1", "Laptop");
+cartMap.set("item2", "IPhone");
+cartMap.set("item3", "Monitor");
+cartMap.set("price1", 10000);
+cartMap.set("price2", 20000);
+cartMap.set("price3", 50000);
+cartMap.set("discount", 10000);
+
+// has ka kam value check karna
+console.log(cartMap.has("item1")); // true ai ga
+console.log(cartMap.has("item4")); // false ai ga
+console.log(cartMap.has("item3")); // true ai ga
+console.log(cartMap.has("price4")); // false ai ga keuke wo exist he nahi karti
+console.log(cartMap.has("ITEM1")); // false ai ga key ha but yaha case sensitive ha blkl same spelling or same case hona chaia
+
+const cartTotal =
+  cartMap.get("price1") + cartMap.get("price2") + cartMap.get("price3");
+
+// Sabse Zaroori Use — .has() + .get() Saath
+
+if (cartMap.has("discount")) {
+  console.log(`Discounted Price is ${cartTotal - cartMap.get("discount")}`);
+} else {
+  console.log(`Without discounted Price: ${cartTotal}`);
+}
+
+//? Nested Map Mein .has()
+
+const myBankMap = new Map();
+
+myBankMap.set("user", "Hammad Khan");
+myBankMap.set("pin", 2939);
+// myBankMap.set("balance", 14000);
+const bankInfo = new Map();
+bankInfo.set("branch", "Bank Al Habib");
+bankInfo.set("location", "Abbottabad, Supply");
+bankInfo.set("isActive", true);
+myBankMap.set("fullDetail", bankInfo);
+
+console.log(myBankMap); // map with nested map print
+
+// has ke sath checking ke exist karti hain keys ke nahi
+
+console.log(myBankMap.has("fullDetail"));
+console.log(myBankMap.has("bankInfo")); // false ai ga keuke ye my bank ke value ha key nai
+
+// has or get ka use karna condition main
+
+if (myBankMap.has("balance")) {
+  console.log(`The Balance is ${myBankMap.get("balance")}`);
+} else {
+  console.log("Balance Mojood Nahi ha");
+}
+
+// School Result System
+
+const resultMap = new Map();
+const marksInfo = new Map();
+
+// marksInfo mein daalo:
+// "math"    → 95
+// "english" → 88
+// "science" → 76
+
+// resultMap mein daalo:
+// "studentName" → "Hammad Siddique"
+// "class"       → "10th"
+// "passed"      → true
+// marksInfo ko bhi link karo — key: "marks"
+
+// Ab .has() se yeh karo:
+// 1. "studentName" exist karta hai? check karo
+// 2. "feesPaid" exist karta hai? check karo
+// 3. Nested map mein "math" exist karta hai? check karo
+// 4. "passed" hai toh "Mubarak! Pass ho gaye!" print karo
+//    nahi hai toh "Result nahi mila!"
+// 5. Object key trap:
+//    const subjectKey = { name: "math" }
+//    set karo — ek baar has(subjectKey)
+//    ek baar has({ name: "math" }) — farq dekho!
+
+marksInfo.set("math", 95);
+marksInfo.set("english", 88);
+marksInfo.set("science", 76);
+
+resultMap.set("studentName", "Hammad Siddique");
+resultMap.set("class", "BS Islamic Studies");
+resultMap.set("passed", true);
+resultMap.set("marks", marksInfo);
+
+console.log(resultMap.has("studentName")); // true ai ga exist karta ha
+console.log(resultMap.has("fessPaid")); // false ai ga key exist nahi karti
+
+if (marksInfo.has("math")) {
+  console.log("Mubarak ho bahi pass ho gay ho ");
+} else {
+  console.log("Result Nahi Mila");
+} // mubarak ho wala ai ga keuke math exist karta ha marksinfo main
+
+// object key add karna
+const subjectKey = { name: "math" };
+resultMap.set(subjectKey, "Math Subject");
+console.log(resultMap.has(subjectKey)); // true ai ga keuke key mojood ha
+console.log(resultMap.has({ name: "math" })); // false ai ga keuke ye key nahi key ke value ha or has main key check ki jati value nahi

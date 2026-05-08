@@ -230,8 +230,94 @@ console.log(myMap4.get(branch)); // ab yaha per branch name ai ga keuke ab ye al
 
 console.log(myMap4.get("transactions")); // undefined ai ga keuke ye key exist he nahi  karti 
 
+//? 4️⃣ Type Match Zaroori Hai
+
+// yani agar string ko key lia ha to us ke format main he likho like with quotes
+
+//? 5️⃣ .get() Ki Return Value Use Kar Sakte Ho
+
+// .get() sirf value print nahi karta — value return karta hai — matlab us value ke saath kuch bhi kar sakte ho!
+
+const myMap5 = new Map();
+myMap5.set("price", 25000);
+myMap5.set("discount", 6500);
+
+const price = myMap5.get("price");
+const discount = myMap5.get("discount");
+const finalPrice = price - discount;
+console.log(finalPrice);
+console.log(myMap5);
 
 
+//? 6️⃣ Nested Map Se Value Nikalna
+// Map ke andar Map bhi ho sakti hai!
+
+const bankingSystemMap = new Map(); // ye main map jo parent ha 
+const accountInfo = new Map(); // Nested map banaya 
+
+accountInfo.set("accountHolder", "Hammad Siddique");
+accountInfo.set("accountNumber", 384021084010);
+accountInfo.set("isActive", true);
+accountInfo.set("accountType", "Current"); // ye sab nested map ka data ha 
+
+// ab parent map ka data dale ga 
+
+bankingSystemMap.set("accountBlc", 500000);
+bankingSystemMap.set("bankName", "Bank Al Habib");
+bankingSystemMap.set("bankLocation", "Mandia Supply Abbottabad");
+
+// nested map ko parent ke sath link kare ga or pura map 1 value ban jai ga key ka 
+
+bankingSystemMap.set("bankDetails", accountInfo);
 
 
+console.log(bankingSystemMap); // pura map print ho ga with nested 
+console.log(bankingSystemMap.get("bankDetails")); // sirf nested map ka data print ho ga 
+console.log(bankingSystemMap.get("bankDetails").get("isActive")); // nested map ke specific key ke value print ho gi  is ko chaining kehte hian 
+
+
+//! Shop Task
+
+const shop = new Map();
+shop.set("item", "Mobile");
+shop.set("price", 100000);
+shop.set("company", "Iphone");
+shop.set("inStock", true);
+shop.set(1, "First Item"); // number use in map key
+shop.set("1", "Category One"); // string use in map key 
+shop.set("deliveryCharges", "Free"); // ye sab parent map ka data ha
+
+const location = new Map();
+location.set("city", "Abbottabad");
+location.set("area", "Fawara Chock");
+location.set("plaza", "Iqbal Plaza Fawara Chock Ground Floor");
+location.set("shopName", "Hammad & Son's");
+
+shop.set("location", location);
+
+// .get() se yeh karo:
+// 1. item nikalo
+// 2. price nikalo aur 5000 discount lagao — final price print karo
+// 3. "ITEM" se get karo — kya milega?
+// 4. 1 (number) se get karo
+// 5. "1" (string) se get karo
+// 6. location ki city nikalo — nested Map se!
+
+
+console.log(shop.get("item")); // sirf item ke value nikle gi 
+const itemPrice = shop.get("price");
+const discountedPrice = 5000;
+const itemFinalPrice = itemPrice - discountedPrice;
+console.log(itemFinalPrice); // 95000 ai ga 
+
+console.log(shop.get("ITEM")); // undefiend ai ga case sensitive ha 
+
+console.log(shop.get("location").get("city")); // abbottabad ai ga 
+
+console.log(shop.get(1)); // first item ai ga 
+console.log(shop.get("1")); // categroy 1 ai ga 
+
+console.log(shop.get("1") === shop.get(1)); // false ai ga 
+
+console.log(shop); // pura shop print ho ga 
 

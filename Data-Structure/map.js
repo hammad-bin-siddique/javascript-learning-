@@ -427,3 +427,169 @@ const subjectKey = { name: "math" };
 resultMap.set(subjectKey, "Math Subject");
 console.log(resultMap.has(subjectKey)); // true ai ga keuke key mojood ha
 console.log(resultMap.has({ name: "math" })); // false ai ga keuke ye key nahi key ke value ha or has main key check ki jati value nahi
+
+
+//? 🗺️ Topic 6 — .delete()
+// Map se ek specific entry hatana — key do, woh entry hamesha ke liye chali jaayegi!
+
+// Syntax
+// myMap.delete(key)
+
+//? Basic Example
+
+const mapDelete = new Map();
+mapDelete.set("name", "Fahad");
+mapDelete.set("age", 25);
+mapDelete.set("isMarried", true);
+mapDelete.set("city", "Bonair");
+mapDelete.set("country", "Pakistan");
+
+console.log(mapDelete.size); // abhi size 5 ha 
+
+mapDelete.delete("isMarried");
+console.log(mapDelete, mapDelete.size); // size four ho ga or is married key delete ho gai ha 
+
+//? Return Value — True Ya False
+// mean ke check karne ke lia agar delete ho gai ha to true warna false 
+
+const result1 = mapDelete.delete("isMarried"); // false ai ga keuke uper wo key delete ho chuki ha is lia wo exist he nahi karti 
+
+console.log(result1); // false ai ga 
+const result2 = mapDelete.delete("city"); 
+console.log(result2); // ab true ai ga keuke city exist karti thi or ab delete ho gai ha 
+
+//? .has() + .delete() — Safe Tarika
+
+if (mapDelete.has("city")) {
+  mapDelete.delete("city");
+  console.log("City Delete ho gai ha");
+}
+else{
+  console.log("City Exist He Nahi karti");
+}; // second wala ai ga output keuke city uper pehle se delete ho gai thi 
+
+//? ⚠️ Object Key Delete Karna 
+
+const keyDeleteMap = {city: "Peshawar"};
+mapDelete.set(keyDeleteMap, "KPK");
+console.log(mapDelete.size, mapDelete); // yaha size four ho ga 
+// direct kare ge to nahi ho ge delete 
+mapDelete.delete({city: "Peshawar"}); 
+const result3 = mapDelete.delete({city: "Peshawar"});
+console.log(result3); 
+// false ai ga keuke ye object ha key nahi 
+
+//! Sahi tareeqa variable se ho ga 
+
+mapDelete.delete(keyDeleteMap);
+console.log(mapDelete.size, mapDelete); // ab yaha ye key nahi ho gi or size bhi 3 ho ga 
+
+
+// Nested Map Se Delete Karna
+
+const collegeMap = new Map(); // parent map 
+const collegeMarks = new Map(); // nested map 
+
+collegeMarks.set("math", 98);
+collegeMarks.set("english", 39);
+collegeMarks.set("physics", 59);
+
+collegeMap.set("studentName", "Hammad Tanoli");
+collegeMap.set("collegeName", "GPGC NO 1 Abbottabad");
+collegeMap.set("subjectMarks", collegeMarks);
+
+// parent se delete 
+
+collegeMap.delete("collegeName"); // delete kia parent se 
+console.log(collegeMap.has("collegeName"));  // false ai ga delete ho gia 
+
+// Nested Map se delete 
+
+if (collegeMap.has("subjectMarks")) {
+  collegeMap.get("subjectMarks").delete("physics");
+  console.log(collegeMap.get("subjectMarks")); // sirf 2 he ai ge  physics delete ho chuka ha 
+}
+else{
+  console.log("Subject Mark key mili he nahi");
+};
+
+//? Real Life Example — Shopping Cart
+
+const productCart = new Map();
+productCart.set("item1", "Iphone");
+productCart.set("item2", "Laptop");
+productCart.set("item3", "Monitor");
+
+console.log("Cart Map:", productCart);
+console.log("Cart Size", productCart.size);
+
+if (productCart.has("item2")) {
+  productCart.delete("item2");
+  console.log("Laptop Remove ho gia ha ");
+}
+else {
+  console.log("item2 exist he nahi karta");
+};
+
+// mean agar item naw ho to us ke eg
+
+if (productCart.has("item4")) {
+  productCart.delete("item4");
+  console.log("Item4 Remove ho gia ha ");
+}
+else{
+  console.log("item4 exist he nahi karta");
+};
+
+//! Task
+
+// School result system banao aur:
+
+// 1. "science" marks delete karo nested map se
+// 2. "class" delete karo — return value variable mein pakdo — print karo
+// 3. "feesPaid" delete karo — jo exist nahi karti — kya return aayega?
+// 4. Delete ke baad size print karo — pehle aur baad mein
+// 5. Object key banao — variable mein rakho
+//    set karo — delete karo variable se — phir seedha try karo
+//    farq dekho!
+
+const schoolResult = new Map();
+schoolResult.set("studentClass", "10th");
+schoolResult.set("nameStudent", "Muhammad Huzaifa");
+schoolResult.set("rollNumber", 3849);
+
+// nested Map
+const schoolMarks = new Map();
+schoolMarks.set("science", 89);
+schoolMarks.set("english", 39);
+schoolMarks.set("physics", 80);
+
+schoolResult.set("subjectMarks", schoolMarks);
+
+schoolMarks.delete("science"); // science ko delete kia ha 
+console.log(schoolMarks); // yaha science print nahi ho ga
+
+schoolResult.delete("studentClass");
+
+const result4 = schoolResult.delete("studentClass");
+console.log(result4); // false ai ga uper delete ho chuki ha 
+console.log(schoolResult.size);
+schoolResult.delete("feesPaid");  // koi bhi changes nahi ho gi keuke wo exist he nahi karta 
+console.log(schoolResult.size); // yaha bhi size 3 he rahe ga jese uper ha 
+
+const schoolKey = {school: "name"};
+schoolResult.set(schoolKey, "GPGC");
+
+schoolResult.delete({school: "name"});
+
+const result5 = schoolResult.delete({school: "name"});
+console.log(result5); // false ai ga keuke direct object se delete nahi hoti ha 
+console.log(schoolResult); // yaha show ho gi school key 
+// variable se delete karna 
+
+schoolResult.delete(schoolKey); 
+console.log(schoolResult); // yaha delete ho gai ha ab key
+
+// ab variable main dal kar check kare ge ke hui ha ke nahi 
+const result6 = schoolResult.delete(schoolKey);
+console.log(result6); // yaha false ai ga keuke delete ho chuki ha uper pehle he sa is lia wo exist he nahi karti 

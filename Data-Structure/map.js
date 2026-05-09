@@ -593,3 +593,160 @@ console.log(schoolResult); // yaha delete ho gai ha ab key
 // ab variable main dal kar check kare ge ke hui ha ke nahi 
 const result6 = schoolResult.delete(schoolKey);
 console.log(result6); // yaha false ai ga keuke delete ho chuki ha uper pehle he sa is lia wo exist he nahi karti 
+
+//? 🗺️ Topic 7 — .clear()
+
+// Kaam Kya Karta Hai?
+// Map ki saari entries ek saath hatana — ek hi baar mein poori Map khali ho jaayegi!
+
+// .delete() vs .clear() — Farq
+//  .delete() — sirf ek entry hatata hai
+// myMap.delete("name")  // sirf "name" gaya
+
+// .clear() — sab kuch hatata hai — ek saath!
+// myMap.clear()         // poori Map khali!
+
+//? Basic Example
+
+const mapClear = new Map();
+mapClear.set("name", "Hammad")
+.set("isStudent", true);
+
+console.log(mapClear.size); // 2 ai ga 
+
+mapClear.clear();
+console.log(mapClear.size); // 0 ai ga sab kuch reset kar deta ha 
+
+//? ⚠️ Clear Ke Baad .get() — Undefined
+
+console.log(mapClear.has("name")); // false ai ga 
+console.log(mapClear.get("name")); // undeined ai ga keuke ab wo exist he nahi karti 
+
+//? ⚠️ Return Value — Undefined!
+// .delete() true/false return karta tha — lekin .clear() kuch return nahi karta!
+
+const getResult = mapClear.clear();
+console.log(getResult); // undeined ai ga 
+
+//? Nested Map Pe Clear
+
+const playerMap = new Map(); // parent Map
+const statsMap = new Map(); // nested Map
+
+statsMap.set("kills", 52000);
+statsMap.set("damage", 200899);
+statsMap.set("playedFor", "7 Years");
+
+playerMap.set("playerName", "Mufasa");
+playerMap.set("rank", "Ace Dominator");
+playerMap.set("playerLevel", 81);
+playerMap.set("stats", statsMap);
+
+console.log(playerMap); // pura map ka output ai ga with nested map
+
+// Nested Map clear 
+
+playerMap.get("stats").clear();
+console.log("Stats clear hone ke bad", playerMap.get("stats")); // stats clear ho gai hain ab map main 0 show ho ga
+
+playerMap.clear();
+console.log("Player Map Clear ke bad", playerMap); // clear ho gia 
+
+console.log("Stats Map", statsMap);
+
+//? Real Life Example — Logout System
+
+const userSession = new Map();
+userSession.set("username", "hammad123");
+userSession.set("password", "2384duodk3");
+userSession.set("role", "admin");
+userSession.set("loginTime", "10:30 AM");
+
+console.log("Logged In:", userSession);
+console.log("Session Size", userSession.size);
+
+
+// user ne logout kia sab session hatao 
+
+userSession.clear();
+console.log("Logged Out");
+console.log("Session:", userSession);
+console.log("Session Size:", userSession.size);
+
+//? Real Life Example 2 — Cart Reset
+
+const shoppingCart = new Map();
+shoppingCart.set("item1", "Laptop");
+shoppingCart.set("item2", "Mobile");
+shoppingCart.set("item3", "Cloths");
+
+console.log("Cart:", shoppingCart);
+console.log("Cart Size:", shoppingCart.size); 
+
+
+// orderplace hone ke bad cart ko reset karo 
+
+shoppingCart.clear();
+console.log("Order Place ho gia ha Cart is Reset Now");
+console.log(shoppingCart);
+console.log(shoppingCart.size);
+
+//? 🗺️ Topic 8 — .size
+
+// Kaam Kya Karta Hai?
+// Map mein kitni entries hain — yeh batata hai!
+
+//? ⚠️ Yeh method nahi — property hai!
+// jsmyMap.size    // ✅ sahi — property
+// myMap.size()  // ❌ galat — function nahi hai!
+
+const sizeMap = new Map();
+console.log("The Size Is 0", sizeMap.size); // size 0 ho ga
+
+sizeMap.set("name", "Hammad");
+console.log("The Size is 1", sizeMap.size);
+
+sizeMap.set("fatherName", "Muhammad Siddique Zaman");
+console.log("The size is 2", sizeMap.size);
+
+sizeMap.set("city", "Abbottabad");
+console.log("The Size is 3", sizeMap.size);
+
+//? Delete Ke Baad Size
+
+sizeMap.delete("name"); // abhi 3 se kam ho kar 2 ho jai ga 
+console.log("The Size is 2 Now", sizeMap.size);
+
+// Same Key Pe Size Nahi Barhta
+sizeMap.set("name", "Ali"); // hammad ke jaga ali print ho ga or size same he rahe ga yani 2 he 
+
+console.log(sizeMap, sizeMap.size);
+
+//? Size Se Condition Lagana
+
+const sizeCart = new Map();
+sizeCart.set("item1", "Laptop");
+sizeCart.set("item2", "IPhone");
+
+if (sizeCart.size === 0){
+  console.log("Cart Khali ha");  
+}
+else{
+  console.log(`Cart main ${sizeCart.size} items hain`);
+};
+// yaha per output ho ga cart main 2 item hain 
+
+// Size Ko Variable Mein Rakhna
+
+const totalItems = sizeCart.size;
+console.log("Total Items:", totalItems, "Hain");
+
+// Real Life Example — Student Attendance
+
+const attendanceMap = new Map();
+attendanceMap.set("Hammad", true);
+attendanceMap.set("Fahad", true);
+attendanceMap.set("Bilal", true);
+attendanceMap.set("Azan", true);
+
+console.log(`Class mian student ke tadad ${attendanceMap.size} ha or aj itne ${attendanceMap.size} Student ai hain`);

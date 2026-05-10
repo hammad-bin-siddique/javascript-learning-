@@ -750,3 +750,19 @@ attendanceMap.set("Bilal", true);
 attendanceMap.set("Azan", true);
 
 console.log(`Class mian student ke tadad ${attendanceMap.size} ha or aj itne ${attendanceMap.size} Student ai hain`);
+
+
+//! 🗺️ Topic 9 — Prefilled Map
+
+// Kya Hai Prefilled Map?
+// Pehle hum pehle khali Map banate the — phir .set() se data dalete the:
+
+const mapPrefilled = new Map([
+
+  ["name", "Hammad Siddique"],
+  ["fatherName", "Muhammad Siddique Zaman"],
+  ["rollNumber", "ISL 22:02"],
+  ["semester", "8th"]
+]);
+
+console.log(mapPrefilled);

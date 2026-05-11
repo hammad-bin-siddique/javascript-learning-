@@ -756,6 +756,20 @@ console.log(`Class mian student ke tadad ${attendanceMap.size} ha or aj itne ${a
 
 // Kya Hai Prefilled Map?
 // Pehle hum pehle khali Map banate the — phir .set() se data dalete the:
+// Prefilled Map mein — ek hi baar mein Map banao aur data bhi do!
+
+// Syntax — Poori Detail
+// const myMap = new Map([
+//             ↑
+//             Bada array — sab entries iska hain
+
+//   [ key,  value ],
+//  ↑       ↑
+//  key    value — chhota array
+
+//   [ key2, value2 ],
+//   [ key3, value3 ]
+// ])
 
 const mapPrefilled = new Map([
 
@@ -766,3 +780,85 @@ const mapPrefilled = new Map([
 ]);
 
 console.log(mapPrefilled);
+
+//? Prefilled Map — Real Life Example
+
+const studentCard = new Map([
+  ["name", "Hammad Siddique"],
+  ["rollNbr", "ISL 22:02"],
+  ["subject", "Islamic Studies"],
+  ["semester", "8th"],
+  ["cgpa", 3.59]
+]);
+
+console.log(`Student Name is ${studentCard.get("name")} Student Roll Number is ${studentCard.get("rollNbr")} Subject Name is ${studentCard.get("subject")} Current Semester ${studentCard.get("semester")} Student CGPA is ${studentCard.get("cgpa")}`);
+
+
+//? Prefilled + Nested Map
+
+const addressKey = new Map([
+  ["city", "Batgram"],
+  ["country", "Pakistan"],
+  ["district", "Thakot"]
+]);
+
+const studentCard2 = new Map([
+  ["name", "Imran Khan"],
+  ["subject", "Islamic Studies"],
+  ["rollNbr", "ISL 22:23"],
+  ["cgpa", 3.43],
+  ["address", addressKey]
+]);
+
+
+console.log(`Student Name is ${studentCard2.get("name")} Student Roll No is ${studentCard2.get("rollNbr")} student CGPA is ${studentCard2.get("cgpa")} Student City Name is ${studentCard2.get("address").get("city")} Student District Name is ${studentCard2.get("address").get("district")}`);
+
+
+// 1. Ek prefilled Map banao — apni profile ke saath:
+//    name, age, city, isStudent, hobby
+
+// 2. Us pe yeh sab karo:
+//    .get() se name nikalo
+//    .has() se "salary" check karo
+//    .set() se "university" add karo
+//    .delete() se "hobby" hatao
+//    .size pehle aur baad mein print karo
+
+// 3. Nested prefilled Map banao:
+//    addressMap — city, area, street
+//    profileMap — name, age, address (addressMap link karo)
+//    city nikalo nested se
+
+// 4. Object key ke saath prefilled Map:
+//    const courseKey = { id: 101 }
+//    Map mein courseKey → "JavaScript" daalo
+//    .get(courseKey) se nikalo
+//    .get({ id: 101 }) try karo — kya aayega?
+
+const profileAddress = new Map([
+  ["city", "Abbottabad"],
+  ["area", "Nawasher Residential Area"],
+  ["street", "Saba Colony"]
+]); // nested map banaya 
+
+const courseKey = {id: 101}; // object ke banay variable main
+
+const myProfile = new Map([
+  ["name", "Hammad Siddique"],
+  ["age", 23],
+  ["city", "Abbottabad"],
+  ["isStudent", true],
+  ["hobbies",["Coding", "Programing", "Chess", "Blogging"]],
+  ["address". profileAddress],
+  [key, "javascript"]
+]);
+console.log(myProfile.get("hobbies"))
+console.log(myProfile.get("name")); // name show ho ga
+console.log(myProfile.has("salary")); // salary ke key nahi false ai ga 
+myProfile.set("universty", "GPGC NO 1 Abbottabad"); // set se universty add kar dia ha 
+console.log(myProfile.size);  // 
+myProfile.delete("hobbies"); // hobbies wali key delete kar di ha 
+console.log(myProfile.size); // 
+console.log(myProfile.get("address").get("city")); // city nikal di ha nested se 
+console.log(myProfile.get("key"));
+console.log(myProfile.get({id: 101}));

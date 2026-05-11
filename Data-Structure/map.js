@@ -849,8 +849,8 @@ const myProfile = new Map([
   ["city", "Abbottabad"],
   ["isStudent", true],
   ["hobbies",["Coding", "Programing", "Chess", "Blogging"]],
-  ["address". profileAddress],
-  [key, "javascript"]
+  ["address", profileAddress],
+  [courseKey, "javascript"]
 ]);
 console.log(myProfile.get("hobbies"))
 console.log(myProfile.get("name")); // name show ho ga
@@ -860,5 +860,5 @@ console.log(myProfile.size);  //
 myProfile.delete("hobbies"); // hobbies wali key delete kar di ha 
 console.log(myProfile.size); // 
 console.log(myProfile.get("address").get("city")); // city nikal di ha nested se 
-console.log(myProfile.get("key"));
-console.log(myProfile.get({id: 101}));
+console.log(myProfile.get(courseKey)); // Javascript ai ga
+console.log(myProfile.get({id: 101})); // undefined ai ga keuke ke get key ko select karta ha value ko nahi 

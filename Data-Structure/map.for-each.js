@@ -262,7 +262,9 @@ classMap.forEach((studentValue, studentKey) => {
     } else if (mark >= 70) {
       console.log(`${subject} => ${mark} Grade B`);
     } else if (mark >= 60) {
-      console.log(`${subject} => ${mark} Grade Fail Try Again kiddo`);
+      console.log(`${subject} => ${mark} Grade C`);
+    } else {
+      console.log(`${subject} => ${mark} Grade Fail Try Again Kiddo`)
     }
   });
 
@@ -285,6 +287,45 @@ classMap.forEach((studentValue, studentKey) => {
   } else if (average >= 70) {
     console.log("Overall Grade: B");
   } else if (average >= 60) {
+    console.log("Overall Grade C");
+  } else{
     console.log("Overall Grade Fail Next Time Kiddo");
-  }
+  };
 });
+
+
+//! Mobile Phone Contacts System:
+
+const contacts = new Map([
+    ["Hammad",  "+92-300-1234567"],
+    ["Ali",     "+92-321-7654321"],
+    ["Fahad",   "+92-333-9876543"],
+    ["Sara",    "+92-311-4567890"],
+    ["Usman",   "+92-345-6789012"]
+]);
+
+
+let totalNum = 0;
+contacts.forEach((number, name) => {
+  console.log(`${name} => ${number}`);
+  totalNum++;
+});
+console.log(`Total Contacts ${totalNum}`);
+
+// Sirf "+92-3" se shuru hone wale numbers print karo
+
+contacts.forEach((number,name) => {
+  if(number.startsWith("+92-32")){
+    console.log(`${name} => ${number}`);
+  };
+}); // yaha ab sirf +92-32 wale number print ho ge mean ke  Ali wala
+
+
+// ab teen perameter ke sath for each ka use karna 
+
+contacts.forEach((number, name, map) => {
+  console.log(`Name: ${name}`);
+  console.log(`Number: ${number}`);
+  console.log(`Size: ${map.size}`);
+});
+

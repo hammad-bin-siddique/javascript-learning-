@@ -194,55 +194,52 @@ studentMap.forEach((studentValue, studentKey) => {
     }
   }); // yaha her subject ka grade or number print kia ha
 
-  //  ab yaha total number or average print ho ga 
+  //  ab yaha total number or average print ho ga
 
   const average = subjectMarks / subjectCount;
 
   console.log("=====================");
-  console.log(`Total Marks: ${subjectMarks}`); // total marks print ho ge each student ke 
+  console.log(`Total Marks: ${subjectMarks}`); // total marks print ho ge each student ke
 
   console.log("====================");
-  console.log(`Total Average: ${average}`); // tatal average print ho ge each student ki 
-  
+  console.log(`Total Average: ${average}`); // tatal average print ho ge each student ki
 
-  // ab yaha average base per Overall grade define ho ga with condition 
+  // ab yaha average base per Overall grade define ho ga with condition
 
-  if(average >= 90) {
+  if (average >= 90) {
     console.log("Overall Grade: A+");
-  } else if(average >= 80) {
+  } else if (average >= 80) {
     console.log("Overall Grade: A");
   } else if (average >= 70) {
     console.log("Overall Grade: B");
   } else if (average >= 60) {
     console.log("Overall Grade: C");
   } else if (average <= 50) {
-    console.log("Overall Grade Fail")
-  };
+    console.log("Overall Grade Fail");
+  }
 
+  //?   Highest marks wala subject nikalo
 
-//?   Highest marks wala subject nikalo
+  let highestMarks = 0;
+  let highesSubject = "";
 
-let highestMarks = 0;
-let highesSubject = "";
+  subjectMap.forEach((mark, subject) => {
+    if (mark > highestMarks) {
+      highestMarks = mark;
+      highesSubject = subject;
+    }
+  });
 
-subjectMap.forEach((mark, subject) => {
-    if(mark > highestMarks) {
-        highestMarks = mark;
-        highesSubject = subject;
-    };
-});
+  console.log(highestMarks);
+  console.log(highesSubject);
 
-console.log(highestMarks);
-console.log(highesSubject);
+  // fail count
 
-// fail count 
+  let failCount = 0;
 
-let failCount = 0;
-
-subjectMap.forEach((mark, subject) => {
+  subjectMap.forEach((mark, subject) => {
     if (mark < 50) failCount++;
-});
+  });
 
-console.log(`Total Failed ${failCount}`);
-
+  console.log(`Total Failed ${failCount}`);
 });

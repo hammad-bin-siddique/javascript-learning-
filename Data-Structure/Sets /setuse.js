@@ -115,3 +115,63 @@ const brandNew = [...newCustomer].filter (old =>
 
 console.log(`Old Customer: ${returning}`);
 console.log(`New Customer: ${brandNew}`);
+
+
+//! Tasks
+console.log("=====Tasks=====");
+
+
+//? Task 1 — Duplicates remove:
+// Yeh array hai:
+// ["Ali", "Sara", "Hammad", "Ali", "Sara", "Zara"]
+// Duplicates remove karo aur clean array print karo.
+
+
+const task1Array = ["Ali", "Sara", "Hammad", "Ali", "Sara", "Zara"];
+
+const task1Unique = [...new Set(task1Array)];
+
+console.log("====Task 1====");
+console.log(`Unique Names Size: ${task1Unique.length}`);
+console.log(`Unique Names: ${task1Unique}`);
+
+
+//? Task 2 — Unique check:
+// Ek Set banao visitedPages naam ka.
+// Yeh pages visit karo:
+// "home", "about", "home", "contact", "about"
+// Phir print karo ke kitne unique pages visit hue.
+
+const visitedPages = ["home", "about", "home", "contact", "about"];
+
+const uniquePages = [...new Set(visitedPages)];
+
+console.log("====Task 2====");
+console.log(`Unique Visited Pages: ${uniquePages}`);
+console.log(`Total Unique Pages: ${uniquePages.length}`);
+
+
+//? Task 3 — Intersection:
+// Dono mein common values nikalo.
+
+let set1 = new Set([1, 2, 3, 4, 5]);
+let set2 = new Set([3, 4, 5, 6, 7]);
+
+const commonNum = [...set1].filter(num => 
+    set2.has(num)
+);
+
+console.log("===Task 3====");
+console.log(`Common Num In Both Sets: ${commonNum}`); // 3 4 5 
+
+//? Task 4 — Difference:
+// Same sets use karo — set1 mein jo values hain jo set2 mein nahi hain woh nikalo.
+
+const diffNum = [...set1].filter(num =>
+    !set2.has(num)
+); 
+
+console.log("===Task 4===");
+console.log(`Diff Num in both Sets  ${diffNum}`); // agar set 1 ko filter kare ge to 1 2 ai ga diff number or agar set 2 ko kia to 6 7 ai ga 
+
+

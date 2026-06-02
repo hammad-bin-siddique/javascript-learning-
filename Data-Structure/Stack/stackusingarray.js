@@ -222,3 +222,14 @@ console.log(`Peek After Poping: ${myStack.peek()}`); // stack khali ha wali cond
 //? Khali stack ko pop karna 
 
 console.log(`Pop: ${myStack.pop()}`); // pop nahi ho ga keuke stack khali ha stack is empty ai ga 
+
+
+//! 🎯 Summary:
+
+// Stack Using Array use hota hai:
+// → Undo/Redo systems mein
+// → Browser history mein
+// → App navigation mein
+// → Order systems mein
+// → Function calls mein
+// → Game levels mein

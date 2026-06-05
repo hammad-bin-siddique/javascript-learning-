@@ -1,6 +1,5 @@
 //! 📚 Topic 12: Undo/Redo Functionality
 
-
 //? 📖 Undo/Redo Kaise Kaam Karta Hai?
 
 // 2 Stacks hote hain:
@@ -40,7 +39,6 @@
 
 //? Redo Karte Waqt:
 
-
 // Redo Stack se pop karo → Undo Stack mein push karo
 
 // Ctrl+Y dabaya:
@@ -75,136 +73,261 @@
 // Redo karo    → Redo Stack se pop
 //                Undo Stack mein push
 
-
 class Stack {
-    constructor() {
-        this.word = [];
-    };
+  constructor() {
+    this.word = [];
+  }
 
-    //? Push function banana 
+  //? Push function banana
 
-    push(element) {
-        this.word.push(element);
-    };
+  push(element) {
+    this.word.push(element);
+  }
 
-    //? Pop function banana 
+  //? Pop function banana
 
-    pop(){
-        if(this.isEmpty()) {
-            return null
-        }
-        return this.word.pop();
-    };
+  pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.word.pop();
+  }
 
-    //? Peek Function banana 
+  //? Peek Function banana
 
-    peek() {
-        if(this.isEmpty()) {
-            return null
-        }
-        return this.word[this.word.length - 1];
-    };
+  peek() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.word[this.word.length - 1];
+  }
 
-    //? isEmpty Function banana 
+  //? isEmpty Function banana
 
-    isEmpty() {
-        return this.word.length === 0;
-    };
+  isEmpty() {
+    return this.word.length === 0;
+  }
 
-    //? Size Function banana 
+  //? Size Function banana
 
-    size() {
-        return this.word.length;
-    };
+  size() {
+    return this.word.length;
+  }
 
-    //? sab ko print karne ka function banana 
+  //? sab ko print karne ka function banana
 
-    print() {
-        console.log(this.word);
-    };
+  print() {
+    console.log(this.word);
+  }
+}
 
-
-};
-
-
-//? Undo Redo Stack System 
+//? Undo Redo Stack System
 
 const undoStack = new Stack();
 const redoStack = new Stack();
 
-//? ab action function banao 
+//? ab action function banao
 
 function action(word) {
-    undoStack.push(word); // yani jo bhi action karo us ko undo stack main dalo 
+  undoStack.push(word); // yani jo bhi action karo us ko undo stack main dalo
 
-    redoStack.word = []; // or redo stack ko clear karo keuke new action per redo stack clear ho jata ha 
+  redoStack.word = []; // or redo stack ko clear karo keuke new action per redo stack clear ho jata ha
 
-    console.log(`Action: ${word}`); // yani jo bhi action hue hain un ko console karo 
-};
+  console.log(`Action: ${word}`); // yani jo bhi action hue hain un ko console karo
+}
 
-//? ab undo function banao 
+//? ab undo function banao
 
 function undo() {
-    if(undoStack.isEmpty()) {
-        console.log("Kuch Nahi ha Undo karne ko"); // yani jab undo stack empty ho to wo kuch return nahi kare ga 
-        return // yaha function ko close kar do 
-    }
+  if (undoStack.isEmpty()) {
+    console.log("Kuch Nahi ha Undo karne ko"); // yani jab undo stack empty ho to wo kuch return nahi kare ga
+    return; // yaha function ko close kar do
+  }
 
-    const word = undoStack.pop(); // undo stack se words ko nikalo 
+  const word = undoStack.pop(); // undo stack se words ko nikalo
 
-    redoStack.push(word); // or redo stack main dalo words ko 
+  redoStack.push(word); // or redo stack main dalo words ko
 
-    console.log(`Undo: ${word}`); // jo word undo function main hain un ko print karo 
-};
+  console.log(`Undo: ${word}`); // jo word undo function main hain un ko print karo
+}
 
-//? Ab Redo Function banao 
+//? Ab Redo Function banao
 
 function redo() {
-    if(redoStack.isEmpty()) {
-        console.log("Kuch Nahi ha Redo karne ko!"); // yani jab redo stack khali ho ga to wo kuch return nahi kare ga 
+  if (redoStack.isEmpty()) {
+    console.log("Kuch Nahi ha Redo karne ko!"); // yani jab redo stack khali ho ga to wo kuch return nahi kare ga
 
-        return // ab is function ko close karo 
-    }
+    return; // ab is function ko close karo
+  }
 
-    const word = redoStack.pop(); // redo stack se pop karo words ko 
+  const word = redoStack.pop(); // redo stack se pop karo words ko
 
-    undoStack.push(word); // or undo stack main dalo 
-    console.log(`Redo: ${word}`); // jo kuch redo main ha wo print karo 
-};
+  undoStack.push(word); // or undo stack main dalo
+  console.log(`Redo: ${word}`); // jo kuch redo main ha wo print karo
+}
 
+action("My"); // ab ye first action kia undostack main chala gia
 
-action("My"); // ab ye first action kia undostack main chala gia 
+action("Name"); // ye bhi undo stack main chala gia
 
-action("Name"); // ye bhi undo stack main chala gia 
-
-action("is Hammad"); // ye bhi undo stack mian gia 
+action("is Hammad"); // ye bhi undo stack mian gia
 
 console.log("=====Undo Stack====");
 undoStack.print(); // yaha ab my name is hammad ho ga [ 'My', 'Name', 'is Hammad' ]
 
-undo(); // is Hammad gia undo se Redo main 
-undo(); // Name bhi Gia redo main 
+undo(); // is Hammad gia undo se Redo main
+undo(); // Name bhi Gia redo main
 
 console.log("====Undo Stack After 2 Undos====");
-undoStack.print(); // ab undo main sirf My ho ga 
+undoStack.print(); // ab undo main sirf My ho ga
 
 console.log("===Redo Stack After 2 Undos===");
-redoStack.print(); // us main top per Name ho ga or neache is Hammad lifo method se 
+redoStack.print(); // us main top per Name ho ga or neache is Hammad lifo method se
 
-redo(); 
+redo();
 
 console.log("===Undo Stack After Redo===");
 
-undoStack.print(); // ab undo main Name bhi a jai ga top per or neache my ho ga 
+undoStack.print(); // ab undo main Name bhi a jai ga top per or neache my ho ga
 
 console.log("===Redo Stack After Redo===");
-redoStack.print(); // ab redo stack main sirf is Hammad HO ga 
+redoStack.print(); // ab redo stack main sirf is Hammad HO ga
 
-action("."); 
+action(".");
 
-console.log("===Final Undo Stack===="); 
-undoStack.print(); // ab is main my name or . ho ga 
+console.log("===Final Undo Stack====");
+undoStack.print(); // ab is main my name or . ho ga
 
 console.log("===Final Redo Stack===");
-redoStack.print(); // redo stack main kuch nahi ha  or wo khali array return kare ga 
+redoStack.print(); // redo stack main kuch nahi ha  or wo khali array return kare ga
 
+//! Task
+
+class NewStack {
+  constructor() {
+    this.data = [];
+  }
+
+  //? push function banana
+  push(item) {
+    return this.data.push(item);
+  }
+
+  //? pop funciton banana
+
+  pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.data.pop();
+  }
+
+  //? peek Function banana
+
+  peek() {
+    if (this.isEmpty()) {
+      return "Stack is Empty";
+    }
+    return this.data[this.data.length - 1];
+  }
+
+  //? isEmpty Function banana
+
+  isEmpty() {
+    return this.data.length === 0;
+  }
+
+  //? Size Function banana
+
+  size() {
+    return this.data.length;
+  }
+
+  //? print function banana
+
+  print() {
+    console.log(this.data);
+  }
+}
+
+const newUndoStack = new NewStack();
+const newRedoStack = new NewStack();
+
+// ab action function banano
+
+function actionNew(data) {
+  newUndoStack.push(data);
+  // undo  stack mian data dalo
+
+  newRedoStack.data = []; // redo stack khali karo
+
+  console.log(`New Action ${data}`);
+}
+
+//? ab undo function banao
+
+function newUndo() {
+  if (newUndoStack.isEmpty()) {
+    console.log("Kuch nahi ha undo karne ko");
+    return;
+  }
+
+  const data = newUndoStack.pop(); // undo stack se nikalo
+
+  newRedoStack.push(data); // or redo stack main dalo
+
+  console.log(`Undo: ${data}`);
+}
+
+//? redo function banao
+
+function newRedo() {
+  if (newRedoStack.isEmpty()) {
+    console.log("Kuch nahi ha redo karne ko");
+    return;
+  }
+
+  const data = newRedoStack.pop();
+  newUndoStack.push(data);
+  console.log(`Redo: ${data}`);
+}
+
+actionNew("Task One");
+actionNew("Task Two");
+actionNew("Task Three");
+
+console.log("====New Undo Stack====");
+newUndoStack.print(); // abhi is main 3 add ho ge
+
+console.log("===New Redo Stack===");
+newRedoStack.print(); // ye khali arrays ho ga keuke abhi kuch undo hua he nahi
+
+newUndo(); // task three gia redo main
+newUndo(); // ab task two gia redo main
+
+console.log("===Undo Stack After Undos===");
+newUndoStack.print(); // is main sirf task one ho ga
+
+console.log("===Redo Stack After Undos===");
+newRedoStack.print(); // is main top per task two ho ga or phir neache task three ho ga lifo rule ke according
+
+//? Ab redo karte hain
+
+newRedo();
+
+console.log("===Undo Stack After Redo===");
+
+newUndoStack.print(); // is main ab task one neache ho ga or task two ho ga top per
+
+console.log("===Redo Stack After Redo===");
+
+newRedoStack.print(); // is main se ab task two nikal gia or sirf task three ho ga
+
+actionNew("Task Four");
+
+console.log("==Undo Stack After New Action===");
+
+newUndoStack.print(); // is main ab sab se pehle task one phir task two ho ga or phir task four ho ga
+
+console.log("===Redo Stack after New Action===");
+newRedoStack.print(); // ye ab khali ho ga keuke new action ke bad ye clear ho gia

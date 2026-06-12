@@ -181,3 +181,132 @@ backStack.print(); // is main ab google hostinger or hamlistore ho ga
 console.log("===Final Forward Stack==="); 
 
 forwardStack.print(); // ye khali ho ga keuke ke new action ke bad forward stack clear ho jata ha 
+
+
+//! Task — Browser Back Button
+
+class StackNew  {
+
+    constructor() {
+        this.item = []
+    };
+
+    // push function banana 
+
+    push(page){
+        return this.item.push(page);
+    };
+
+    // pop function banana 
+
+    pop() {
+        if(this.isEmpty()) {
+            return null
+        }
+        return this.item.pop();
+    };
+
+    //isEmpty Function banana 
+
+    isEmpty(){
+        return this.item.length === 0;
+    };
+
+    //peek function banana 
+
+    peek() {
+        if(this.isEmpty()){
+            return null
+        }
+        return this.item[this.item.length - 1];
+    };
+
+    //size function banana 
+
+    size() {
+        return this.item.length;
+    };
+
+    //print function banana 
+
+    print(){
+        console.log(this.item);
+    }
+};
+
+// ab forward or back jane ke lia variable banai ge 
+
+const backStackNew = new StackNew();
+
+const forwardStackNew = new StackNew();
+
+let currentPageNew = null;
+
+//?visit Function banana 
+
+function visitNew(myPage){
+    if(currentPageNew !== null) {
+        return backStackNew.push(currentPageNew);
+    }; // yani agar current page empty nahi ha to jo prana page ha us ko back stack main dalao 
+};
+
+currentPageNew = myPage; // yani jo new page visit kia us ko current page bana do 
+
+forwardStackNew.item = []; // forward stack ko clear kar do new page visit karte he 
+
+console.log(`Visiting ${currentPageNew}`);
+
+// yani jo visit kia page hain wo print karo like visiting daraz.pk aliexpress.com etc
+
+//? Back function banana 
+
+function backNew() {
+    if(backNew.isEmpty()) {
+        console.log("Koi Previous Page Nahi ha");
+        // yani agar back stack khali ha to print karo ke koi page nahi ha previous 
+        return; // function close karo 
+    };
+
+
+    forwardStackNew.push(currentPageNew); //ab forward stack main current page ko dalo
+
+    currentPageNew = backStackNew.pop(); // abhi current page wo ha jo backstack ke top se pop hua 
+
+    console.log(`Back ${currentPageNew}`);
+
+    // yani jo back stack main pages hain un ko print karo 
+
+};
+
+
+//? Ab forward function banao 
+
+
+function forwardNew() {
+    if(forwardNew.isEmpty()){
+        console.log("Koi Forward Page Nahi ha");
+        // yani agar forwardstack khali ha to msg print karo ke koi forward page nahi ha 
+        return; 
+    };
+
+    backStackNew.push(currentPage); // backstack main current page ko dalao 
+
+    currentPageNew = forwardStackNew.pop(); 
+    // forward stack se jo top item pop karo us ko current page bana do 
+
+    console.log(`Forward: ${currentPage}`);
+
+    // yani jo forward stack main pages hain un ko print kar do 
+
+};
+
+visitNew("daraz.pk");
+visitNew("aliexpress.com");
+visitNew("amazon.com");
+visitNew("ebay.com");
+
+console.log("===Back Stack===");
+
+backStackNew.print();
+
+//abhi back stack main top per amazon ho ga phir aliexpres ho phir daraz ho ga lifo rule ke waja se or current page main abhi ebay.com ho ga 

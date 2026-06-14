@@ -14,7 +14,6 @@
 // 3. Koi extra ya missing
 //    bracket na ho
 
-
 //! 🤔 Stack Kyun Use Hota Hai Yahan?
 
 // LIFO → Last In First Out
@@ -90,7 +89,6 @@
 
 // → BALANCED! ✅
 
-
 //? 🔑 3 Important Cases
 
 // Case 1: Opening bracket mila
@@ -105,3 +103,44 @@
 //         → Stack khali hai?
 //           → HAAN → TRUE (Balanced!)
 //           → NAHI → FALSE (kuch khula reh gaya)
+
+//? 📖 isBalanced() — Complete Line By Line
+
+function isBalanced(str) {
+  const stack = [];
+  const pairs = {
+    ")": "(",
+    "}": "{",
+    "]": "[",
+  };
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+
+    //Opening Bracket
+
+    if (char === "(" || char === "[" || char === "{") {
+      stack.push(char);
+    }
+
+    //Closing Brackets
+    else if (char === ")" || char === "}" || char === "]") {
+      if (stack.length === 0) {
+        return false;
+      }
+      const top = stack.pop();
+      if (top !== pairs[char]) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+};
+
+
+console.log(isBalanced("()")); // true 
+console.log(isBalanced("([])")); // true 
+console.log(isBalanced("([)]")); // false 
+console.log(isBalanced("(((")); // false 
+console.log(isBalanced(")(")); // false
+console.log(isBalanced("")); // true

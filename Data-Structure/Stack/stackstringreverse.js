@@ -11,7 +11,7 @@
 // 4. Space ke saath jodo
 
 function reverseWords(str) {
-    let words = str.split(" "); // strings ko space main kia yani un ka array bana dia 
+    let words = str.split(" "); // strings ko split kia or array banaya 
     let stack = [];
 
     for(let i = 0; i < words.length; i++) {
@@ -20,10 +20,43 @@ function reverseWords(str) {
 
     let reverseWord =  ""; 
     while(stack.length > 0) {
-        reverseWord = reverseWord + stack.pop();
+        reverseWord = reverseWord + stack.pop() + " ";
     };
-    return reverseWord;
+    return reverseWord.trim(); // extra space hata dia 
 };
 
 console.log(reverseWords("HELLO WORLD")); // WORLD HELLO
-console.log(reverseWords("Danial Donkey")); // Donkey Danial  mean ke khota khota he hota ha chaia age lagao ya peache 
+console.log(reverseWords("Fahad Shafique")); // Shafique Fahad
+console.log(reverseWords("I Love JavaScript"));
+
+//! Function 2: reverseEachWord(str)
+
+// Input:  "I love JavaScript"
+// Output: "I evol tpircSavaJ"
+
+// Hint:
+// 1. String ko SPACE se todo → array of words
+// 2. HAR WORD ko reverseString() (Topic 15) se reverse karo
+// 3. Space ke saath jodo (order same rakho!)
+
+
+
+function reverseString(string) {
+    let wordNew = string.split(" ");
+    let stackNew = [];
+
+    for(let i = 0; i < string.length; i++){
+
+        stackNew.push(string[i]);
+    }; 
+
+    let reverseNew = "";
+
+    while(stackNew.length > 0){
+        reverseNew = reverseNew + stackNew.pop();
+    };
+
+    return reverseNew.trim();
+};
+
+console.log(reverseString("I Love JavaScript"));

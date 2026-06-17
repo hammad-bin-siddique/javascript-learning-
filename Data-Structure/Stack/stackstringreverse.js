@@ -41,22 +41,23 @@ console.log(reverseWords("I Love JavaScript"));
 
 
 
-function reverseString(string) {
-    let wordNew = string.split(" ");
+function reverseString(str){
+    let wordNew = str.split(" ");
     let stackNew = [];
 
-    for(let i = 0; i < string.length; i++){
-
-        stackNew.push(string[i]);
-    }; 
+    for(let i = 0; i < str.length; i++){
+        stackNew.push(str[i]);
+    };
 
     let reverseNew = "";
 
-    while(stackNew.length > 0){
+    while(stackNew.length > 0) {
         reverseNew = reverseNew + stackNew.pop();
     };
 
     return reverseNew.trim();
 };
 
+
+console.log(reverseString("Hello Hammad"));
 console.log(reverseString("I Love JavaScript"));

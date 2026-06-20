@@ -77,14 +77,67 @@ function isBalanced(str) {
       }
     }
   }
-  // step 4: agar stack khali hai or sab match ho jai 
+  // step 4: agar stack khali hai or sab match ho jai
 
   return stack.length === 0;
-};
+}
 
+// console.log(isBalanced("( { [ ] } )")); // true
+// console.log(isBalanced("( { [ ) } )")); // false
+// console.log(isBalanced("{ }")); // true
+// console.log(isBalanced("( ( ( )")); // false
+// console.log(isBalanced("")); // true
 
-console.log(isBalanced("( { [ ] } )"));  // true
-console.log(isBalanced("( { [ ) } )"));  // false
-console.log(isBalanced("{ }"));          // true
-console.log(isBalanced("( ( ( )"));      // false
-console.log(isBalanced(""));             // true
+//! Function is balanced task
+
+function isBalancedNew(string) {
+  //? step one khali stack banana
+
+  let stackNew = [];
+
+  //? step 2 opening and closing pair banana
+
+  let openNew = ["(", "{", "["];
+  let closeNew = [")", "}", "]"];
+
+  //? step three her character ko dekhna
+
+  for (let x = 0; x < string.length; x++) {
+    let character = string[x]; // yani jab tak x string ke length se chota ha tab tak loop chalao or her bar x main 1 add karte jao
+
+    //? agar opening bracket ha to us ko stack main dalo
+
+    if (openNew.includes(character)) {
+      stackNew.push(character);
+    }
+    // yani open new main dekho ke character ha yani ( [ ye to us ko stack ke andar push karo character ko
+
+    //? ab dosri condition lage gi yani closing wali
+    else if (closeNew.includes(character)) {
+      if (stackNew.length === 0) {
+        return false;
+      } // yani jab pehle wala if nahi chale mean ke "( { [ " in main se koi naw ho to phir dekho ke closing bracket ha ke nahi ")}]" to ye chalo jab tak stack ke length 0 nahi ho jati ye condition is lia lagate ha ke agar stack khali hua to undefined return kare ga
+
+      let topNew = stackNew.pop(); //yani stack se uper wala nikalo or use top new wale variable main store karo
+
+      let topIndexNew = openNew.indexOf(topNew); // yani jo stack se abhi pop hua us ka index of ko dhondta  ha like openNew.indexOf("("); is ka index of 0 ha
+      let closeIndexNew = closeNew.indexOf(character); // ye bhi same kam karta ha but closing bracket main ke un ka index kn sa ha agar closing or opening bracket ka index same ha like ( ) in dono ka index 0 ha to phir pair matched ho ga or balanced main true ai ga
+
+      if (topIndexNew !== closeIndexNew) {
+        return false; // yani ye condition ye check kare gi ke top index or close index agar brabar nahi ha to false ai ga like ( is ka index 0 ha or is ka } 1 ha to false return kare ga warna agar dono ka same ata ha to loop continue ho ga or kuch return nahi ha ga
+      }
+    }
+  }
+  // agar stack khali ha to mean ke sab match hua or balanced ha
+
+  return stackNew.length === 0; // yani agar stack khali ha to mean ke sab match ho gia or agar "({[" ye ho to stack khali nahi ho or match bhi nahi to false return kare ga mean ke agar sab match hut to true warna false
+}
+
+console.log(isBalancedNew("({[]})")); // true ai ga
+console.log(isBalancedNew("({)}")); // false ai ga keuke pair match nahi kar rahe
+console.log(isBalancedNew("()")); // true ai ga
+
+console.log(isBalancedNew("")); // true ai ga keuke stack khola he nahi ke band karna pare 
+console.log(isBalancedNew("(((")); // false ai ga khola to ha magar band nahi kia 
+
+console.log(isBalancedNew(")(")); // false ai ga keuke kholne se pehle he band kar dia 

@@ -24,3 +24,4 @@ function decimalToBinary(num) {
 console.log(decimalToBinary(20));
 console.log(decimalToBinary(10)); 
 console.log(decimalToBinary(5));
+console.log(decimalToBinary(100)); // 1100100

@@ -25,3 +25,7 @@ console.log(decimalToBinary(20));
 console.log(decimalToBinary(10)); 
 console.log(decimalToBinary(5));
 console.log(decimalToBinary(100)); // 1100100
+
+
+//! NOTE
+//kisi bhi decimal number ko binary main convert karne ke lia us number ko 2 per divide karte raha ge jab tak quationt 0 naw ho jai or reminder ko jo ho wo binary number ho ga 

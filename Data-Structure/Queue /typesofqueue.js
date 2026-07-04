@@ -145,3 +145,94 @@ circularQueue.print(); // yaha 0 or 1 main null ai ga or c d 2 3 index per ai ge
 circularQueue.enqueue("E"); // E rear per ho or front ka abhi index 2 ho ga jaha C ha first in first out rule se ye index 0 per to ho ga but dequeue karne per C nikle ga naw ke ye
 circularQueue.enqueue("F"); // F aya rear per 
 circularQueue.print(); // E F C D is tara ho ga 
+
+
+//? Topic 17: Priority Queue 🏆
+
+// 🧠 Priority Queue Kya Hai?
+// Normal Queue = pehle aao, pehle jao (FIFO)
+
+// Priority Queue = jo IMPORTANT hai — woh pehle nikle ga!
+//                  chahe baad mein aaya ho!
+
+
+class PriorityQueue {
+    constructor(){
+        this.item = []; // khali array banaya is main object store ho ge khali string nahi keuke priority bhi add karni ha name ya chez ke sath 
+    };
+
+    // ab enqueue kare ge element ke sath priority bhi ai gi 
+    // 1 variable banaya jis main element or priority save ho gi or abhi ke lia added false kia ha mean ke jab koi new element priority ke sath dale ge agar us ke priority kam hui existing wale to added false ho ga or agar ziada hui to true ho or add ho jai ga front per 
+
+
+    enqueue(element, priority) {
+        let newItem = {element, priority};
+        let added = false;
+
+        for (let i = 0; i < this.item.length; i++) {
+            if(newItem.priority < this.item[i].priority) {
+                this.item.splice(i, 0, newItem);
+                added = true;
+                break;
+
+                //abhi loop chalaya ha index filhal 0 ha or i main add karte jao elements ko jab tak ke array ke length 0 nahi ho jati 
+                //acha neache condition lagai ha ke agar new item ke priority kam hui existing se to added ko true kar do mean ke pehle zaid aya 4 priority ke sath phir ali aya 1 priority ke sath ali ke priority kam ha zaid se is lia is ko front per le ai ge or zaid ko age or added true ho jai ga 
+            }
+        }
+
+        if(!added) {
+            this.item.push(newItem);
+            // mean ke agar man lo new item ke priority ziada ha existing se to phir added false ho jai ga or ye new item push ho jai ga rear per 
+        }
+    };
+
+    //?dequeue Function banana 
+    dequeue() {
+        if(this.isEmpty()) {
+            return null;
+        }
+        return this.item.shift();
+    };
+
+    //? Peek Function banana 
+
+    peek() {
+        if(this.isEmpty()) {
+            return null;
+        }
+        return this.item[0];
+    };
+
+    //? Is Empty function banana 
+
+    isEmpty() {
+        return this.item.length === 0;
+    };
+
+    //? Size Function banana 
+
+    size() {
+        return this.item.length;
+    };
+
+    print() {
+        this.item.forEach(items => {
+            console.log(`Items => ${items.element} Priority => ${items.priority}`);
+        });
+    };
+};
+
+const priorityQueue = new PriorityQueue();
+
+
+priorityQueue.enqueue("Faizan", 3);
+priorityQueue.enqueue("Bilal", 4);
+priorityQueue.enqueue("Hammad", 1);
+priorityQueue.enqueue("Momina", 2); 
+
+priorityQueue.print(); // front per hammad ho ga second per momina phir faizan and last mian bilal
+console.log(priorityQueue.peek()); // Hammad ho ga peek per 
+console.log(priorityQueue.dequeue()); // Hammad Nikal gia 
+
+priorityQueue.print(); // abhi hammad nahi ho ga highest priority Momina ki ho gi 
+console.log(priorityQueue.peek()); // Momina ho gi 

@@ -236,3 +236,104 @@ console.log(priorityQueue.dequeue()); // Hammad Nikal gia
 
 priorityQueue.print(); // abhi hammad nahi ho ga highest priority Momina ki ho gi 
 console.log(priorityQueue.peek()); // Momina ho gi 
+
+
+//? Topic 18: Deque — Double Ended Queue 🔀
+
+// Normal Queue:
+// REAR se add → FRONT se nikalo
+
+// Deque (Double Ended Queue):
+// DONO sides se add kar sakte ho!
+// DONO sides se nikal sakte ho!
+
+//! 📌 Deque Ki 4 Main Operations
+
+// addFront(x)    → FRONT se add karo
+// addRear(x)     → REAR se add karo
+// removeFront()  → FRONT se nikalo
+// removeRear()   → REAR se nikalo
+
+class Deque {
+    constructor() {
+        this.items = [];
+    };
+
+    //? sab se pehle front per add karne ke lia function banai ge 
+
+    addFront(element) {
+        return this.items.unshift(element); // unshift array ka built in method ha jo front per item add karta ha
+    };
+
+    //? Abhi end per add karne ke function banai ge 
+
+    addBack(element) {
+        return this.items.push(element);
+    };
+
+    //? Abhi front se removed karne ke lia function banai ge 
+
+    removeFront(){
+        return this.items.shift(); // shift array ke start se item ko remove karta ha 
+    };
+
+    //? abhi last se remove karne ke lia function banai ge 
+
+    removeBack() {
+        return this.items.pop(); // pop last se items ko remove karne ke lia use hota ha 
+    };
+
+    //? Front se peek karne ke lia function banai ge 
+
+    peekFront() {
+        if(this.isEmpty()) {
+            return null;
+        }
+        return this.items[0]; // ye 0 index wale item ko dikhai ge 
+    };
+
+    //? Abhi back se peek karne wala function banai ge 
+
+    peekBack() {
+        if(this.isEmpty()) {
+            return null;
+        }
+        return this.items[this.items.length - 1]; // ye last element ko show karwai ga 
+    };
+
+    //? Abhi size Function banai ge 
+
+    size() {
+        return this.items.length;
+    };
+
+    //? is Empty function banai ge 
+
+    isEmpty() {
+        return this.items.length === 0;
+    };
+
+    //? Print fucntion banai ge 
+
+    print(){
+        console.log(this.items);
+    };
+};
+
+const deque = new Deque();
+console.log("====Deque====");
+
+
+deque.addBack("Bilal");
+deque.addBack("Faizan");
+deque.addFront("Hammad"); // abhi hammad front per add hua ha 
+console.log(deque.size()); // 3 ho ga 
+deque.print(); // Hammad Front per ho ga
+console.log(deque.peekFront()); // Hammad Ai ga 
+console.log(deque.peekBack()); // Faizan  ai ga 
+
+console.log(deque.removeBack()); // Faizan Remove ho gia 
+console.log(deque.removeFront()); // Hammad Remove ho gia front se 
+console.log(deque.peekFront()); // Bilal ai ga 
+console.log(deque.peekBack()); // yaha bhi Bilal ai ga keuke abhi 1 he item rehta ha abhi front se dekho ya end se ye he ai ga 
+console.log(deque.size()); // 1 ai ga 

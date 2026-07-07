@@ -7,9 +7,9 @@ class CallCenterQueue {
     constructor() {
         this.customerQueue = []; // is array main customer ai ga 
         this.agents  = [
-            {name: "Agent1", status: "Free"},
-            {name: "Agent2", status: "Free"},
-            {name: "Agent3", status: "Free"}
+            {name: "Agent1", status: "free"},
+            {name: "Agent2", status: "free"},
+            {name: "Agent3", status: "free"}
         ]; // ye 1 array banaya ha jis ke andar object main agents or us ka status data ha 
     };
 
@@ -28,5 +28,37 @@ class CallCenterQueue {
             this.customerQueue.push(customerName);
             console.log(`${customerName} Waiting in Customer Queue`)
         }
-    }
+    };
+
+    //? ab yaha se finsh call ka function bane ga mean ke jab agent 1 customer se free ho jai to us ko dosre queue main wait karte hue customer se connect karna ha jab tak ke customer khatam naw ho jai 
+
+    finishCall(agentName) {
+        const agent = this.agents.find(free => free.name === agentName);
+        // ye line agent name main check kare jo name ham ne neache call kia us ko agents name main find kare ge agar exact match hua to phir age function chale ga mean ke status free karna etc ye sab
+
+        agent.status = "free"; // pehele busy tha status ab free kar dia 
+
+        //? ab jo queue main betha hua customer ha us ko connect kare ge free agent ke sath 
+
+        if(this.customerQueue.length === 0) {
+            console.log("There is no customer in the queue");
+            return;
+        }
+        let nextCustomer = this.customerQueue.shift(); // ab yaha free agent ko queue main wait karte hue customer ko de dia ha 
+        agent.status = "busy";
+        console.log(`${nextCustomer} connected to ${agent.name}`);
+    };
 };
+
+
+const callCenter = new CallCenterQueue();
+
+callCenter.addCustomer("Hammad"); // Hammad connect hua agent ke sath 
+callCenter.addCustomer("Waleed"); // Waleed bhi connect hua agent ke sath 
+callCenter.addCustomer("Faizan"); // Faizan bhi connect hua agent ke sath 
+callCenter.addCustomer("Hamza"); // tamam agents busy hain is lia ye customer queue main chala gia 
+callCenter.addCustomer("Fahad"); 
+callCenter.addCustomer("Farhan"); 
+callCenter.addCustomer("Sara");  // ye abhi 4 log queue main wait kar rahe hain 
+callCenter.finishCall("Agent1"); // abhi Hammad nikla or hamza chala gia agent one ke pas 
+callCenter.finishCall("Agent2"); // waleed nikal or fahad connect hua 

@@ -32,5 +32,82 @@ function fristNonRepeatingChar(string) {
     return null;
 };
 
+console.log("===First Non Repeating Character Using Map===")
 console.log(fristNonRepeatingChar("Hammad")); // H
 console.log(fristNonRepeatingChar("ammara")); // r
+
+
+//? Abhi ham ne queue ka class se blueprint banaya ha 
+class Queue {
+    constructor(){
+        this.queue = [];
+    };
+
+    enqueue(element) {
+        this.queue.push(element);
+    };
+
+    dequeue() {
+        if(this.isEmpty()){
+            console.log("There is nothing to dequeue");
+            return null;
+        }
+        return this.queue.shift();
+    };
+
+    peek() {
+        if(this.isEmpty()) {
+            console.log("There is nothing to peek");
+            return null;
+        }
+        return this.queue[0];
+    };
+
+    size() {
+        return this.queue.length;
+    };
+
+    isEmpty() {
+        return this.queue.length === 0;
+    };
+
+    print() {
+        console.log(this.queue);
+    };
+};
+
+//? acha pehle ham ne just map ke help se first non repeating character nikala tha abhi ham queue ke help se is tara ka function banai ge 
+
+
+function fristNonRepeatingCharUsingQueue(string) {
+    let charCount = new Map();
+    let queue = new Queue();
+
+    for(let char of string) {
+        if(charCount.has(char)) {
+            let current = charCount.get(char);
+            current++; 
+            charCount.set(char,current);
+        }
+        else{
+            charCount.set(char, 1);
+        }
+    }
+
+    for(let char of string) {
+        queue.enqueue(char); // her charcter ko queue mian push karo 
+    };
+
+    while(!queue.isEmpty()) {
+        let char = queue.dequeue()
+        if(charCount.get(char) === 1){
+            return char;
+        }
+    }
+
+    return null;
+}
+
+console.log("===First Non Repeating Character Using Queue===");
+console.log(fristNonRepeatingCharUsingQueue("ahmad")); // h 
+console.log(fristNonRepeatingCharUsingQueue("abdullah")); // b

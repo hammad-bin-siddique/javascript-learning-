@@ -90,6 +90,64 @@ function search(head, value) {
 
 console.log("===Task Three===");
 
-console.log(search(firstTask1, "Faizan")); // true ai ga keuke ye exist karta ha 
-console.log(search(firstTask1, "Subhan")); // false ai ga keuke ye exist nahi karta 
+console.log(search(firstTask1, "Faizan")); // true ai ga keuke ye exist karta ha
+console.log(search(firstTask1, "Subhan")); // false ai ga keuke ye exist nahi karta
 
+//! Mini Project
+
+class PassengerNode {
+  constructor(name, token) {
+    this.name = name;
+    this.token = token;
+    this.next = null;
+  }
+}
+
+let head = null;
+
+function addPassenger(name, token) {
+  let newNode = new PassengerNode(name, token);
+
+  if (head === null) {
+    head = newNode;
+    // yani agar head khali ha to head ke andar new node add kar do
+  } else {
+    let current = head;
+
+    while (current.next !== null) {
+      current = current.next;
+    }
+    current.next = newNode;
+  }
+}
+
+function printQueue() {
+  let current = head;
+
+  while (current !== null) {
+    console.log(`Current Name: ${current.name} => Token ${current.token}`);
+    current = current.next;
+  }
+}
+
+function removeFirst() {
+  if (head === null) {
+    console.log("There is nothing to Remove");
+    return;
+  }
+
+  head = head.next;
+}
+
+console.log("===Mini Project===");
+addPassenger("Hammad", 1);
+addPassenger("Bilal", 2);
+addPassenger("Faizan", 3);
+addPassenger("Fahad", 4);
+
+console.log("=== Initial Queue ===");
+printQueue(); // hammad bilal faizan fahad
+
+removeFirst();
+console.log("=== After removeFirst ===");
+printQueue(); // bilal faizan or fahad

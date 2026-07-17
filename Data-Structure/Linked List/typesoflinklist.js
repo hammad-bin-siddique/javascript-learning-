@@ -151,3 +151,56 @@ printQueue(); // hammad bilal faizan fahad
 removeFirst();
 console.log("=== After removeFirst ===");
 printQueue(); // bilal faizan or fahad
+
+
+//! 🔹 Doubly Linked List
+
+class DoubleLinkedList {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+    this.prev = null;
+  };
+};
+
+const doubleOne = new DoubleLinkedList("Waleed");
+const doubleTwo = new DoubleLinkedList("Ahsan");
+const doubleThree = new DoubleLinkedList("Momina");
+console.log("===Double Linked List===")
+doubleOne.next = doubleTwo;
+doubleTwo.prev = doubleOne;
+doubleTwo.next = doubleThree;
+doubleThree.prev = doubleTwo;
+
+console.log(doubleOne)
+console.log(doubleThree.prev.data); // Ahsan ha previous 
+console.log(doubleOne.next.next.data); // Momina next ke next ka 
+
+
+//? abhi print forward wala function banai ge jo first se start ho kar last node tak itriate kare ga 
+
+
+function printForward() {
+  let current = doubleOne;
+
+  while(current !== null) {
+    console.log(current.data);
+    current = current.next;
+  };
+};
+console.log("===Print Forward Function===");
+printForward();
+
+//? ab print backword wala function banai ge jo last node se start ho ga or apne se pehle wale nodes print karta jai ga jab tak prev node null naw ho jai 
+
+function printBack() {
+  let lastNode = doubleThree; 
+
+  while(lastNode !== null) {
+    console.log(lastNode.data);
+    lastNode = lastNode.prev;
+  };
+};
+ 
+console.log("===Print Back Function===");
+printBack();

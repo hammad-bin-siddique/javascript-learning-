@@ -204,3 +204,92 @@ function printBack() {
  
 console.log("===Print Back Function===");
 printBack();
+
+
+//! 🔹 Circular Linked List
+
+// is linked list main circular kam ho ga mean ke jaha se start kia tha wha he khatam ho ga or waha se chale ga mean ke infinite loop but hame ye nahi karna hame sirf 1 bar chalana ha loop or phir rokna ha 
+
+class CircularNode {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  };
+};
+
+const circularOne = new CircularNode("Hammad");
+const circularTwo = new CircularNode("Waleed");
+const circularThree = new CircularNode("Ahmad");
+
+circularOne.next = circularTwo;
+circularTwo.next = circularThree;
+circularThree.next = circularOne; // yaha ham ne wapis head ko link kar dia last node ke sath 
+
+function printCircular() {
+
+  let head = circularOne;
+  let current = head;
+
+  do {
+    console.log(current.data);
+    current = current.next; 
+  
+  } while (current !== head);
+};
+
+console.log("===Circular Linked List===");
+printCircular();
+
+
+//! ab circular doubly  linked list banai ge mean ke prev or next dono linked ho ge 
+
+class CircularDoublyNode {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+    this.prev = null;
+  };
+};
+
+
+const circularDoublyOne = new CircularDoublyNode("Fahad");
+const circularDoublyTwo = new CircularDoublyNode("Umair");
+const circularDoublyThree = new CircularDoublyNode("Faizan");
+
+circularDoublyOne.next = circularDoublyTwo;
+circularDoublyTwo.next = circularDoublyThree;
+circularDoublyTwo.prev = circularDoublyOne;
+circularDoublyThree.prev = circularDoublyTwo;
+circularDoublyThree.next = circularDoublyOne;
+circularDoublyOne.prev = circularDoublyThree;
+
+function printForwardCircular() {
+  let head = circularDoublyOne;
+  let current = head;
+
+  do{
+    console.log(current.data);
+    current = current.next;
+  }
+  while(current !== head);
+};
+
+console.log("===Forward Circular===");
+
+printForwardCircular();  // fahad umair faizan
+
+
+function  printBackwardCircular(){
+  let head = circularDoublyOne;
+  let current = head;
+
+  do{
+    console.log(current.data);
+    current = current.prev;
+  }
+  while(current !== head);
+};
+
+console.log("===printBackwardCircular===");
+printBackwardCircular(); // fahad faizan umair
+

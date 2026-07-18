@@ -293,3 +293,27 @@ function  printBackwardCircular(){
 console.log("===printBackwardCircular===");
 printBackwardCircular(); // fahad faizan umair
 
+//! kn si type kab use karni ha?
+
+
+//? 1️⃣ Singly Linked List — kab use karo?
+
+// Jab sirf ek direction mein traverse karna ho (aage)
+// Jab memory important ho (kam se kam pointers rakhne hain)
+// Example: Simple queue system (jaisa humara Bus Stand Token System) — jahan sirf front se remove aur back se add hota hai, kabhi peeche jane ki zaroorat nahi
+
+//? 2️⃣ Doubly Linked List — kab use karo?
+
+// Jab tumhe dono directions mein traverse karna ho
+// Jab kisi bhi node ka reference mil jaye aur usay fast delete karna ho (bina head se traverse kiye)
+// Example: Browser history (Back/Forward buttons), Music player (Previous/Next), Undo/Redo feature in editors (jaise VS Code mein Ctrl+Z, Ctrl+Y)
+
+//? 3️⃣ Circular Singly Linked List — kab use karo?
+
+// Jab data mein koi fixed "end" na ho — chakkar lagta rahe
+// Example: Round-robin scheduling (CPU tasks ko baari baari time dena, list khatam hone pe wapis shuru se), multiplayer game turns
+
+//? 4️⃣ Circular Doubly Linked List — kab use karo?
+
+// Jab circular behavior chahiye ho dono directions mein bhi jana ho
+// Example: Playlist with repeat mode + previous/next buttons — gaana khatam hone pe wapis pehlay se shuru ho, aur user "Previous" bhi dabaa sake kabhi bhi

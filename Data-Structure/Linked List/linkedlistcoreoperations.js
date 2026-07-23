@@ -154,6 +154,52 @@ class LinkedList {
 
 
   };
+
+
+  //? Phase 3 — Topic 9: removeAt(index)
+  // is topic main ham beach main se index ke help se kisi bhi node ko delete kare ge or phir node ko connect kare ge take chain toote naw 
+
+
+  removeAt(index) {
+    if(index === 0) {
+      this.removeFromStart();
+      return;
+    }; // mean ke agar index 0 ho to  phir remove from start wala method use karo 
+
+    if(index === this.length - 1) {
+      this.removeFromEnd();
+      return;
+    };
+    //  yani agar akhri node ho to waha remove from end wala method use karo 
+
+    let previousNode = this.head;
+
+    for(let i = 0; i < index - 1; i++) {
+      previousNode = previousNode.next; 
+      //  yani jab tak last index nahi a jata tab tak loop ko chalao or count main increament karte jao 
+    };
+
+    let removed = previousNode.next;
+    previousNode.next = removed.next;
+    this.length--;
+
+    return removed.item;
+  };
+
+
+  //? Phase 3 — Topic 10: Traversal (Print/Loop through saari list)
+
+  printList() {
+    let current = this.head;
+
+    while(current !== null) {
+      console.log(current.item);
+      current = current.next;
+    }
+    
+  };
+
+
 }
 
 const items = new LinkedList();
@@ -187,3 +233,19 @@ console.log(list.removeFromStart()); // ab 40 gia
 console.log(list.head.item); // 10
 console.log(list.tail.item); // 20
 console.log(list.length); // 2
+
+console.log("===Removed From index")
+const removeList = new LinkedList();
+removeList.append(10);
+removeList.append(20);
+removeList.append(30);
+removeList.append(40);
+
+const removed = removeList.removeAt(1);   
+
+console.log(removed);              // 20 removed hua
+console.log(removeList.head.item);       // 10 ho ga keuke wo remove nahi hua 0 index per ha 
+console.log(removeList.head.next.item);  // 30 ha keuke 20 remove ho gia or  us next node ko link kar dia ha head ke next ke sath 
+console.log(removeList.tail.item);       //  40 ho ga wo last main 
+console.log(removeList.length);          //  3 ho gi 
+console.log(removeList.printList())

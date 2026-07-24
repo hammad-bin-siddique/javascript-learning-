@@ -62,144 +62,166 @@ class LinkedList {
     //  Case 1 agar index 0 ha to waha beach main add nahi kar sakte is lia waha prepend method use kare ge
 
     if (index === 0) {
+      this.prepend(data);
+      return;
+    }
 
-        this.prepend(data);
-        return;
-    };
+    // Case 2 agar last main kuch add karna ho to waha bhi insert method nahi balke append method use ho ga
 
-    // Case 2 agar last main kuch add karna ho to waha bhi insert method nahi balke append method use ho ga 
+    if (index === this.length) {
+      this.append(data);
+      return;
+    }
 
-    if(index === this.length) {
-        this.append(data);
-        return;
-    };
-
-    // ab yaha se insert method ka flow start ho ga 
+    // ab yaha se insert method ka flow start ho ga
 
     const newNode = new Node(data);
 
     //  ab ham previous linking ke lai traverse kare gain"
 
-    let previousNode = this.head; // abhi pichla node ham ne head ko bana dia mean ke first node ko 
+    let previousNode = this.head; // abhi pichla node ham ne head ko bana dia mean ke first node ko
 
-    for(let i = 0; i < index -1; i++) {
-        //  yani ke head se start karo wo abhi 0 ha head jab tak akhiri index tak nahi ponch jata tab tak chalao loop ko or head main + 1 head karte jao her itreation per 
+    for (let i = 0; i < index - 1; i++) {
+      //  yani ke head se start karo wo abhi 0 ha head jab tak akhiri index tak nahi ponch jata tab tak chalao loop ko or head main + 1 head karte jao her itreation per
 
-        previousNode = previousNode.next
+      previousNode = previousNode.next;
     }
 
     newNode.next = previousNode.next;
     previousNode.next = newNode;
     this.length++;
+  }
 
-  };
-
-  //? Phase 3 — Topic 6: Deletion — removeFromStart() is topic main ham linked list ke start se item ko nikale ge or us se agle ko head bana de ga 
+  //? Phase 3 — Topic 6: Deletion — removeFromStart() is topic main ham linked list ke start se item ko nikale ge or us se agle ko head bana de ga
 
   removeFromStart() {
-    if(this.head === null) {
+    if (this.head === null) {
       console.log("Head is Empty");
       return null;
 
-      // agar head pehle se he khali ha to return karo  null or console message bhi kar do ke Head is empty 
-    };
+      // agar head pehle se he khali ha to return karo  null or console message bhi kar do ke Head is empty
+    }
 
-    const removeNode = this.head; // head ko remove kar do 
-    this.head = this.head.next; // ab head se agle wale ko head bana do 
+    const removeNode = this.head; // head ko remove kar do
+    this.head = this.head.next; // ab head se agle wale ko head bana do
 
-    if(this.head === null) {
+    if (this.head === null) {
       this.tail = null;
-    };
+    }
 
     this.length--;
 
     return removeNode.item;
-  };
+  }
 
-  //? Phase 3 — Topic 7: removeFromEnd() is case main sab se last se banda nikle ga 
-
+  //? Phase 3 — Topic 7: removeFromEnd() is case main sab se last se banda nikle ga
 
   removeFromEnd() {
-    // Case 1 Agar head khali ho to 
-    if(this.head === null) {
+    // Case 1 Agar head khali ho to
+    if (this.head === null) {
       console.log("Head is Empty");
       return null;
-    };
+    }
 
-    // Case 2 Agar head or tail dono 1 he node ho to 
+    // Case 2 Agar head or tail dono 1 he node ho to
 
-    if(this.head === this.tail) {
-
+    if (this.head === this.tail) {
       const removeNode = this.head;
       this.head = null;
       this.tail = null;
       this.length--;
       return removeNode.item;
-    };
+    }
 
-    // Case 3 agar 2 ya ziada node ho to phir kia karna ha 
+    // Case 3 agar 2 ya ziada node ho to phir kia karna ha
 
-    let current = this.head; // head ko current variable main rakho reference ke lia 
+    let current = this.head; // head ko current variable main rakho reference ke lia
 
     while (current.next.next !== null) {
-      current = current.next; 
-      //  yani jab tak current ke next ka next null nahi hota tab tak loop chalao or current ke jaga badalte jao man lo 10 20 30  40 null ha current abhi 10 ha 20 1 step phir 30 2 step  us ke bad null nahi ha to loop chalao mean ke 40 ha loop chale ga or 20 per abhi current a jai ga is tara loop chalta jai ga jab tak condition match nahi ho jati 
-    };
+      current = current.next;
+      //  yani jab tak current ke next ka next null nahi hota tab tak loop chalao or current ke jaga badalte jao man lo 10 20 30  40 null ha current abhi 10 ha 20 1 step phir 30 2 step  us ke bad null nahi ha to loop chalao mean ke 40 ha loop chale ga or 20 per abhi current a jai ga is tara loop chalta jai ga jab tak condition match nahi ho jati
+    }
 
     const removeNode = current.next;
     current.next = null;
     this.tail = current;
     this.length--;
     return removeNode.item;
-
-
-  };
-
+  }
 
   //? Phase 3 — Topic 9: removeAt(index)
-  // is topic main ham beach main se index ke help se kisi bhi node ko delete kare ge or phir node ko connect kare ge take chain toote naw 
-
+  // is topic main ham beach main se index ke help se kisi bhi node ko delete kare ge or phir node ko connect kare ge take chain toote naw
 
   removeAt(index) {
-    if(index === 0) {
+    if (index === 0) {
       this.removeFromStart();
       return;
-    }; // mean ke agar index 0 ho to  phir remove from start wala method use karo 
+    } // mean ke agar index 0 ho to  phir remove from start wala method use karo
 
-    if(index === this.length - 1) {
+    if (index === this.length - 1) {
       this.removeFromEnd();
       return;
-    };
-    //  yani agar akhri node ho to waha remove from end wala method use karo 
+    }
+    //  yani agar akhri node ho to waha remove from end wala method use karo
 
     let previousNode = this.head;
 
-    for(let i = 0; i < index - 1; i++) {
-      previousNode = previousNode.next; 
-      //  yani jab tak last index nahi a jata tab tak loop ko chalao or count main increament karte jao 
-    };
+    for (let i = 0; i < index - 1; i++) {
+      previousNode = previousNode.next;
+      //  yani jab tak last index nahi a jata tab tak loop ko chalao or count main increament karte jao
+    }
 
     let removed = previousNode.next;
     previousNode.next = removed.next;
     this.length--;
 
     return removed.item;
-  };
-
+  }
 
   //? Phase 3 — Topic 10: Traversal (Print/Loop through saari list)
 
   printList() {
     let current = this.head;
 
-    while(current !== null) {
+    while (current !== null) {
       console.log(current.item);
       current = current.next;
     }
-    
-  };
+  }
 
+  //? Phase 3 — Topic 11: Search — kisi value ko dhoondna
 
+  search(value) {
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.item === value) {
+        return true; // yani ke value agar current se match ho jai to loop ko rok do or true return karo
+      }
+      current = current.next; // or agar match naw ho to loop ko chalao or agar jab tak null nahi ho jata or false return kar do
+    }
+    return false;
+  }
+
+  //? Phase 3 — Topic 12 (Last!): Update — kisi node ki value change karna
+  // is method main ham kisi bhi node ko index se target kar ke us ke value change kare ge bina dlt kia
+
+  update(index, newValue) {
+    let current = this.head;
+    if (index >= this.length) {
+      console.log("This Node didn't exist");
+      return false;
+    } else if (index < 0) {
+      console.log("this node didn't exist");
+      return false;
+    }
+    for (let i = 0; i < index; i++) {
+      current = current.next;
+    }
+
+    current.item = newValue;
+    return true;
+  }
 }
 
 const items = new LinkedList();
@@ -211,41 +233,62 @@ console.log(`Removed From Start ${items.removeFromStart()}`); // yaha se ab 10 n
 
 console.log(items.head.item); // 20
 console.log(items.head.next.item); // 25
-console.log(items.head.next.next.item); // 30 
+console.log(items.head.next.next.item); // 30
 //! console.log(items.head.next.next.next.item);
-//yaha per error ai ga keuke 25 ka next 30 ha or 30 ka next null ha or ham null mian item ko dhond rahe ha or javascript null ke andar ja he nahi sakta ke wo waha property ka access kare is lia error ai ga 
+//yaha per error ai ga keuke 25 ka next 30 ha or 30 ka next null ha or ham null mian item ko dhond rahe ha or javascript null ke andar ja he nahi sakta ke wo waha property ka access kare is lia error ai ga
 console.log(items.length); // 3  10 nikal gia
-
 
 console.log("====Remove from First and last===");
 
 const list = new LinkedList();
-list.append(10); 
+list.append(10);
 list.append(20);
 list.append(30);
-list.prepend(40); 
-console.log(list.length); 4
+list.prepend(40);
+console.log(list.length);
+4;
 console.log(list.removeFromEnd()); // 30 gia
 console.log(list.head.item); // 40
 console.log(list.tail.item); // 20
 console.log(list.length); // 3
-console.log(list.removeFromStart()); // ab 40 gia 
+console.log(list.removeFromStart()); // ab 40 gia
 console.log(list.head.item); // 10
 console.log(list.tail.item); // 20
 console.log(list.length); // 2
 
-console.log("===Removed From index")
+console.log("===Removed From index");
 const removeList = new LinkedList();
 removeList.append(10);
 removeList.append(20);
 removeList.append(30);
 removeList.append(40);
 
-const removed = removeList.removeAt(1);   
+const removed = removeList.removeAt(1);
 
-console.log(removed);              // 20 removed hua
-console.log(removeList.head.item);       // 10 ho ga keuke wo remove nahi hua 0 index per ha 
-console.log(removeList.head.next.item);  // 30 ha keuke 20 remove ho gia or  us next node ko link kar dia ha head ke next ke sath 
-console.log(removeList.tail.item);       //  40 ho ga wo last main 
-console.log(removeList.length);          //  3 ho gi 
-console.log(removeList.printList())
+console.log(removed); // 20 removed hua
+console.log(removeList.head.item); // 10 ho ga keuke wo remove nahi hua 0 index per ha
+console.log(removeList.head.next.item); // 30 ha keuke 20 remove ho gia or  us next node ko link kar dia ha head ke next ke sath
+console.log(removeList.tail.item); //  40 ho ga wo last main
+console.log(removeList.length); //  3 ho gi
+console.log(removeList.printList());
+
+console.log("===Search Method===");
+
+const searchList = new LinkedList();
+searchList.append(10);
+searchList.append(20);
+searchList.append(30);
+
+console.log(searchList.search(10)); // true
+console.log(searchList.search(99)); // false
+
+console.log("===Update Node Values===");
+
+const updateList = new LinkedList();
+updateList.append(10);
+updateList.append(20);
+updateList.append(30);
+
+console.log(updateList.update(1, 99)); // true ai ga 20 99 se badal gia 
+console.log(updateList.head.next.item); // head 10 ha 0 index per us ka next ka item 20 tha jo 99 se badal gia 
+console.log(updateList.update(10, 5)); // this node didn't exist or false return kare ga 

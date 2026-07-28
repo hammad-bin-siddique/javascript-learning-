@@ -66,6 +66,44 @@ class DoublyLinkedList {
 
     this.length++;
   };
+
+  //? ab inset at index method likhe ge mean ke nodes ke beach main kahi add karna ho node to kese kare ge 
+
+  insertAt(index, item) {
+
+    // Edge case 1 mean ke agar start main add karna ho to ham prepend method he call kare ge 
+
+    if(index === 0) {
+      this.prepend(item);
+      return; // function close
+    };
+
+    //  Edge Case 2 agar index lenght ke barabar ha to mean ke last main add karna ho to 
+
+    if(index === this.length) {
+      this.append(item);
+      return;
+    };
+
+    //  Ab main topic agar beach main add karna ho to 
+
+    const newNode = new Node(item);
+
+    let prevNode = this.head; // ab head ko prev node bana dia ha 
+    for(let i = 0; i < index -1; i++) {
+      prevNode = prevNode.next; 
+      // mean ke index 0 se start karo or jab tak index ke length apne target se -1 ponch jai to us waqt loop ko rok do man lo 2 index per change karna ha ab loop 2 se -1 1 per ja kar ruk jai ge ab loop head se start ho ga or age chalta jai ga 
+    };
+
+    let nextNode = prevNode.next; // abhi jo new ham add kare ge us ke next node ka reference secure kar rahe hain 
+
+    newNode.next = nextNode;
+    newNode.prev = prevNode;
+    prevNode.next = newNode;
+    nextNode.prev = newNode;
+
+    this.length++;
+  };
 }
 
 const hammad = new Node("Hammad");
@@ -130,3 +168,16 @@ console.log(doubly2.head.item);         // Fahad
 console.log(doubly2.tail.item);         // Faizan
 console.log(doubly2.length);            // 4
 console.log(doubly2.head.next.prev.item); // Fahad he ho ga head ka agla hammad ha hammad ka prev Fahad ha 
+
+console.log("===InsertAt Method===");
+doubly2.insertAt(2, "Bilal2");
+
+let current = doubly2.head;
+while(current !== null) {
+  console.log(current.item);
+  current = current.next;
+};
+console.log("Length:", doubly2.length); //  predection Fahad Hammad bilal2 bilal faizan total lengty 5
+
+console.log(doubly2.head.next.next.item); // bilal2;
+console.log(doubly2.head.next.next.prev.item); // Hammad head ka next hammad ka next bilal2 or bilal2 ka prev Hammad he ha 

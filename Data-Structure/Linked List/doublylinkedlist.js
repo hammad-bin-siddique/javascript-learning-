@@ -104,6 +104,57 @@ class DoublyLinkedList {
 
     this.length++;
   };
+
+  //! Topic: Deletion (Doubly Linked List)
+
+
+  //? Remove from head mean ke koi node start se remove karna ho to kia kare ge 
+
+  removeFromStart() {
+    // 1 edge case agar list pehle se empty ho to mean ke koi node naw ho 
+
+    if(this.head === null) {
+      console.log("Head is Empty");
+      return null;
+    };
+
+    let removedNode = this.head; // Head ke value ko remove variable main store kia referance ke lia 
+
+    this.head = this.head.next; // head ko agla node bana dia 
+
+    if(this.head === null) {
+      this.tail = null; // mean ke remove karne ke bad agar 1 node hua to head or tail dono ko null kar do 
+    }
+    else{
+      this.head.prev = null; // agar 1 se ziada nodes hain to head ke previous ko null kar do 
+    };
+
+    this.length--;
+    return removedNode.item; // or jo remove kia node un ke item ko return kar do 
+  };
+
+  //? Ab remove from end wala method likhe mean ke is main list ke akhir se koi node nikalna ho to kese kare ge 
+
+  removeFromEnd() {
+    if(this.tail === null) {
+      console.log("Tail is Empty");
+      return null; // mean ke agar koi node ho he naw to empty return karo
+    };
+
+    const removedNode = this.tail; // Jo node remove karna ha us ko variable main store kia return karne ke lia 
+
+    this.tail = this.tail.prev; // ab tail remove ho gia ha is lia tail se pitchle node ko tail bana dia ha 
+    if(this.tail === null) {
+      this.head = null;
+      // mean ke agar sirf 1 he node ho to phir head or tail 2no ko null kar do 
+    }
+    else{
+      this.tail.next = null; // mean ke agar node 1 se ziada ho to tail ke next ko null kar do 
+    };
+
+    this.length--;
+    return removedNode.item; // akhir main removed item ko return kar do
+  };
 }
 
 const hammad = new Node("Hammad");
@@ -181,3 +232,32 @@ console.log("Length:", doubly2.length); //  predection Fahad Hammad bilal2 bilal
 
 console.log(doubly2.head.next.next.item); // bilal2;
 console.log(doubly2.head.next.next.prev.item); // Hammad head ka next hammad ka next bilal2 or bilal2 ka prev Hammad he ha 
+
+console.log("===RemoveFromStart Method===");
+let removed = doubly2.removeFromStart(); // Fahad nikla
+console.log("Removed:", removed);  // Fahad
+
+let removedFromStartCurrent = doubly2.head;
+while(removedFromStartCurrent !== null) {
+  console.log(removedFromStartCurrent.item);
+  removedFromStartCurrent = removedFromStartCurrent.next;
+}
+
+console.log("Length:", doubly2.length); // ab fahad remove ho gia ha to Hammad Bilal2 Bilal Faizan  Total 4 length ho gi 
+console.log("New head prev:", doubly2.head.prev); // null 
+
+
+console.log("===RemoveFromEnd Method===");
+let removedEnd = doubly2.removeFromEnd(); // Faizan nikla
+console.log("Removed:", removedEnd); // Faizan
+
+
+let removedFromEndCurrent = doubly2.head;
+while(removedFromEndCurrent !== null) {
+  console.log(removedFromEndCurrent.item);
+  removedFromEndCurrent = removedFromEndCurrent.next;
+}
+
+
+console.log("Length:", doubly2.length); // ab Faizan nikal gia to Hammad Bilal2 Bilal re gay to length 3 ho gi 
+console.log("New tail next:", doubly2.tail.next); // null ai ga 

@@ -116,6 +116,47 @@ class LinkedList {
     };
   };
 
+
+  //! Topic 5: Merge Two Sorted Linked Lists 
+
+  // is topic main ham 2 sorted linked list ko apas main merge kare ge 
+
+  mergeSorted(list1, list2)  {
+    let dummy = new Node(null); // mean ke ham yaha 1 fake starting point banai ge take hame sort karte waqt bar bar ye naw dekhna pare ke kia ye result list ka pehle node ha 
+
+    let tail = dummy; // ye result list ka akhri node track kare ga 
+
+    let p1 = list1.head; 
+    let p2 = list2.head; // ye dono list ke ham ne starting point bana dia ha 
+
+    while (p1 !== null && p2 !== null) {
+      // yaha condition check kare ge ke agar p1 or p2 dono main se koi 1 jab tak null nahi ho jata tab tak loop chalao 
+      if(p1.item <= p2.item) {
+        tail.next = p1;
+        p1 = p1.next;
+        // yaha condition rakhi ke agar p1 ka item p2 se chota ya brabar ha to placeholder jo ha us ko p1 bana do mean ke dummy ko p1 node se badal do mean ke result ko or p1 ko 1 step age le kar chlao like p1 agar 10 ha or p2 20 ha or p1 yaha p2 se chota ha is lia p1 ab placeholder ke age a jai ga or p1 10 se agle node per chala jai ga yani 30 per 
+      }
+      else{
+        tail.next = p2;
+        p2 = p2.next; // man lo agar p1 p2 se chota nahi ha to phir placeholder per agla node p2 ka ho ga or p2 1 step agey chala jai ga mean ke 20 se 40 per 
+      };
+
+      tail = tail.next; // is ke sath sath agar condition match hoti ha to tail ko bhi age karte jao 1 1 step
+    };
+
+    // while loop ruk gia man lo koi 1 null ho gai list phir 
+
+    if(p1 !== null) {
+      tail.next = p1; // agar p1 null nahi ha p2 ha to phir tail yani placeholder ke age p1 ko add karte jao 
+
+    }  
+    else {
+      tail.next = p2; // or agar p1 null ho gai to p2 ko add karte jao tail ke age 
+    };
+
+    return dummy.next; // dummy placeholder yaha se nikal gia or asli head return kar do 
+  };
+
 }
 
 console.log("===Reverse A Linked List===");
@@ -217,3 +258,24 @@ while(currRmEdge !== null) {
 };
 
 console.log("Tail:", list7.tail.item); // Yaha per Bilal tail ho ga keuke faizan last node ha or duplicate ha is lia prev ko he tail bana dia ha 
+
+
+console.log("===Merge Two Sorted Linked Lists===");
+
+const listA = new LinkedList();
+listA.append(10);
+listA.append(30);
+listA.append(50);
+
+const listB = new LinkedList();
+listB.append(20);
+listB.append(40);
+listB.append(60);
+
+const mergedList = new LinkedList(); 
+let mergedHead = mergedList.mergeSorted(listA, listB); // yaha ham ne variable banaya jis main mergelist ko sort kia list a or b 
+
+while (mergedHead !== null) {
+  console.log(mergedHead.item);
+  mergedHead = mergedHead.next;
+};

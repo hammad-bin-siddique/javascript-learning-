@@ -20,17 +20,30 @@ console.log(weakMap.get(user)); // undefined is lia aya ha user null ha or null 
 
 //! Real-world use case
 
-let clickData = new WeakMap();
+// let clickData = new WeakMap();
 
-let button = document.querySelector("#myBtn");
-clickData.set(button, {clicks: 0}); // abhi clicks 0 hain 
+// let button = document.querySelector("#myBtn");
+// clickData.set(button, {clicks: 0}); // abhi clicks 0 hain 
 
-button.addEventListener("click", () => {
-    let data = clickData.get(button); // yani ke weak map se button ke click ka data lo or data variable main store karo 
-    data.clicks++;
-    console.log(data.clicks);
-});
+// button.addEventListener("click", () => {
+//     let data = clickData.get(button); // yani ke weak map se button ke click ka data lo or data variable main store karo 
+//     data.clicks++;
+//     console.log(data.clicks);
+// });
 
 //  is code ko working karne ke lia html file ke zarurat ha lekin yaha as a example likh sakte hain 
 
 //! <button id ="myBtn">Click Me</button>
+
+
+//? Weak Map Task
+
+let carData = new WeakMap();
+
+let myCar = {brand: "Honda"};
+
+carData.set(myCar, "5 Year Old");
+
+console.log("===Weak Map Task===");
+
+console.log(carData.get(myCar));

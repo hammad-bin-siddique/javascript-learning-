@@ -167,3 +167,41 @@ const filtered = JSON.stringify(user, function(key, value) {
 },2 ); // yaha last main space parameter add kar dia ha 
 
 console.log(filtered);
+
+
+
+//! Topic Three Tasks 
+
+//? Task One
+
+const product = {
+    name: "Iphone",
+    price: 150000,
+    stock: 50,
+    secretCode: 38593
+};
+
+console.log("===Task One===");
+console.log(JSON.stringify(product, null, 4));
+
+
+//? Task 2
+
+console.log("===Task Two===");
+console.log(JSON.stringify(product, ["name", "price"],2));
+
+
+//? Task 3
+console.log("===Task Three===");
+
+const replacer = JSON.stringify(product, function(key, value) {
+    if(key === "secretCode") {
+        return undefined;
+    };
+    if(key === "price") {
+        return value * 0.9;
+    };
+    return value
+},2);
+
+console.log(replacer);

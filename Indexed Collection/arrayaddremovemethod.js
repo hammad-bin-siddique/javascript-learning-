@@ -152,3 +152,154 @@ unshiftArr.unshift(1, 2); // start main 2 element add hue
 
 console.table(unshiftArr); // abhi 0 pe 1 or 1 per 2 and so on 
 console.log(unshiftArr.length); // 6
+
+
+//? Real-World Example — Priority Queue (Emergency Case)
+
+
+let patientQueue = ["Bilal", "Hamza", "Umair"];
+
+// ab emergency patient ha us ko sab se ziada priority mile ge 
+
+patientQueue.unshift("Emergency: Faizan"); // ab ye faizan first number mean ke 0 index per ho ga 
+
+console.log(patientQueue); 
+
+
+//? Part B — Topic 5: splice()
+
+console.log("===Topic 5 Splice()===");
+
+//splice sab se powerful method ha array main ye kis bhi index se delete replace kar sakta ha ye flexible ha 
+
+//? Syntax
+
+//! array.splice(startIndex, deleteCount, item1, item2);
+
+// is main 3 parameters hain
+//? Start Index: Ke mean ke kaha se start karna ha mean ke kn se index main change ya delete karna ha 
+
+//? Delete Count: Mean ke us specific index se kitne elements delete karne hain 0 bhi ho sakta ha 
+
+//? addition: mean ke new element add kar sakte hain ye optional ha 
+
+
+
+//? Use Case 1 Sirf Delete Karna 
+
+let deleteArr = [1, 2, 4, 3, 4, 5];  // ab yaha 4 ke position sahi nahi ha is lia us ko delete kare ge splice method se 
+console.log(deleteArr);
+
+deleteArr.splice(2, 1);
+console.log(deleteArr); // ab yaha beach main 2 index se 4 remove ho gia ha 
+
+
+//? Use Case 2: Sirf Insert Karna (deleteCount = 0)
+
+let insertArr = [1, 2, 3, 6, 7, 8]; // ab is array main 3 ke bad direct 6 ha beach main ham abhi 4 or 5 add kare ge splice se 
+console.log(insertArr);
+
+insertArr.splice(3, 0, 4, 5); // ab 4 or 5 add kia ha or 3 index se start lia ha 
+
+console.log(insertArr); // ab 3 ke bad 4 or 5 bhi ho ge
+
+
+//? Use Case 3: Remove + Replace Ek Saath
+
+let removeReplaceArr = [1, 2, 3, 4, 9, 8, 9, 8, 9, 10]; // ab is array main 4 ke bad 9 8 9 sahi nahi lag rahe hain ham une hata kar 5 6 7 add kare ge 
+
+console.log(removeReplaceArr); 
+
+removeReplaceArr.splice(4, 3, 5, 6, 7); // abhi ham  ne 4 index se start kia or 3 element ko remove kia ha or 5 6 7 ko un ke jaga replace kia ha 
+console.log(removeReplaceArr); 
+
+
+//! Important Points
+//  - splice() original array main direct change karta ha 
+//  - return value main 1 new array return karta ha jis main removed item hote hain 
+// - negetaive index bhi use kar sakte hian end se count karne ke lia 
+
+
+
+//? Return value
+
+let returnArr = [1, 2, 4, 3]; 
+
+let removed = returnArr.splice(2, 2); 
+console.log(returnArr); // 1 2
+console.log(removed); // 4 3
+
+//? Negative index
+
+let negArr = [1, 2, 3, 4, 6]; 
+let indexArr = negArr.splice(-1, 1); // last wala 6 delete ho jai ga 
+console.log(indexArr); 
+console.log(negArr);
+
+//? Real-World Example — Playlist Editor
+
+let playlist = ["Ride It", "Pal Pal", "Faded", "Love Me Like You Do"]; 
+
+// user ko hindi song pasand nahi ha is lie wo pal pal ko replace kare ga english sone ke sath 
+
+playlist.splice(1, 1, "Ignite"); // Pal pal song ko Ignite song se badal dia ha 
+
+console.log(playlist); 
+
+
+//? Part B — Topic 6: slice()
+
+
+// slice() array ka ek portion (copy) nikalta hai — bina original array ko chuye (mutate kiye).
+
+//? Syntax
+
+// array.slice(startIndex, endIndex)
+
+// startIndex → kahan se copy start karni hai (included)
+// endIndex → kahan tak copy karni hai (excluded  yani ye wala index shamil nahi hota)
+
+//? Basic Example: 
+console.log("===Topic 6 Slice() Method===");
+
+let sliceArr = ["Faizan", "Bilal", "Umair", "Farhan", "Hammad"];
+
+let sliced = sliceArr.slice(1, 3); // yaha bilal or umair ke copy nikle ge bilal index 1 per ha wo included ho ga or farhan index 3 per ha wo included nahi ho ga
+console.log("Basic Example:", sliced);
+
+
+//! Special Cases
+
+//? Agar end index naw to start index se le kar end tak copy nikalta ha 
+
+let sliced2 = sliceArr.slice(2); // Umair se end tak copy kare ge 
+
+console.log("Start Index To The End:", sliced2);
+
+
+//? Negative index bhi working ha end se count karna 
+
+let sliced3 = sliceArr.slice(-3); // ye end se last three element ke copy nikale ge 
+console.table(["Copy From Negetive Index:", sliced3]); // Umair Farhan Hammad
+
+
+//? Agar just slice likho or koi value naw do to pure array ke copy nikal deta ha 
+
+let copySlice = sliceArr.slice(); // koi value bhi nahi di 
+
+console.log("Full Array Copy:", copySlice); 
+console.table([copySlice]);
+
+
+//? Real-World Example  position holder student nikalna or failed student nikalna 
+
+
+let allStudents = ["Ali", "Sara", "Hammad", "Bilal", "Imran", "Faizan", "Fani", "Daniyal", "Waleed"]; 
+
+let top3 = allStudents.slice(0, 3); // Ali Sara Hammad
+let last3 = allStudents.slice(-3); // Fani Daniyal Waleed
+let averageStudents  = allStudents.slice(3, 6); // 6 fani excluded ha or bilal se le kar faizan tak average students hain 
+
+console.table([top3]);
+console.table([last3]); 
+console.table([averageStudents]);

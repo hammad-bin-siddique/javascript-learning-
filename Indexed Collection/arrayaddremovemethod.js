@@ -303,3 +303,71 @@ let averageStudents  = allStudents.slice(3, 6); // 6 fani excluded ha or bilal s
 console.table([top3]);
 console.table([last3]); 
 console.table([averageStudents]);
+
+
+//! Combined Practice Tasks
+
+//? Task 1 — Playlist Manager:
+console.log("===Task One===");
+
+let taskPlaylist = ["Ride it", "Faded", "Without Me", "Lonely"];
+
+taskPlaylist.push("Love Me Like You Do");
+taskPlaylist.unshift("Song Intro:");
+let removedSong = taskPlaylist.pop(); // Love Me like you Do nikal gia 
+taskPlaylist.splice(2, 0, "Burn"); // ab ye ride it ke bad song add ho gia ha 
+
+console.log("Playlist:", taskPlaylist); // song intro ride it faded burn without me lonely 
+
+
+//? Task 2 — Guest List Cleanup:
+
+console.log("===Task Two Guest List Cleaner===");
+
+let guests = ["Ahmed", "Zara", "Uninvited1", "Uninvited2", "Bilal", "Sara"];
+
+
+guests.splice(2, 2);
+let vipGuests = guests.slice(0, 2); // pehle do vip guests ko alade kar dia ha 
+
+console.log("Original Guests:", guests); // is main uninvited  1 2 nahi ho ge wo nikal dia ha baki sab ho ge 
+
+console.log("Vip Guests:", vipGuests); // Ahmed Zara 
+
+
+//? Task 3 — Undo Feature
+console.log("===Task Three Undo System===");
+
+let actions = ["Open File", "Edit Text", "Save File"];
+console.log("Actions At Start:", actions);
+
+actions.push("Print File", "Close File"); // 2 action or kia user ne 
+console.log("After Two Push:", actions)
+
+
+
+let undoneAction = actions.pop(); // Close File nikal gia 
+console.log("After Undo the Action:", actions); // Close file nahi ho ga 
+console.log("Undo:", undoneAction); // Close File
+
+
+//! Mini Project — "Class Attendance & Roll Call System"
+
+console.log("===Mini Project===");
+
+let studentInClass = ["Hammad", "Ali", "Subhan", "Wasib", "Azan", "Bilal"];
+
+let newStudent = studentInClass.push("Faizan"); // New Student End main add ho gia ha 
+
+console.log(newStudent); // 7 ye new length return karta ha 
+
+let transferStudent = studentInClass.unshift("Madhi"); // Madhi migration kar ke aya ha first main add kia ha 
+
+let dropoutStudent = studentInClass.splice(3,1); // Subhan ko dropout kar dia ha 
+let firstRowStudent = studentInClass.slice(0,3); // start index include hota ha or last index nahi so 0 1 1 2 2 3 
+
+console.log("Dropout Student:", dropoutStudent); // Subhan
+console.log("Total Students:", studentInClass.length); // 7 Subhan Nikal gia ha 
+
+console.log("First Row Student:", firstRowStudent); // Madhi Hammad Ali
+console.table([studentInClass]); 

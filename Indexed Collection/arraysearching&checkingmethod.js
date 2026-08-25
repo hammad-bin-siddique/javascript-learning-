@@ -228,3 +228,148 @@ console.log(newNums.findIndex((num) => num > 90)); // or ye wala start se check 
 // 6. findLast(condition) → find() jaisa hi hai lekin array ko END se check karta hai, yani condition match karne wala LAST element return karta hai, nahi mila to undefined
 
 // 7. findLastIndex(condition) → findLast() jaisa hi hai lekin element ki jagah uska INDEX return karta hai, nahi mila to -1
+
+//! Tasks
+
+//? Task 1: Order Tracking System
+
+const orders = [
+  { id: 101, customer: "Ali", status: "delivered" },
+  { id: 102, customer: "Bilal", status: "pending" },
+  { id: 103, customer: "Hammad", status: "cancelled" },
+  { id: 104, customer: "Usman", status: "pending" },
+  { id: 105, customer: "Ahmed", status: "delivered" },
+];
+
+console.log("===Task 1===");
+
+// Pehla pending order dhundo aur poora object print karo (kaunsa method?)
+
+console.log(orders.find((order) => order.status === "pending")); // yaha main ne find method use kia ha or is ne start se check kia or array ke object ke status ko check kia or jo status given condition se match karta ha wo return kar dia is case main second array of object he condition se matched tha is lia wo return kar dia
+
+// Pehla pending order ka index print karo
+console.log(orders.findIndex((order) => order.status === "pending"));
+
+// is ka index ai ga 1 keuke condition 1 index wale object per match karti ha or find index condition ture hone per us element ka index return karta ha
+
+// Check karo ke koi order "cancelled" hai ya nahi (true/false)
+
+// find se find karna
+
+const hasCancelled =
+  orders.find((order) => order.status === "cancelled") !== undefined;
+console.log(hasCancelled); // true return kare ga keuke 2 index per jo array of object ha us ka status cancelled ha
+
+// find index se find karna
+
+const hasCancelledIndex =
+  orders.findIndex((order) => order.status === "cancelled") !== -1;
+console.log(hasCancelledIndex); // true return kare ga keuke wo exist karta ha 2 array of object ke status main
+
+// Sabse aakhri delivered order dhundo aur uska object print karo
+
+console.log(orders.findLast((order) => order.status === "delivered"));
+// acha abhi is ke lia ham ne find last method ka use kia ha jo last se check karta ha elemnts ko agar condition true ho jai to return kar deta ha yaha last se first element he tha jis se condition true ho gai is lia is ne wo object return kar dia ahmad wala
+
+// Sabse aakhri delivered order ka index print karo
+console.log(orders.findLastIndex((order) => order.status === "delivered"));
+// find last index array ke last se elemnt ko check karta ha or condition ture hone per us elment ka index print karta ha is case main last main jo first elment tha us per condition ture ho rahi thi is lia is ne us ka index return kia ha jo ke 4 ha
+
+//? Task 2: Number Analysis
+
+const scores = [55, 42, 78, 90, 33, 61, 90, 15];
+
+console.log("===Task Two===");
+// Pehla number jo 60 se zyada hai, dhundo (value)
+console.log(scores.find((num) => num > 60));
+// yaha ham ne is task ko karne ke lia find ka use kia ha find start se array ko check karta ha or condition true hone per wo element return karta ha or yaha per wo element 78 ha
+
+// Us number ka index nikalo
+
+console.log(scores.findIndex((num) => num > 60)); // yaha ham ne is task ko karne ke lia find index ka use kia ha jo condition true hone per us element ka index return karta ha or yaha elment 78  ha or us ka index 2 ha
+
+// Value 90 ka pehla index, aur aakhri index dono nikalo (do alag methods se)
+
+console.log(scores.indexOf(90)); // ye start se element ko check kata ha or given elment ka index nikalta  ha or start se pehla 90 3 num per ha is lia 3 answer ai ga
+
+console.log(scores.lastIndexOf(90)); // ye last se element ko check karta ha or given element ka index nikalta ha or is case main 90 6 number per ha to answer = 6
+
+// is ko ham find or findindex or find last index method se bhi check kar sakte hain
+
+console.log(scores.findIndex((score) => score === 90)); // yaha ab start se check kare ga agar wo element hua to us ka index return kare ga is case main ha or us ka index 3 ha
+
+console.log(scores.findLastIndex((score) => score === 90));
+// ye method last element check karta ha or condition match hone per us ka index nikalta ha is case main ha or us ka index 6 ha
+
+// Check karo array mein 100 hai ya nahi
+
+console.log(scores.includes(100)); // false keuke 100 nahi ha
+
+// is ko ham find method se bhi check kar sakte hain
+
+console.log(scores.find((score) => score >= 100)); // undefined keuke wo exist he nahi karta ha
+
+// isi tara ham ise find index se bhi check kar sakte hain
+
+console.log(scores.findIndex((score) => score >= 100)); // -1 keuke ye element exist he nahi karta ha or findindex condition true naw per -1 return karta ha
+
+//! Mini Project: Simple Inventory & Order Manager
+
+const inventory = [
+  { id: 1, item: "Laptop", stock: 5, category: "electronics" },
+  { id: 2, item: "Mouse", stock: 0, category: "electronics" },
+  { id: 3, item: "Desk", stock: 12, category: "furniture" },
+  { id: 4, item: "Chair", stock: 0, category: "furniture" },
+  { id: 5, item: "Monitor", stock: 8, category: "electronics" },
+  { id: 6, item: "Lamp", stock: 0, category: "furniture" },
+];
+
+console.log("===Mini Project===");
+
+function findFirstOutOfStock(inventory) {
+  return inventory.find((product) => product.stock === 0);
+} // ye function start se us object ko find kare ga jis ka stock 0 ha or is case main wo Mouse wala object ha jis ka index 1 ha
+
+console.log("First Out of Stock Product:", findFirstOutOfStock(inventory)); // id 2 wala product
+
+function findLastOutOfStock(inventory) {
+  return inventory.findLast((product) => product.stock === 0);
+}
+
+// ye function last se wo array of object find kare ga jis ka stock 0 ha is case main wo lamp ha or us ka index 5 ha
+
+console.log("Last Out of Stock Product:", findLastOutOfStock(inventory));
+
+function getOutOfStockIndex(inventory) {
+  return inventory.findIndex((product) => product.stock === 0);
+}
+
+// ye function array of object main first wo element dhonde ka jis ka stock 0 ho or phir us item ka index return kare ga is case main wo 2nd object ha or us ka index 1 ha
+console.log(getOutOfStockIndex(inventory)); // index 1
+
+function isItemAvailable(inventory, itemName) {
+  return inventory.find((prodcut) => prodcut.item === itemName) !== undefined;
+} // ye function product item ko match kare ga dia gay hua parameter ke sath agar match hua to value return kare ga warna false  return kare ga
+
+console.log("Is Item Available:", isItemAvailable(inventory, "Laptop")); // true laptop exist karta ha
+console.log("Is Item Available:", isItemAvailable(inventory, "Mobile")); // false keuke mobile name ka koi bhi item nahi ha inventory main
+
+function hasElectronicsOutOfStock(inventory) {
+  return (
+    inventory.find(
+      (product) => product.category === "electronics" && product.stock === 0,
+    ) !== undefined
+  );
+} // ye abhi is function main find her product ke category or stock dekhta ha agar category or stock dono condition ke mutabik hua to ye return kare ga ka true waran false return kare ga
+
+console.log("Has Item Available", hasElectronicsOutOfStock(inventory));
+
+function findItemById(inventory, id) {
+  return inventory.find((product) => product.id === id);
+}
+
+// ye function parameter main dia hui id ko match kare ga product id ke sath agar match hui to us id wala object return kare ga warna undefined
+
+console.log(findItemById(inventory, 6)); // ye match karta ha is lia id 6 wala pure product ka object return kare ga jo ke Lamp ha
+
+console.log(findItemById(inventory, 7)); // undefined return kare ga keuke is name ke id wala koi product ha he nahi

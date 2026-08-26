@@ -194,3 +194,117 @@ const filterdWord = words.filter( (word) => {
 }); 
 
 console.log(filterdWord);
+
+
+//? Pard D Topic 3 reduce()
+
+// reduce() ek array ke saare elements ko ek ek karke process karta hai, aur unko combine karke ek single final value bana deta hai — jaise sum, product, average, ya koi bhi combined result.
+
+
+//? Syntax
+
+// const result = array.reduce((accumulator, currentElement) => {
+//     return updatedAccumulator;
+// }, initialValue);
+
+// accumulator — ye wo "chalta hua total" hai jo har step pe update hota rehta hai (jaise dukaandar ka calculator jisme total build ho raha hai)
+// initialValue — ye wo starting point hai jaha se accumulator shuru hota hai (calculator ko 0 pe set karna, shuru mein)
+
+
+//? Real Example — Sum nikalna:
+
+// Mean ke pure array ya kisi bhi chez ka total sum nikalna 
+
+console.log("===Array Method reduce()===");
+
+const bill = [334, 5555, 693, 494, 293, 2934, 4959]; 
+
+const total = bill.reduce((acc, crr) => {
+    console.log("Accumulator:", acc, "| CurrentPrice:", crr); 
+    return acc + crr;
+},0); 
+
+console.log(total); 
+
+
+//! Important Points:
+// initialValue zaroori hai dena (0, ya jo bhi tumhara starting point ho) — warna JavaScript pehla element khud utha kar accumulator bana deta hai, jo confusion create kar sakta hai (abhi ke liye hamesha initialValue do).
+// reduce() ka use sirf sum ke liye nahi hota — average, maximum value, counting, ya poori array ko object mein convert karna, sab kuch reduce se ho sakta hai.
+// Return hamesha accumulator ka naya version hona chahiye — warna next step pe accumulator undefined ho jayega.
+
+
+//! Tasks 
+
+//? Task One 
+
+console.log("===Task One===");
+
+let table = [3, 5, 7]; 
+
+const product = table.reduce( (acc, num) => {
+    return acc * num; 
+}, 1); 
+
+console.log(product);  // 105 yaha ham ne initial value 1 di ha 0 nahi keuke agar 0 dain to phir 0 * 3 = 0 phir chai tum jitne bare num se multiply karo answer 0 he ai ga is lia product karte waqt initial value 1 rakho cuz 1 safe ha 3 * 1 = 3 to koi changes nahi ho gi or product bhi sahi ho ga 
+
+
+
+//? Task Two 
+
+console.log("===Task Two==="); 
+
+// find the max number in an array 
+
+const randomNum = [2, 55, 33, 666, 4994, 3494, 2234, 554, 665, 4445];
+
+const maxNum = randomNum.reduce((acc, crr) => {
+    if(crr > acc) {
+        return crr; // mean ke agar current number bara ha acc se to ye return karo 
+    }
+    else {
+        return acc; // warna purana accumulator he return karo 
+    }; 
+}, randomNum[0]); // yaha ham ne initial value 0 ke bajai array ka first element rakh dia ha keuke 0 rakhne se yaha to chal jai ga but in case agar sab element negative ho to phir sahi nahi ha 
+
+console.log(maxNum);
+
+
+//now let's find the minimum number in it 
+
+const minNum = randomNum.reduce( (acc, crr) => {
+    if(crr < acc)  {
+        return crr; // mean ke agar current number chota ha accumulator se to wo return karo 
+    }
+    else {
+        return acc; // warna purana accumulator return karo 
+    };
+}, randomNum[0]);
+
+console.log(minNum);
+
+//! reduceRight()
+
+// reduce right bhi reduce ke tara ha but ye right to left work karta ha is ka addition multiplication main farq nahi ata ha khlai strings main ata ha 
+
+
+//? Example 
+console.log("===Array Method Reduce Right===");
+
+const letters = ["h", "a", "m", "m", "a", "d"]; 
+
+const normalReduce = letters.reduce( (acc, letter) => {
+    console.log("Added:", acc, "| Current Letter:", letter);
+    return acc + letter;
+}, ""); 
+
+console.log(normalReduce); // ye same add kare ga left to right seedha 
+
+
+// ab reduce right karna 
+
+const rightReduce = letters.reduceRight( (acc, letter) =>  {
+    console.log("Added:", acc, "| Current Letter:", letter);
+    return acc + letter;
+}, ""); //
+
+console.log(rightReduce); // ye ab right se add kare ga 

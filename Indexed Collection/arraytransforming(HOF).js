@@ -308,3 +308,227 @@ const rightReduce = letters.reduceRight( (acc, letter) =>  {
 }, ""); //
 
 console.log(rightReduce); // ye ab right se add kare ga 
+
+//? Part D Topic 4 forEach()
+
+// forEach() hai: har element pe kaam karna, bina kuch return kiye.
+
+//? Syntax — Normal Function ke sath:
+
+// array.forEach(function (element, index, array) {
+// yahan kuch bhi karo is element ke sath
+// });
+
+
+// Example: 
+
+const fruits = ["Apple", "Banana", "Mango", "Orange"]; 
+
+//? With Simple Function 
+console.log("===Array Method forEach()===");
+fruits.forEach( function (fruit, index, array) {
+    console.log("Index:", index, "| Fruit:", fruit, "| Whole Array", array);
+});
+
+
+//? With Arrow Function 
+
+fruits.forEach((fruit, index, array) => {
+    console.log("Fruit:", fruit, "Index:", index, "Whole Array:", array);
+}); 
+
+// simple fruit khali nikalna 
+
+fruits.forEach((fruit) => {
+    console.log("Fruit:", fruit);
+});
+
+//! forEach function chalta har element per return kuch nahi karta ha 
+
+//? Example 
+
+const number2 = [4, 8, 12, 16, 20]; 
+
+const doubleMap = number2.map((num) => {
+    return num * 2;
+}); 
+
+console.log(doubleMap); // ye ab 8 16 24 and so on result de ga keuke map return karta ha 1 new array 
+
+const doubleForEach = number2.forEach((num) => {
+    console.log(num * 2);
+}); 
+
+console.log(doubleForEach); // undefined keuke foreach kuch return nahi karta 
+
+number2.forEach((num) => {
+    console.log("Triple:", num * 3);
+});  // 12 24 and so on
+
+//? Real-world examples jaha forEach() use hota hai:
+
+// Console mein print karna 
+
+const student3 = ["Hammad", "Bilal", "Umar", "Fahad"]; 
+
+student3.forEach((student) => {
+    if(student === "Hammad") {
+        console.log(student, "Is Absent");
+    }
+    else {
+        console.log(student, "Is Present");
+    };
+});
+
+// Kisi external variable ko update karna (jaise total jama karna — waise reduce() zyada behtar hai iske liye, lekin forEach() se bhi ho sakta hai):
+
+let total1 = 0; 
+let price2 = [100, 500, 339, 293, 494, 594];
+
+price2.forEach((price) => {
+    total1 = total1 + price;
+}); 
+
+console.log("Total Price:", total1);
+
+
+
+//? Pard D Topic 5 sort()
+
+// sort() method array ke andar order karta ha mean ke us array ko elements ko sort karta ha or ye usi original array main karta ha mean is se original array mutate hota ha 
+
+
+//? Alphabad main to sorting default way main ho jati ha but agar ham ne numbers ko sort karna ha to us ke lia hame sort ke sath comparator function ka use karna parta ha 
+
+//! Example With Alphabet
+console.log("===Array Method sort()===");
+
+const alphabet = ["Hammad", "Ali", "Faizan", "Danial", "Imran", "Mudasir"];
+
+alphabet.sort(); // ye ab alphabetically sab ko sort out kar de ga or ha ye new array nahi balke usi origniall array main change kare ga 
+
+
+console.log(alphabet);
+
+//? Lekin numbers main ye bina comparator method ke numbers ko bhi string he treat karta ha or ye numbers main sahi nahi karta agar comparator function use naw karo to 
+
+
+const sortNumber = [2, 3, 43, 29, 23, 14, 59, 95, 20, 38, 92]; 
+
+
+sortNumber.sort();
+console.log(sortNumber) // 14 2 20, 23, 29 so on is tara kare ga 
+
+// Custom Comparator Function 
+
+
+sortNumber.sort((a , b) => {
+    return a - b; // agar ap ko small se big chaia ascending order 
+}); 
+
+console.log("Ascending Order:", sortNumber); 
+
+sortNumber.sort((a, b) => {
+    return b - a; // Desending Order agar ap ko bare se chota chaia ho to 
+}); 
+
+console.log("===Desending Order:", sortNumber);
+
+
+// Comparator Kaise Kaam Karta Hai :
+
+// sort() internally do elements ko baar baar compare karta hai (a aur b), aur teen scenarios ho sakte hain:
+
+// Agar a - b negative number de (matlab a < b) → a pehle aayega
+// Agar a - b positive number de (matlab a > b) → b pehle aayega
+// Agar a - b zero de (matlab a === b) → dono ka order same rahega (koi change nahi)
+
+//! Sort Original array main mutation karta ha new array return nahi karta ha agar ap ko safely kam karna ho to pehle original array ke copy bana kar copy per sort kare 
+
+
+const original = [3, 4, 5, 2, 1]; 
+
+const copy = [...original]; // spread operator se orignal ke copy banai 
+
+copy.sort((a, b) => {
+    return a - b;
+}); 
+
+console.log(original); // original will remain same 
+console.log(copy); // copy will change 
+
+
+//! Tasks 
+
+
+//? Task One 
+
+console.log("===Task One==="); 
+
+
+let price3 = [33, 235, 565, 990, 400, 293, 443];
+
+// sort the price into ascending order from small to big 
+
+
+price3.sort((a, b) => {
+    return a - b;
+}); 
+
+console.log("Ascending Order Price:", price3); 
+
+// sort the price into decendign order from big to small 
+
+console.log("===Task Two===");
+price3.sort((a, b) => {
+    return b - a;
+}); 
+
+console.log("Descending Order Price:", price3);
+
+
+//? Task Three 
+
+console.log("===Task Three==="); 
+
+let names1 = ["Zara", "ali", "Bilal", "hamza"]; 
+
+names1.sort(); // yaha per result ho ga Bilal, Zara, ali Hamza keuke sort pehle capital ko solve kare ga phir lowercase ko 
+console.log(names1);
+
+// some method to do sort perfectly first make all the element lowercase using map 
+
+
+const lowerCa = names1.map((name) => {
+    return name.toLowerCase();
+}); 
+
+console.log(lowerCa); 
+
+// now sort this 
+
+lowerCa.sort(); // now it will be sort perfectly 
+console.log(lowerCa);
+
+
+// or make the lowercase to upper case using map 
+
+const upperCa = names1.map((name) => {
+    return name[0].toUpperCase() + name.slice(1);
+}); 
+
+console.log(upperCa); // now the first alphabat of the element is capital 
+
+// now sort it 
+
+upperCa.sort(); 
+console.log(upperCa); 
+
+// or use .localCompare 
+
+names1.sort((a, b) => {
+   return a.toLowerCase().localeCompare(b.toLowerCase());
+
+}); 
+
+console.log(names1);

@@ -532,3 +532,46 @@ names1.sort((a, b) => {
 }); 
 
 console.log(names1);
+
+//? Part D Topic 6 reverse()
+
+// array orignal array main changes karta ha mean ke ye new array return nahi karta balke original array main change karta ha or reverse karta ha use ke andar elements ko 
+
+
+//? Syntax
+
+// array.reverse();
+
+
+//? Example:
+console.log("===Array Method: reverse()===");
+
+const numbers3 = [1, 2, 3, 4, 5, 6]; 
+
+numbers3.reverse(); 
+
+console.log(numbers3); // orignal array main changes hue ha 
+
+// ab agar phir reverse kare ge to usi state main change kare ga mean ke abhi 6, 5, 4, 3 so ha 
+
+numbers3.reverse(); 
+console.log(numbers3); // 1, 2, 3, 4, 5
+
+
+//! Important — Ye Bhi Mutating Method Hai (sort() ki tarah):
+
+const original1 = [1, 2, 3, 4, 5]; 
+
+const reversed = original1.reverse(); 
+
+console.log(original1); // 5, 4, so on 
+console.log(reversed); // 5, 4, so on mean ke reverse bhi sort ke tara original array ko mutate karta ha 
+console.log(original1 === reversed); // same true ai ga 
+
+const words1 = ["Abbottabad", "Islamabad", "Karachi", "Lahore"];
+
+words1.sort();
+console.log("After Sort:", words1);
+
+words1.reverse();
+console.log("After Reverse:", words1);

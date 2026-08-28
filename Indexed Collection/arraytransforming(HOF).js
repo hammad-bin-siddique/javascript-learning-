@@ -2,21 +2,20 @@
 
 //? Part D Topic 1: map() — Deep Dive
 
-
-//! Map kia karta ha 
+//! Map kia karta ha
 
 // Ek naya array return karta hai
 // Original array ko chhupata (mutate) nahi karta
 // Har element pe ek function chalata hai, aur uska return value naye array mein daal deta hai
 
 //! Syntax:
-//? With Simple Function 
+//? With Simple Function
 
 // const newArray = oldArray.map(function(element, index, array) {
 //     return kuch_naya_value;
 // });
 
-//? With Arrow Function 
+//? With Arrow Function
 
 // const newArray = oldArray.map((element) => {
 //     return kuch_naya_value;
@@ -27,23 +26,23 @@ console.log("===Array Method Map()===");
 const prices = [500, 345, 234, 645, 294, 909, 234];
 
 const priceWithTax = prices.map(function (price) {
-    return price + (price * 0.1);
+  return price + price * 0.1;
 });
 
-//With arrow function 
+//With arrow function
 
 const priceWithTaxArrow = prices.map((price) => {
-    return price + price * 0.1;
+  return price + price * 0.1;
 });
 
 console.log("Price With Tax", priceWithTax);
 console.log("Original Price", prices);
 console.log("Price With Tax Using Arrow Function", priceWithTaxArrow);
 
-// now we give a 10 percent discount on tax menu 
+// now we give a 10 percent discount on tax menu
 
 const discountPrice = priceWithTax.map((discount) => {
-    return Math.round(discount * 0.9);
+  return Math.round(discount * 0.9);
 });
 
 console.log("Discounted Price:", discountPrice);
@@ -54,74 +53,70 @@ console.log("Discounted Price:", discountPrice);
 
 // Agar tum return nahi likhoge function ke andar, to har element undefined ban jayega naye array mein. Ye ek bohat common mistake hai.
 
-//? let's double the price  without using return 
+//? let's double the price  without using return
 
 const doublePrice = discountPrice.map((num) => {
-    // yaha ham return nahi likhte hain jis se undefined ai ga 
-    num * 2;
+  // yaha ham return nahi likhte hain jis se undefined ai ga
+  num * 2;
 });
 
 console.log("Return Keyword Missing in Map()", doublePrice);
 
-//? now fix it 
+//? now fix it
 
 const doublePriceFix = discountPrice.map((num) => {
-    return Math.round(num * 2);
+  return Math.round(num * 2);
 });
 
 console.log("Double The discounted Price:", doublePriceFix);
 
-
 //! Practice Tasks
 
-//? Task One  
+//? Task One
 console.log("===Task One===");
-let names = ["ali", "bilal", "hammad"]; 
+let names = ["ali", "bilal", "hammad"];
 
 const capName = names.map((name) => {
-    return name[0].toUpperCase() + name.slice(1); // abhi is main ham ne first letter ko capital kar dia ha or phir us ke name ke copy mila di ha slice se 1 index se keuke 0 index per capital latter ha is lia wo skip kia
+  return name[0].toUpperCase() + name.slice(1); // abhi is main ham ne first letter ko capital kar dia ha or phir us ke name ke copy mila di ha slice se 1 index se keuke 0 index per capital latter ha is lia wo skip kia
 });
-console.log(names); 
-console.log(capName); 
-
+console.log(names);
+console.log(capName);
 
 //? Task 2:
 console.log("===Task Two===");
 
-const ages = [15, 22, 7, 34, 54]; 
+const ages = [15, 22, 7, 34, 54];
 
 const agesWithString = ages.map((age) => {
-    return "Age:" + age;
+  return "Age:" + age;
 });
 
-console.log(ages);  // khali age print ho gi number
-console.log(agesWithString); // age with string dono print ho gi 
+console.log(ages); // khali age print ho gi number
+console.log(agesWithString); // age with string dono print ho gi
 
 //? Task 3
 console.log("===Task Three===");
 
 const students = [
-    { name: "Ahmed", marks: 80 },
-    { name: "Bilal", marks: 45 },
-    { name: "Sana", marks: 90 }
+  { name: "Ahmed", marks: 80 },
+  { name: "Bilal", marks: 45 },
+  { name: "Sana", marks: 90 },
 ];
 
 const studentName = students.map((student) => {
-    return student.name;
+  return student.name;
 });
 
-console.log(studentName); // only names print ho ge 
+console.log(studentName); // only names print ho ge
 
+//? Part D Topic 2 filter()
 
-//? Part D Topic 2 filter() 
-
-//! Filter kia karta ha 
+//! Filter kia karta ha
 
 // Ek naya array return karta hai
 // Har element ek condition (true/false) se guzarta hai
 // Agar condition true return kare, element naye array mein jata hai
 // Agar condition false return kare, element (skip ho jata hai)
-
 
 //? Syntax:
 
@@ -133,73 +128,67 @@ console.log(studentName); // only names print ho ge
 
 const people = [18, 17, 25, 16, 46, 26, 63, 12, 15, 13, 14, 22, 21, 33];
 
-// ab ham filter method se is main se adults nikale ge new array main 
+// ab ham filter method se is main se adults nikale ge new array main
 console.log("===Array Method filter()===");
 
-
-const adult = people.filter( (age) => {
-    return  age >= 18;
-}); 
+const adult = people.filter((age) => {
+  return age >= 18;
+});
 
 console.table([adult]);
 
-// now filter the minors from the array 
+// now filter the minors from the array
 
-const minor = people.filter( (age) => {
-    return age < 18;
+const minor = people.filter((age) => {
+  return age < 18;
 });
 
 console.table([minor]);
 
+//! Tasks
 
-
-//! Tasks 
-
-//? Task 1: 
+//? Task 1:
 
 console.log("===Task One===");
 
 const students1 = [
-    { name: "Ahmed", marks: 80 },
-    { name: "Bilal", marks: 45 },
-    { name: "Sana", marks: 90 }
+  { name: "Ahmed", marks: 80 },
+  { name: "Bilal", marks: 45 },
+  { name: "Sana", marks: 90 },
 ];
 
-const filteredStudents = students1.filter( (student) => {
-    return student.marks >= 60; 
-})
+const filteredStudents = students1.filter((student) => {
+  return student.marks >= 60;
+});
 
 console.log(filteredStudents);
 
-
-//? Task 2: 
+//? Task 2:
 
 console.log("===Task Two===");
 
-let prices1 = [223, 423, 123, 45, 44, 122, 345, 564]; 
+let prices1 = [223, 423, 123, 45, 44, 122, 345, 564];
 
 const priceAbove3Hun = prices1.filter((price) => {
-    return price >= 300;
-}); 
+  return price >= 300;
+});
 
 console.log(priceAbove3Hun);
 
-//? Task Three 
+//? Task Three
 console.log("===Task Three===");
 
-const words = ["cat", "elephant", "dog", "hippopotamus", "ant"]; 
+const words = ["cat", "elephant", "dog", "hippopotamus", "ant"];
 
-const filterdWord = words.filter( (word) => {
-    return word.length >= 4;
-}); 
+const filterdWord = words.filter((word) => {
+  return word.length >= 4;
+});
 
 console.log(filterdWord);
-
 
 //? Pard D Topic 3 reduce()
 
 // reduce() ek array ke saare elements ko ek ek karke process karta hai, aur unko combine karke ek single final value bana deta hai — jaise sum, product, average, ya koi bhi combined result.
-
 
 //? Syntax
 
@@ -210,104 +199,94 @@ console.log(filterdWord);
 // accumulator — ye wo "chalta hua total" hai jo har step pe update hota rehta hai (jaise dukaandar ka calculator jisme total build ho raha hai)
 // initialValue — ye wo starting point hai jaha se accumulator shuru hota hai (calculator ko 0 pe set karna, shuru mein)
 
-
 //? Real Example — Sum nikalna:
 
-// Mean ke pure array ya kisi bhi chez ka total sum nikalna 
+// Mean ke pure array ya kisi bhi chez ka total sum nikalna
 
 console.log("===Array Method reduce()===");
 
-const bill = [334, 5555, 693, 494, 293, 2934, 4959]; 
+const bill = [334, 5555, 693, 494, 293, 2934, 4959];
 
 const total = bill.reduce((acc, crr) => {
-    console.log("Accumulator:", acc, "| CurrentPrice:", crr); 
-    return acc + crr;
-},0); 
+  console.log("Accumulator:", acc, "| CurrentPrice:", crr);
+  return acc + crr;
+}, 0);
 
-console.log(total); 
-
+console.log(total);
 
 //! Important Points:
 // initialValue zaroori hai dena (0, ya jo bhi tumhara starting point ho) — warna JavaScript pehla element khud utha kar accumulator bana deta hai, jo confusion create kar sakta hai (abhi ke liye hamesha initialValue do).
 // reduce() ka use sirf sum ke liye nahi hota — average, maximum value, counting, ya poori array ko object mein convert karna, sab kuch reduce se ho sakta hai.
 // Return hamesha accumulator ka naya version hona chahiye — warna next step pe accumulator undefined ho jayega.
 
+//! Tasks
 
-//! Tasks 
-
-//? Task One 
+//? Task One
 
 console.log("===Task One===");
 
-let table = [3, 5, 7]; 
+let table = [3, 5, 7];
 
-const product = table.reduce( (acc, num) => {
-    return acc * num; 
-}, 1); 
+const product = table.reduce((acc, num) => {
+  return acc * num;
+}, 1);
 
-console.log(product);  // 105 yaha ham ne initial value 1 di ha 0 nahi keuke agar 0 dain to phir 0 * 3 = 0 phir chai tum jitne bare num se multiply karo answer 0 he ai ga is lia product karte waqt initial value 1 rakho cuz 1 safe ha 3 * 1 = 3 to koi changes nahi ho gi or product bhi sahi ho ga 
+console.log(product); // 105 yaha ham ne initial value 1 di ha 0 nahi keuke agar 0 dain to phir 0 * 3 = 0 phir chai tum jitne bare num se multiply karo answer 0 he ai ga is lia product karte waqt initial value 1 rakho cuz 1 safe ha 3 * 1 = 3 to koi changes nahi ho gi or product bhi sahi ho ga
 
+//? Task Two
 
+console.log("===Task Two===");
 
-//? Task Two 
-
-console.log("===Task Two==="); 
-
-// find the max number in an array 
+// find the max number in an array
 
 const randomNum = [2, 55, 33, 666, 4994, 3494, 2234, 554, 665, 4445];
 
 const maxNum = randomNum.reduce((acc, crr) => {
-    if(crr > acc) {
-        return crr; // mean ke agar current number bara ha acc se to ye return karo 
-    }
-    else {
-        return acc; // warna purana accumulator he return karo 
-    }; 
-}, randomNum[0]); // yaha ham ne initial value 0 ke bajai array ka first element rakh dia ha keuke 0 rakhne se yaha to chal jai ga but in case agar sab element negative ho to phir sahi nahi ha 
+  if (crr > acc) {
+    return crr; // mean ke agar current number bara ha acc se to ye return karo
+  } else {
+    return acc; // warna purana accumulator he return karo
+  }
+}, randomNum[0]); // yaha ham ne initial value 0 ke bajai array ka first element rakh dia ha keuke 0 rakhne se yaha to chal jai ga but in case agar sab element negative ho to phir sahi nahi ha
 
 console.log(maxNum);
 
+//now let's find the minimum number in it
 
-//now let's find the minimum number in it 
-
-const minNum = randomNum.reduce( (acc, crr) => {
-    if(crr < acc)  {
-        return crr; // mean ke agar current number chota ha accumulator se to wo return karo 
-    }
-    else {
-        return acc; // warna purana accumulator return karo 
-    };
+const minNum = randomNum.reduce((acc, crr) => {
+  if (crr < acc) {
+    return crr; // mean ke agar current number chota ha accumulator se to wo return karo
+  } else {
+    return acc; // warna purana accumulator return karo
+  }
 }, randomNum[0]);
 
 console.log(minNum);
 
 //! reduceRight()
 
-// reduce right bhi reduce ke tara ha but ye right to left work karta ha is ka addition multiplication main farq nahi ata ha khlai strings main ata ha 
+// reduce right bhi reduce ke tara ha but ye right to left work karta ha is ka addition multiplication main farq nahi ata ha khlai strings main ata ha
 
-
-//? Example 
+//? Example
 console.log("===Array Method Reduce Right===");
 
-const letters = ["h", "a", "m", "m", "a", "d"]; 
+const letters = ["h", "a", "m", "m", "a", "d"];
 
-const normalReduce = letters.reduce( (acc, letter) => {
-    console.log("Added:", acc, "| Current Letter:", letter);
-    return acc + letter;
-}, ""); 
+const normalReduce = letters.reduce((acc, letter) => {
+  console.log("Added:", acc, "| Current Letter:", letter);
+  return acc + letter;
+}, "");
 
-console.log(normalReduce); // ye same add kare ga left to right seedha 
+console.log(normalReduce); // ye same add kare ga left to right seedha
 
+// ab reduce right karna
 
-// ab reduce right karna 
-
-const rightReduce = letters.reduceRight( (acc, letter) =>  {
-    console.log("Added:", acc, "| Current Letter:", letter);
-    return acc + letter;
+const rightReduce = letters.reduceRight((acc, letter) => {
+  console.log("Added:", acc, "| Current Letter:", letter);
+  return acc + letter;
 }, ""); //
 
-console.log(rightReduce); // ye ab right se add kare ga 
+console.log(rightReduce); // ye ab right se add kare ga
 
 //? Part D Topic 4 forEach()
 
@@ -319,121 +298,110 @@ console.log(rightReduce); // ye ab right se add kare ga
 // yahan kuch bhi karo is element ke sath
 // });
 
+// Example:
 
-// Example: 
+const fruits = ["Apple", "Banana", "Mango", "Orange"];
 
-const fruits = ["Apple", "Banana", "Mango", "Orange"]; 
-
-//? With Simple Function 
+//? With Simple Function
 console.log("===Array Method forEach()===");
-fruits.forEach( function (fruit, index, array) {
-    console.log("Index:", index, "| Fruit:", fruit, "| Whole Array", array);
+fruits.forEach(function (fruit, index, array) {
+  console.log("Index:", index, "| Fruit:", fruit, "| Whole Array", array);
 });
 
-
-//? With Arrow Function 
+//? With Arrow Function
 
 fruits.forEach((fruit, index, array) => {
-    console.log("Fruit:", fruit, "Index:", index, "Whole Array:", array);
-}); 
-
-// simple fruit khali nikalna 
-
-fruits.forEach((fruit) => {
-    console.log("Fruit:", fruit);
+  console.log("Fruit:", fruit, "Index:", index, "Whole Array:", array);
 });
 
-//! forEach function chalta har element per return kuch nahi karta ha 
+// simple fruit khali nikalna
 
-//? Example 
+fruits.forEach((fruit) => {
+  console.log("Fruit:", fruit);
+});
 
-const number2 = [4, 8, 12, 16, 20]; 
+//! forEach function chalta har element per return kuch nahi karta ha
+
+//? Example
+
+const number2 = [4, 8, 12, 16, 20];
 
 const doubleMap = number2.map((num) => {
-    return num * 2;
-}); 
+  return num * 2;
+});
 
-console.log(doubleMap); // ye ab 8 16 24 and so on result de ga keuke map return karta ha 1 new array 
+console.log(doubleMap); // ye ab 8 16 24 and so on result de ga keuke map return karta ha 1 new array
 
 const doubleForEach = number2.forEach((num) => {
-    console.log(num * 2);
-}); 
+  console.log(num * 2);
+});
 
-console.log(doubleForEach); // undefined keuke foreach kuch return nahi karta 
+console.log(doubleForEach); // undefined keuke foreach kuch return nahi karta
 
 number2.forEach((num) => {
-    console.log("Triple:", num * 3);
-});  // 12 24 and so on
+  console.log("Triple:", num * 3);
+}); // 12 24 and so on
 
 //? Real-world examples jaha forEach() use hota hai:
 
-// Console mein print karna 
+// Console mein print karna
 
-const student3 = ["Hammad", "Bilal", "Umar", "Fahad"]; 
+const student3 = ["Hammad", "Bilal", "Umar", "Fahad"];
 
 student3.forEach((student) => {
-    if(student === "Hammad") {
-        console.log(student, "Is Absent");
-    }
-    else {
-        console.log(student, "Is Present");
-    };
+  if (student === "Hammad") {
+    console.log(student, "Is Absent");
+  } else {
+    console.log(student, "Is Present");
+  }
 });
 
 // Kisi external variable ko update karna (jaise total jama karna — waise reduce() zyada behtar hai iske liye, lekin forEach() se bhi ho sakta hai):
 
-let total1 = 0; 
+let total1 = 0;
 let price2 = [100, 500, 339, 293, 494, 594];
 
 price2.forEach((price) => {
-    total1 = total1 + price;
-}); 
+  total1 = total1 + price;
+});
 
 console.log("Total Price:", total1);
 
-
-
 //? Pard D Topic 5 sort()
 
-// sort() method array ke andar order karta ha mean ke us array ko elements ko sort karta ha or ye usi original array main karta ha mean is se original array mutate hota ha 
+// sort() method array ke andar order karta ha mean ke us array ko elements ko sort karta ha or ye usi original array main karta ha mean is se original array mutate hota ha
 
-
-//? Alphabad main to sorting default way main ho jati ha but agar ham ne numbers ko sort karna ha to us ke lia hame sort ke sath comparator function ka use karna parta ha 
+//? Alphabad main to sorting default way main ho jati ha but agar ham ne numbers ko sort karna ha to us ke lia hame sort ke sath comparator function ka use karna parta ha
 
 //! Example With Alphabet
 console.log("===Array Method sort()===");
 
 const alphabet = ["Hammad", "Ali", "Faizan", "Danial", "Imran", "Mudasir"];
 
-alphabet.sort(); // ye ab alphabetically sab ko sort out kar de ga or ha ye new array nahi balke usi origniall array main change kare ga 
-
+alphabet.sort(); // ye ab alphabetically sab ko sort out kar de ga or ha ye new array nahi balke usi origniall array main change kare ga
 
 console.log(alphabet);
 
-//? Lekin numbers main ye bina comparator method ke numbers ko bhi string he treat karta ha or ye numbers main sahi nahi karta agar comparator function use naw karo to 
+//? Lekin numbers main ye bina comparator method ke numbers ko bhi string he treat karta ha or ye numbers main sahi nahi karta agar comparator function use naw karo to
 
-
-const sortNumber = [2, 3, 43, 29, 23, 14, 59, 95, 20, 38, 92]; 
-
+const sortNumber = [2, 3, 43, 29, 23, 14, 59, 95, 20, 38, 92];
 
 sortNumber.sort();
-console.log(sortNumber) // 14 2 20, 23, 29 so on is tara kare ga 
+console.log(sortNumber); // 14 2 20, 23, 29 so on is tara kare ga
 
-// Custom Comparator Function 
-
-
-sortNumber.sort((a , b) => {
-    return a - b; // agar ap ko small se big chaia ascending order 
-}); 
-
-console.log("Ascending Order:", sortNumber); 
+// Custom Comparator Function
 
 sortNumber.sort((a, b) => {
-    return b - a; // Desending Order agar ap ko bare se chota chaia ho to 
-}); 
+  return a - b; // agar ap ko small se big chaia ascending order
+});
+
+console.log("Ascending Order:", sortNumber);
+
+sortNumber.sort((a, b) => {
+  return b - a; // Desending Order agar ap ko bare se chota chaia ho to
+});
 
 console.log("===Desending Order:", sortNumber);
-
 
 // Comparator Kaise Kaam Karta Hai :
 
@@ -443,130 +411,118 @@ console.log("===Desending Order:", sortNumber);
 // Agar a - b positive number de (matlab a > b) → b pehle aayega
 // Agar a - b zero de (matlab a === b) → dono ka order same rahega (koi change nahi)
 
-//! Sort Original array main mutation karta ha new array return nahi karta ha agar ap ko safely kam karna ho to pehle original array ke copy bana kar copy per sort kare 
+//! Sort Original array main mutation karta ha new array return nahi karta ha agar ap ko safely kam karna ho to pehle original array ke copy bana kar copy per sort kare
 
+const original = [3, 4, 5, 2, 1];
 
-const original = [3, 4, 5, 2, 1]; 
-
-const copy = [...original]; // spread operator se orignal ke copy banai 
+const copy = [...original]; // spread operator se orignal ke copy banai
 
 copy.sort((a, b) => {
-    return a - b;
-}); 
+  return a - b;
+});
 
-console.log(original); // original will remain same 
-console.log(copy); // copy will change 
+console.log(original); // original will remain same
+console.log(copy); // copy will change
 
+//! Tasks
 
-//! Tasks 
+//? Task One
 
-
-//? Task One 
-
-console.log("===Task One==="); 
-
+console.log("===Task One===");
 
 let price3 = [33, 235, 565, 990, 400, 293, 443];
 
-// sort the price into ascending order from small to big 
-
+// sort the price into ascending order from small to big
 
 price3.sort((a, b) => {
-    return a - b;
-}); 
+  return a - b;
+});
 
-console.log("Ascending Order Price:", price3); 
+console.log("Ascending Order Price:", price3);
 
-// sort the price into decendign order from big to small 
+// sort the price into decendign order from big to small
 
 console.log("===Task Two===");
 price3.sort((a, b) => {
-    return b - a;
-}); 
+  return b - a;
+});
 
 console.log("Descending Order Price:", price3);
 
+//? Task Three
 
-//? Task Three 
+console.log("===Task Three===");
 
-console.log("===Task Three==="); 
+let names1 = ["Zara", "ali", "Bilal", "hamza"];
 
-let names1 = ["Zara", "ali", "Bilal", "hamza"]; 
-
-names1.sort(); // yaha per result ho ga Bilal, Zara, ali Hamza keuke sort pehle capital ko solve kare ga phir lowercase ko 
+names1.sort(); // yaha per result ho ga Bilal, Zara, ali Hamza keuke sort pehle capital ko solve kare ga phir lowercase ko
 console.log(names1);
 
-// some method to do sort perfectly first make all the element lowercase using map 
-
+// some method to do sort perfectly first make all the element lowercase using map
 
 const lowerCa = names1.map((name) => {
-    return name.toLowerCase();
-}); 
+  return name.toLowerCase();
+});
 
-console.log(lowerCa); 
-
-// now sort this 
-
-lowerCa.sort(); // now it will be sort perfectly 
 console.log(lowerCa);
 
+// now sort this
 
-// or make the lowercase to upper case using map 
+lowerCa.sort(); // now it will be sort perfectly
+console.log(lowerCa);
+
+// or make the lowercase to upper case using map
 
 const upperCa = names1.map((name) => {
-    return name[0].toUpperCase() + name.slice(1);
-}); 
+  return name[0].toUpperCase() + name.slice(1);
+});
 
-console.log(upperCa); // now the first alphabat of the element is capital 
+console.log(upperCa); // now the first alphabat of the element is capital
 
-// now sort it 
+// now sort it
 
-upperCa.sort(); 
-console.log(upperCa); 
+upperCa.sort();
+console.log(upperCa);
 
-// or use .localCompare 
+// or use .localCompare
 
 names1.sort((a, b) => {
-   return a.toLowerCase().localeCompare(b.toLowerCase());
-
-}); 
+  return a.toLowerCase().localeCompare(b.toLowerCase());
+});
 
 console.log(names1);
 
 //? Part D Topic 6 reverse()
 
-// array orignal array main changes karta ha mean ke ye new array return nahi karta balke original array main change karta ha or reverse karta ha use ke andar elements ko 
-
+// array orignal array main changes karta ha mean ke ye new array return nahi karta balke original array main change karta ha or reverse karta ha use ke andar elements ko
 
 //? Syntax
 
 // array.reverse();
 
-
 //? Example:
 console.log("===Array Method: reverse()===");
 
-const numbers3 = [1, 2, 3, 4, 5, 6]; 
+const numbers3 = [1, 2, 3, 4, 5, 6];
 
-numbers3.reverse(); 
+numbers3.reverse();
 
-console.log(numbers3); // orignal array main changes hue ha 
+console.log(numbers3); // orignal array main changes hue ha
 
-// ab agar phir reverse kare ge to usi state main change kare ga mean ke abhi 6, 5, 4, 3 so ha 
+// ab agar phir reverse kare ge to usi state main change kare ga mean ke abhi 6, 5, 4, 3 so ha
 
-numbers3.reverse(); 
+numbers3.reverse();
 console.log(numbers3); // 1, 2, 3, 4, 5
-
 
 //! Important — Ye Bhi Mutating Method Hai (sort() ki tarah):
 
-const original1 = [1, 2, 3, 4, 5]; 
+const original1 = [1, 2, 3, 4, 5];
 
-const reversed = original1.reverse(); 
+const reversed = original1.reverse();
 
-console.log(original1); // 5, 4, so on 
-console.log(reversed); // 5, 4, so on mean ke reverse bhi sort ke tara original array ko mutate karta ha 
-console.log(original1 === reversed); // same true ai ga 
+console.log(original1); // 5, 4, so on
+console.log(reversed); // 5, 4, so on mean ke reverse bhi sort ke tara original array ko mutate karta ha
+console.log(original1 === reversed); // same true ai ga
 
 const words1 = ["Abbottabad", "Islamabad", "Karachi", "Lahore"];
 
@@ -575,3 +531,113 @@ console.log("After Sort:", words1);
 
 words1.reverse();
 console.log("After Reverse:", words1);
+
+//! Combined Practice Tasks
+
+//? Task 1 — Chaining Practice:
+
+const products = [
+  { name: "Laptop", price: 1200, inStock: true },
+  { name: "Mouse", price: 25, inStock: false },
+  { name: "Keyboard", price: 75, inStock: true },
+  { name: "Monitor", price: 300, inStock: true },
+  { name: "Webcam", price: 50, inStock: false },
+];
+
+console.log("===Task One===");
+const filterProducts = products.filter((product) => {
+  return product.inStock === true;
+});
+
+console.log("Filtered Products:", filterProducts);
+
+const productName = filterProducts.map((product) => {
+  return product.name;
+});
+
+console.log("Products Name:", productName);
+
+const productNameSort = productName.sort();
+
+console.log("Sorted Products:", productNameSort);
+
+//? Task Two reduce() Real Use:
+console.log("===Task Two===");
+
+const theCart = [
+  { item: "Book", price: 500, quantity: 2 },
+  { item: "Pen", price: 20, quantity: 5 },
+  { item: "Bag", price: 1200, quantity: 1 },
+];
+
+const cartTotal = theCart.reduce((acc, crr) => {
+  return acc + crr.price * crr.quantity;
+}, 0);
+
+console.log("Cart Total:", cartTotal);
+
+//? Task 3 — forEach() Real Use:
+console.log("===Task Three===");
+theCart.forEach((item) => {
+  const total = item.price * item.quantity;
+  console.log(`${item.item} x${item.quantity} = RS: ${total}`);
+});
+
+//! Mini Project — "Store Inventory Manager"
+
+const inventory = [
+  { name: "Rice Bag", price: 2500, stock: 20, category: "Grocery" },
+  { name: "Cooking Oil", price: 800, stock: 0, category: "Grocery" },
+  { name: "Notebook", price: 50, stock: 100, category: "Stationery" },
+  { name: "Pen", price: 10, stock: 0, category: "Stationery" },
+  { name: "Shampoo", price: 350, stock: 15, category: "Personal Care" },
+  { name: "Soap", price: 60, stock: 50, category: "Personal Care" },
+];
+
+console.log("===Mini Project===");
+
+// filter() — sirf wo items nikalo jinka stock > 0 hai (out-of-stock items exclude karo), naam availableItems rakho.
+
+const availableItems = inventory.filter((product) => {
+  return product.stock > 0;
+});
+
+console.log("Items Available In Stock:", availableItems);
+
+// map() — availableItems se ek naya array banao jisme har item ka sirf name aur uska totalValue ho (price × stock). Har element ek object hoga: { name: "Rice Bag", totalValue: 50000 }.
+
+const itemWithNameAndPrice = availableItems.map((item) => {
+  return {
+    name: item.name,
+    totalValue: item.price * item.stock,
+  };
+});
+
+console.log("Item With Name And Price:", itemWithNameAndPrice);
+
+// sort() — is naye array ko totalValue ke hisaab se descending order (sabse zyada value wala pehle) mein sort karo.
+
+const totalValueSorting = itemWithNameAndPrice.sort((a, b) => {
+  return b.totalValue - a.totalValue;
+});
+
+console.log("Sorted Value:", totalValueSorting);
+
+// reduce() — poore inventory ka total stock value nikalo (sab items ka price × stock add karke, chahe stock 0 ho ya na ho).
+
+const totalInventory = inventory.reduce((acc, crr) => {
+  return acc + crr.price * crr.stock;
+}, 0);
+
+console.log("Inventory Total:", totalInventory);
+
+// forEach() — availableItems par loop chala kar print karo: "Rice Bag - Rs. 2500 (Stock: 20)" format mein.
+
+availableItems.forEach((item) => {
+  console.log(`${item.name} - Rs: ${item.price} (Stock:${item.stock})`);
+});
+
+// reverse() — step 3 wale sorted array ko reverse karo (ab ascending order mein aa jayega — lowest value pehle).
+
+const reverseSorted = totalValueSorting.reverse();
+console.log("Reverse Sorted:", reverseSorted);

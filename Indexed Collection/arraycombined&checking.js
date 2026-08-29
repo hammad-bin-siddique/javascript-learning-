@@ -227,3 +227,92 @@ let withHoles = [1, 2, , 4, [5, , 6]];
 console.log("With Holes:", withHoles); 
 console.log("Without Holes:", withHoles.flat()); // flat empty holes ko bhi remove kar deta ha 
 
+//? Part C: Method 4: flatMap()
+
+// flatMap() ek array method hai jo har element pe ek callback function chalata hai (jaise map()), aur phir result ko automatically 1 level tak flatten kar deta hai. Ye array.map(fn).flat() likhne jaisa hai, lekin zyada efficient (kyunke array sirf ek hi baar traverse hota hai, do baar nahi).
+
+
+//? Syntax
+
+//! Regular function:
+
+// let result = array.flatMap(function(element) {
+//   return [element, element * 2];
+// });
+
+//! Arrow function:
+
+// let result = array.flatMap((element) => [element, element * 2]);
+
+//? Example
+console.log("===Array Method flatMap()===");
+let orders = [1, 2, 3, 4, 5, 6]; 
+
+// Normal map function se nested array bane ga flate nahi ho ga 
+
+const mapped = orders.map((qty) => {
+  return [qty, qty * 5]
+}); 
+
+console.log("Normal Map:", mapped); // [[1, 5], [2, 10], [3, 15], [4, 20], [5, 25], [6, 30]];
+
+// flatMap se nested array of flat dono ho jai ga 
+
+const flatMapped = orders.flatMap((qty) => {
+  return [qty, qty * 10];
+}); 
+
+console.log("Flat Map:", flatMapped); // [1, 10, 2, 20] and so on 
+
+//? Common Use Case Senctences ko word main karna 
+
+const sentences = ["Hammad Love Javascipt & Python", "Ali Love English"]; 
+
+const intoWord = sentences.flatMap((sentence) => sentence.split(" ")) 
+console.log(intoWord);
+
+//! Important Points
+
+
+// flatMap() sirf 1 level flatten karta hai — agar callback se double-nested array return ho, wo poora flatten nahi hoga (agar zyada depth chahiye to .map().flat(n) alag se use karna padega).
+
+
+// flatMap() bhi naya array return karta hai — original array untouched rehta hai.
+
+// Agar callback simple value return kare (array nahi), to flatMap() bilkul map() jaisa hi behave karega (kuch flatten karne ko hoga hi nahi).
+
+const simpleNum = [1, 2, 3]; 
+
+const flatSimpleNum = simpleNum.flatMap((num) => num * 2);
+console.log("Simple:", simpleNum); 
+console.log("Flat Simple:", flatSimpleNum); // same but value double ho gi nested nahi ha to kuch flat nahi kare ga 
+
+// Bahut helpful hota hai jab aapko filter + map dono ka combo chahiye ho — jaise kisi condition pe element skip karna ho, to empty array [] return kar do us case mein (wo element gayab ho jayega result se).
+
+
+const oddEven = [1, 2, 3, 4, 5, 6, 7, 8]; 
+
+//? flatmap ke help se ham filter bhi kar sakte hain  neache dia hue code main ham  sirf odd number print kare ge or even numbers ko skip kare ge empty array return kar ke 
+
+const onlyOdd = oddEven.flatMap((num) => {
+  if(num % 2 === 0) {
+    return [];
+  }
+  return [num, num * num];
+}); 
+
+console.log("Only Odd Number:", onlyOdd); // 1, 1, 3, 9, 5, 25, 7, 49
+
+//? Now get only even number 
+
+
+const onlyEven = oddEven.flatMap((num) => {
+  if(num % 2 === 0) {
+    return [num, num * 5];
+  };
+  return [];
+}); 
+
+console.log("Only Even Number", onlyEven); // [2, 10, 4, 20] and so on
+
+

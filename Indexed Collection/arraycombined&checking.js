@@ -496,3 +496,102 @@ console.log(passStudent); // false ai ga keuke 45 1 student fail ha
 const andPassStudent = students1.some((student) => student.marks >= 50); 
 
 console.log(andPassStudent); // true ai ga keuke 1 student pass hain 
+
+//? Part E:  Method 7: Array.isArray()
+
+// Array.isArray() ek static method hai (yani ye kisi specific array pe call nahi hota, balke seedha Array class pe call hota hai) jo check karta hai ke di gayi value Array hai ya nahi, aur true/false return karta hai.
+
+//? Syntax
+
+// Array.isArray(value);
+
+//? Example
+console.log("====Array Method isArray()===");
+
+const newStudent = ["Ali", "Umair"]; 
+const studentInfo = {name: "Hammad", age: 20}; 
+const myName = "Hammad"; 
+const theNum = 22;
+
+
+console.log(Array.isArray(newStudent)); // true keuke ke array ha 
+console.log(Array.isArray(studentInfo)); // false keuke ye object ha 
+console.log(Array.isArray(myName)); // false string  ha 
+console.log(Array.isArray(theNum)); // false number ha 
+console.log(Array.isArray(new Array(5))); // true cuz new keyword se array banaya ha 
+
+
+//! Important Points
+
+// typeof array pe kaam nahi karta sahi tarah se — ye ek bahut common mistake hai:
+
+// Array.isArray() static method hai — ye kisi array instance pe call nahi hota (arr.isArray() galat hai), balke seedha Array.isArray(arr) likhna hota hai.
+
+// Nested arrays bhi true dete hain — chahe array khaali ho ya nested ho, jab tak wo array type hai, true aayega:
+
+  //  console.log(Array.isArray([]));        // true
+  //  console.log(Array.isArray([[1,2],[3]])); // true
+
+// Ye method bahut zaroori hota hai jab aapko pata nahi hota ke incoming data (jaise API response, user input) array hai ya nahi — bina check kiye agar aap .map(), .filter() etc use karo aur wo array na nikle, to error aa jayega.
+
+
+// null pe bhi dhyan rakhna: typeof null bhi "object" deta hai (JS ka famous historical bug), isliye Array.isArray(null) → false sahi result deta hai, lekin typeof null === "object" confuse kar sakta hai agar log check kiya jaye.
+
+
+//? Practice Tasks
+
+
+//? Task One 
+
+console.log("===Task One==="); 
+
+const theArray = [1, 2, 3, 4];
+const theObj = {name: "Hammad"}; 
+const theStr = "Hammad"; 
+const theNull = null; 
+const theNumber = 12; 
+
+
+console.log(Array.isArray(theArray)); // true array ha 
+console.log(Array.isArray(theObj));  // false ye object ha 
+console.log(Array.isArray(theStr));  // false string ha 
+console.log(Array.isArray(theNull));  // false ye object ha js ka bug 
+console.log(Array.isArray(theNumber)); // false number ha 
+
+
+//? Task Two 
+
+console.log("===Task Two==="); 
+
+function discribeInput(value) {
+  if(Array.isArray(value)) {
+    console.log("This is an Array")
+    return true;
+  }
+  console.log("This is not an array");
+  return false;
+}; 
+
+discribeInput({name: "Hammad"}); // false this is an object
+discribeInput([1, 2, 3, 4]); // true it's an array  
+discribeInput([{name: "Hammad"}]); // true it's the array of object
+
+//? Task Three 
+console.log("===Task Three===");
+
+
+function processResponse(response) {
+  if(Array.isArray(response)) {
+    console.log(`${response.length} Item Has Been Found`);
+    return true
+  }
+  console.log("Error: Invalid Data Format"); 
+  return false;
+}; 
+
+
+let response1 = ["Ali", "Sara", "Bilal"];
+let response2 = { error: "No data found" };
+
+processResponse(response1); // 3 Item has been Found
+processResponse(response2); // error no data found

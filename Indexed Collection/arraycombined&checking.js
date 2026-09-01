@@ -595,3 +595,6 @@ let response2 = { error: "No data found" };
 
 processResponse(response1); // 3 Item has been Found
 processResponse(response2); // error no data found
+
+
+//! Combined Tasks 

@@ -598,3 +598,22 @@ processResponse(response2); // error no data found
 
 
 //! Combined Tasks 
+
+//?  Combined Task 1: Class Report Card System
+console.log("===Task One===");
+
+let classes = [
+  ["Ali", "Sara"],
+  ["Bilal", "Uzair", "Amir"],
+  []
+];
+
+const classesFlat = classes.flat(Infinity);
+console.log(classesFlat);
+
+const lengthCheck = classesFlat.every((student) => student.length > 2); 
+console.log(lengthCheck); 
+
+const joinClasses = classesFlat.join(" , "); 
+console.log(joinClasses);
+

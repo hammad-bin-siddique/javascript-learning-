@@ -617,3 +617,30 @@ console.log(lengthCheck);
 const joinClasses = classesFlat.join(" , "); 
 console.log(joinClasses);
 
+//? Combined Task 2: Order Validation System
+
+let theOrders = [
+  { id: 1, item: "Pizza", price: 800, inStock: true },
+  { id: 2, item: "Burger", price: 350, inStock: true },
+  { id: 3, item: "Sushi", price: 1200, inStock: false }
+];
+
+
+const task2Every = theOrders.every((order) => order.inStock === true);
+console.log("===Task Two===");
+
+console.log(task2Every); // false keuke sab order ka stack true nahi ha 
+
+
+const task2Some = theOrders.some((order) => order.price >= 1000); 
+console.log(task2Some); // true keuke 1 ha 1200 ka 
+
+
+const task2flatMap = theOrders.flatMap((order) => {
+  if(order.inStock === true) {
+    return order.item;
+  }
+  return [];
+}); 
+
+console.log(task2flatMap);

@@ -644,3 +644,29 @@ const task2flatMap = theOrders.flatMap((order) => {
 }); 
 
 console.log(task2flatMap);
+
+//? Combined Task 3: Data Type Safety Checker
+
+console.log("===Task Three==="); 
+
+
+let apiResponses = [
+  ["user1", "user2"],
+  "invalid_response",
+  ["user3"],
+  { error: true },
+  []
+];
+
+
+let allUsers = []; // yaha per valid data store ho ga 
+
+for (let response of apiResponses) {
+  if(Array.isArray(response)) {
+    allUsers = allUsers.concat(response);
+  }; 
+
+}; 
+
+console.log(allUsers.length); 
+console.log(allUsers.join(", "));

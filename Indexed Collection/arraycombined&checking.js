@@ -670,3 +670,110 @@ for (let response of apiResponses) {
 
 console.log(allUsers.length); 
 console.log(allUsers.join(", "));
+
+
+//! Mini Project: "Multi-Branch Restaurant Order Management System"
+
+
+let branchOrders = [
+  {
+    branch: "Abbottabad",
+    orders: [
+      { item: "Chicken Karahi", price: 1200, ready: true },
+      { item: "Biryani", price: 400, ready: true },
+      { item: "Kebab", price: 600, ready: false }
+    ]
+  },
+  {
+    branch: "Mansehra",
+    orders: [
+      { item: "Pulao", price: 350, ready: true },
+      { item: "Tikka", price: 500, ready: true }
+    ]
+  },
+  {
+    branch: "Haripur",
+    orders: "corrupted_data" // is branch ka data galat format mein hai!
+  }
+];
+
+
+//? Step 1 — Data Safety Check:
+console.log("===Mini Project==="); 
+
+console.log("===Step One===");
+let branchData = []; 
+
+for (let branch of branchOrders) {
+  if(Array.isArray(branch.orders)){
+    branchData = branchData.concat(branch.orders);
+  }
+  else {
+    console.log(branch.branch, "Branch Data Has been Corrupted");
+  }
+}; 
+
+console.log(branchData);
+
+//? Step 2: Ye to already ho gaya (branchData hi combined orders hai)
+
+
+//? Step 3: every() se check karo sab ready: true hain
+console.log("===Step Three===");
+const readyOrder = branchData.every((order) => order.ready === true); 
+
+console.log(readyOrder); // false keuke sab order ready nahi hain 
+
+//? Step 4: some() se check karo koi order 1000+ ka hai
+
+console.log("===Step 4===");
+
+const orderPrice = branchData.some((order) => order.price >= 1000); // true ai ga keuke chicken karahi ke price 1200 ha
+
+console.log(orderPrice);
+
+//? Step 5: flatMap() se sirf ready: true wale item names nikalo
+
+const orderReady = branchData.flatMap((order) => {
+
+  if(order.ready === true) {
+    return order.item
+  }
+  else {
+    return []; // is main ab jis ka order ready nahi ho ga wo skip ho jai ga
+  };
+});
+
+console.log("===Step 5==="); 
+
+console.log(orderReady); // kebab nikal jai ga wo ready nahi ha 
+
+const joinReadyOrder = "Ready Items: " + orderReady.join(", ");
+console.log("===Step 6==="); 
+console.log(joinReadyOrder)
+
+console.log("===Step 7===");
+
+let branchSummary = [];
+for (let branch of branchOrders) {
+ 
+  if(Array.isArray(branch.orders)) {
+     let total = branch.orders.reduce((acc, order) => {
+      return acc + order.price
+    }, 0);
+    console.log(branch.branch, total);
+    branchSummary = branchSummary.concat([[branch.branch, total]])
+  }
+  else {
+    console.log(branch.branch, "This Is Corrupted, Skip it");
+
+  }; 
+
+
+};
+
+console.log(branchSummary);
+
+
+const flatSummary = branchSummary.flat(1);
+console.log(flatSummary)

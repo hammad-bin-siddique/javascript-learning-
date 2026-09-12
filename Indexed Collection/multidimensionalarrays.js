@@ -40,4 +40,44 @@ let seats = [
 
 let grid = Array.from({length: 3}, () => Array.from({length: 5}, () => (0)));
 
-console.log(grid)
+console.log(grid);
+
+
+
+console.log("===Tasks==="); 
+
+//? Task One
+
+const classAttendance = [
+    ["Bilal", "Faizan", "Umair", "Faiz"], 
+    ["Fazi", "Farhan", "Umar", "Uzair"], 
+    ["Arham", "Usman", "Subhan", "Furqan"]
+]; 
+
+console.log("===Task One==="); 
+console.log(classAttendance[1][2]); // Umar
+console.log(classAttendance[1][0]); // Fazi
+
+console.log(classAttendance[0]); // first row
+
+//? Task Two
+console.log("===Task Two===");
+
+let seatPlan = Array.from({length: 3}, () => new Array(3).fill(0));
+
+seatPlan[0][0] = "Hammad"; 
+
+console.log(seatPlan); 
+
+
+//? Task Three
+console.log("===Task Three===");
+
+const taskMatrix = [
+    [1, 2, 3], 
+    [4, 5, 6], 
+    [7, 8, 9]
+]; 
+
+console.log(taskMatrix[1][1]); // 5 in the middle
+console.log(taskMatrix[2][2]); // 9 the last element

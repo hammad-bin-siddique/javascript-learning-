@@ -120,10 +120,206 @@ for (let i = 0; i < names.length; i++) {
 
   for (let c = 0; c < names[i].length; c++) {
     console.log(`Names: [${i}][${c}] = ${names[i][c]}`);
+  }
+}
+
+// outer loop 1 dafa aghe bahrta ha phir jab inner loop complete jo jai mean ke column 0 se so on phir tab outer loop chal kar 1 per ata ha
+
+//! Practice Tasks — Nested Loop Traversal
+
+//? Task 1: Sum of Matrix
+
+console.log("===Task One===");
+
+const matrix2 = [
+  [11, 23, 58],
+  [55, 32, 52],
+  [23, 90, 93],
+];
+
+let total = 0;
+
+for (let i = 0; i < matrix2.length; i++) {
+  for (let c = 0; c < matrix2[i].length; c++) {
+    let current = matrix2[i][c];
+    total = total + current;
+  }
+}
+
+console.log(total);
+
+//? Task 2: Print as Grid (formatted)
+console.log("===Task Two===");
+
+const attendance = [
+  ["Bilal", "Hammad", "Faizan"],
+  ["Ali", "Wasib", "Imran"],
+  ["Huzaifa", "Kamran", "Umar"],
+];
+
+for (let i = 0; i < attendance.length; i++) {
+  let rowString = `ClassRoom ${i + 1}:`;
+
+  for (let c = 0; c < attendance[i].length; c++) {
+    rowString = rowString + attendance[i][c];
+    if (c < attendance[i].length - 1) {
+      rowString = rowString + ", ";
+    }
+  }
+
+  console.log(rowString);
+}
+
+//? Task 3: Jagged Array Sum
+
+console.log("===Task 3===");
+
+let jagged = [
+  [5, 10],
+  [1, 2, 3, 4],
+  [100]
+];
+
+let jaggedTotal = 0; 
+
+for(let i = 0; i < jagged.length; i++) {
+  for (let c = 0; c < jagged[i].length; c++) {
+    let current = jagged[i][c]; 
+    jaggedTotal = jaggedTotal + current;
   };
+};
+
+console.log("Jagged Total:", jaggedTotal);
+
+
+//! Part G — Sub-topic 3: Basic Matrix Operations
+
+
+//?  Operation 1: Row-wise Sum
+
+// Har row ka apna total nikalna.
+console.log("===Basic Matrix Operations===");
+
+let matrix3 = [
+  [1, 2, 3], 
+  [4, 5, 6], 
+  [7, 8, 9]
+]; 
+
+
+for (let i = 0; i < matrix3.length; i++) {
+  let rowSum = 0; 
+  for (let c = 0; c < matrix3[i].length; c++) {
+    let current = matrix3[i][c]; 
+    rowSum = rowSum + current;
+  }; 
+  console.log(`Row: ${i} sum: ${rowSum}`); 
+};
+
+//?  Operation 2: Column-wise Sum
+
+// Uper matrix 3 ko he use karte hain 
+
+
+// is main ham loop ka order reverse kar de ga pehle row outer loop per traverse hoti thi ab outer loop per column ko traverse kare ga 
+ 
+for (let col = 0; col < matrix3[0].length; col++) {
+  let colSum = 0; // start main col sum 0 ho ga 
+
+  for (let row = 0; row < matrix3.length; row++) {
+    let current = matrix3[row][col]; 
+    colSum = colSum + current;
+  };
+
+  console.log(`Column: ${col} sum: ${colSum}`);
+};
+
+
+//! Operation 3: Transpose (Rows ↔ Columns swap)
+
+// Transpose matlab: matrix ko is tarah ghumana ke rows, columns ban jayein aur columns, rows.
+
+
+
+// new empty matrix array banaya same size ka 
+
+let transposed = Array.from({length: 3}, () => new Array(3).fill(0)); 
+
+
+for (let i = 0; i < matrix3.length; i++) {
+  for(let c = 0; c < matrix3.length; c++) {
+    transposed[c][i] = matrix3[i][c]; // yaha per trasposed ke row ko colum se badal dia or column ko row se
+  };
+};
+
+console.log(transposed);
+
+
+// ! Practice Tasks — Matrix Operations
+
+//? Task 1: Row Sums Array
+
+console.log("===Task One===");
+
+let matrix4 = [
+  [23, 42, 59],
+  [45, 65, 70], 
+  [98, 95, 46]
+];
+
+let rowSums = [];
+
+for (let i = 0; i < matrix4.length; i++) {
+  let total = 0;
+  for(let c = 0; c < matrix4[i].length; c++){
+  let current = matrix4[i][c];
+  total = total + current;
+  }; 
+
+  rowSums.push(total);
+}
+
+console.log(rowSums);
+
+
+// Task 2: Column Sums Array
+
+console.log("===Task Two===");
+
+let colSums = [];
+
+for(let col = 0; col < matrix4[0].length; col++) {
+  // is main outer array main columns ko itreate kia ha 
+
+  let total = 0;
+  for(let row = 0; row < matrix4.length; row++) {
+    let current = matrix4[row][col];
+    total = total + current;
+  }
+  colSums.push(total);
 }; 
 
-// outer loop 1 dafa aghe bahrta ha phir jab inner loop complete jo jai mean ke column 0 se so on phir tab outer loop chal kar 1 per ata ha 
+console.log(colSums);
 
 
+//? Task 3: Transpose Function
 
+
+console.log("===Task Three==="); 
+
+
+function trasposeMatrix(matrix) {
+  let size = matrix.length; 
+  let transposed = Array.from({length: size}, () => new Array(size));
+
+  //? Nested Loop 
+
+  for (let i = 0; i < size; i++) {
+    for (let c = 0; c < size; c++) {
+      transposed[c][i] = matrix[i][c];
+    }
+  }
+  return transposed;
+}; 
+
+console.log(trasposeMatrix(matrix4));

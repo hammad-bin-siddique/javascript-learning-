@@ -323,3 +323,57 @@ function trasposeMatrix(matrix) {
 }; 
 
 console.log(trasposeMatrix(matrix4));
+
+
+//! Combined Practice Tasks Part G
+
+
+//? Task 1: Diagonal Sum
+
+
+console.log("===Task One===");
+
+
+const diagonalMatrix = [
+  [1, 2, 3], 
+  [4, 5, 6], 
+  [7, 8, 9]
+];
+
+console.log("===Task One===");
+
+let diagonalSum = 0; 
+
+for (let i = 0; i < diagonalMatrix.length; i++) {
+  let current = diagonalMatrix[i][i]; 
+  diagonalSum = diagonalSum + current;
+
+}; 
+
+console.log(diagonalSum);
+
+
+//? Task 2: Find Max in Matrix
+
+console.log("===Task Two==="); 
+
+
+const maxMatrix = [
+  [93, 59, 30],
+  [90, 40, 20], 
+  [98, 99, 10]
+]; 
+
+
+let maxSoFor = maxMatrix[0][0]; // start with the first element 
+
+for (let row = 0; row < maxMatrix.length; row++) {
+  for (let col = 0; col < maxMatrix[row].length; col++) {
+    let current = maxMatrix[row][col];
+    if(current > maxSoFor) {
+      maxSoFor = current; 
+    }
+  }
+}
+
+console.log(maxSoFor); 

@@ -308,7 +308,7 @@ function trasposeMatrix(matrix) {
 console.log(trasposeMatrix(matrix4));
 
 //! Combined Practice Tasks Part G
-
+console.log("===Combined Practice Tasks===");
 //? Task 1: Diagonal Sum
 
 console.log("===Task One===");
@@ -318,8 +318,6 @@ const diagonalMatrix = [
   [4, 5, 6],
   [7, 8, 9],
 ];
-
-console.log("===Task One===");
 
 let diagonalSum = 0;
 
@@ -417,8 +415,50 @@ for (let i = 0; i < studentTotal.length; i++) {
   studentPercentage.push(percentage); // step two complete
 }
 
+
+//? Step Three Subject Average 
+
+
+let subjectAverage = []; 
+
+
+for (let col = 0; col < marks[0].length; col++) {
+  let total = 0; 
+
+  for (let row = 0; row < marks.length; row++) {
+    let current = marks[row][col]; 
+    total = total + current;
+  }; 
+
+  let average = total / marks.length; 
+  subjectAverage.push(average);
+};
+
+//? Step 4 Highest Score Index
+
+let maxTotal = studentTotal[0]; 
+let maxIndex = 0;
+
+for (let i = 0; i < studentTotal.length; i++) {
+  if(studentTotal[i] > maxTotal) {
+    maxTotal = studentTotal[i]; 
+    maxIndex = i;
+  };
+};
+
+
+
 console.log("===Student Total Step One===");
 console.log(studentTotal);
 
 console.log("===Step Two Percentage of Each Student===");
 console.log(studentPercentage);
+
+
+console.log("===Step Three Subject Average==="); 
+console.log("Subject Average", subjectAverage);
+
+
+console.log("===Step 4 Highest Mark Index Find==="); 
+
+console.log(maxIndex);

@@ -88,7 +88,7 @@ console.log(`The Student ${name} Got ${marks} Marks & is Passed? ${isPassed}`);
 
 
 //? Real Code Example
-
+console.log("===Default Values In Destructuring===");
 
 let order1 = ["naan", "qeema"]; 
 let [roti1, salan1, drink1 = "Water"] = order1; // acha yaha uper order 1 main drink koi bhi mention nahi the to ham ne default use kia pani ko drink ke tor per take undefinef naw ai 
@@ -160,3 +160,169 @@ let [userName, userAge, userCity = "Abbottabad"] = getUserInfo();
 console.log(userAge); // 23
 console.log(userName); // Ali
 console.log(userCity); // Abbottabad
+
+
+//! Part H, Sub-topic 3: Skipping Elements
+console.log("===Array Skipping Elements====");
+//? Syntax Breakdown
+
+// let [first, , third] = [10, 20, 30];
+
+
+//! Real Code Example
+
+
+let colors = ["Red", "Blue", "Green", "Orange"]; // let's say i want to skip Blue and Green 
+
+let [firstColor, , , lastColor] = colors; // ab main ne beach wale do skip kar dia hain 
+
+console.log(firstColor); // red 
+console.log(lastColor); // Orange
+
+
+//! Practice Tasks  Skipping Elements
+
+console.log("===Practice Tasks Skipping Elements==="); 
+
+
+//? Task One 
+
+console.log("===Task One==="); 
+
+const days = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"];
+
+
+let [, , , , holyDay1, , holyDay2] = days;
+
+console.log(holyDay1); // friday 
+console.log(holyDay2); // Sunday 
+
+console.log(`I'm on leave on every ${holyDay1} & ${holyDay2} in Every Week`);
+
+
+//? Task Two 
+
+console.log("===Task Two==="); 
+
+function getUserData() {
+    return [101, "Hammad", 23, "Abbottabad", "0300-12345-12"];
+};
+
+let [, theName, , , number] = getUserData(); 
+
+console.log(theName); // Hammad
+console.log(number); // 0300 ... 
+
+console.log(`The Number of ${theName} is: ${number}`);
+
+
+//? Task 3 
+console.log("===Task Three==="); 
+
+let scores = [90, 85]; 
+
+let [maths, , bonus = 10] = scores; 
+
+console.log(maths); // 90
+console.log(bonus); // 10
+
+
+//! Part H, Sub-topic 4: Swapping Variables
+console.log("===Variable Swapping===");
+
+
+//? abhi ham bina destructure ke variable swap kare ge 
+
+
+let student1 = "Hammad"; 
+let student2 = "Faizan"; 
+console.log("===Before Swaping"); 
+console.log(student1); // Hammad
+console.log(student2); // faizan 
+
+let temp = student1; 
+student1 = student2; 
+student2 = temp;
+
+console.log("===After Swapping Values==="); 
+
+console.log(student1); // Faizan 
+console.log(student2); // Hammad
+
+// ye abhi in variables ke values ko swap karne ke lia hame alag se temporary variable banana para ha 
+
+
+
+console.log("Swapping The Values Using Destructuring==="); 
+
+let name1 = "Madhi"; 
+let name2 = "Hadi"; 
+
+console.log("===Before Swapping==="); 
+
+console.log(name1); // Madhi
+console.log(name2); // Hadi 
+
+
+//? Now Swap the variable using Destructuring 
+
+[name1, name2] = [name2, name1]; 
+
+console.log("===After Swapping the Variable==="); 
+console.log(name1); // Hadi
+console.log(name2); // Madhi
+
+
+//! Practice Tasks — Swapping
+
+console.log("===Practice Task Swapping==="); 
+
+//? Task One 
+
+console.log("===Task One==="); 
+
+let glass1 = "Milk"; 
+let glass2 = "Water"; 
+
+//? Now Swap these two variables values 
+
+[glass1, glass2] = [glass2, glass1]; 
+
+console.log(glass1); // Water 
+console.log(glass2); // Milk
+
+
+//? Task Two 
+
+console.log("===Task Two==="); 
+
+let seat1 = "Bilal"; 
+let seat2 = "Faizan"; 
+let seat3 = "Umar"; 
+
+// Now swapping the three variable values seat1 value should be seat3 and seat 2 value should be seat 1 and seat 3 value should be seat 2 
+
+
+[seat1, seat2, seat3] = [seat3, seat1, seat2]; 
+
+console.log(seat1); // Umar
+console.log(seat2); // Bilal
+console.log(seat3); // Faizan
+
+
+//? Task Three 
+
+console.log("===Task Three==="); 
+
+
+let range = [50, 20]; // yahan wrong calculation ha 50 bara ha 20 chota 
+
+
+if(range[0] > range[1]) {
+    [range[0], range[1]] = [range[1], range[0]];
+}; 
+
+console.log(range[0]); // 20 
+console.log(range[1]); // 50
+
+console.log(`Min Num: ${range[0]} & The Max Num: ${range[1]}`);

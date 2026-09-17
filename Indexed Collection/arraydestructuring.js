@@ -326,3 +326,31 @@ console.log(range[0]); // 20
 console.log(range[1]); // 50
 
 console.log(`Min Num: ${range[0]} & The Max Num: ${range[1]}`);
+
+//! Mini Project
+
+console.log("===Mini Project==="); 
+
+function getStudentProfile() {
+    return [12, "Hammad", 90, 84, 98, undefined];
+}; 
+
+
+let [rollNum, studentName, , subjectMarks2, subjectMarks3, studentCity = "Abbottabad"] = getStudentProfile();
+
+let oldRoll = rollNum;
+let newRoll = "22:02"; 
+
+[oldRoll, newRoll] = [newRoll, oldRoll]; 
+
+console.log(studentName); // Hammad
+
+console.log(rollNum); // 12
+console.log(studentCity); // Abbottabad
+console.log(subjectMarks2); // 84
+console.log(subjectMarks3); // 98
+
+console.log(oldRoll); // 22: 02
+console.log(newRoll); // 12
+
+console.log(`Roll No: ${rollNum}, Name: ${studentName}, Marks: ${subjectMarks2} & ${subjectMarks3}, City: ${studentCity}, New Roll: ${oldRoll}`); 

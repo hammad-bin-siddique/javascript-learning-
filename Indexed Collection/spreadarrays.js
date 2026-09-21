@@ -12,7 +12,7 @@ console.log("===Spread Arrays===");
 //? Copying
 
 let hammadMarks = [89, 90, 83]; 
-let subhanMarks = [...hammadMarks]; // New nIdependant Array
+let subhanMarks = [...hammadMarks]; // New Independant Array
 
 subhanMarks[0] = 100; // abhi subhan wale first index ke marks change ho ge khali 
 
@@ -48,3 +48,50 @@ studentCopy[0].marks = 99; // ye shallow copy karta ha mean ke object khud copy 
 
 console.log(studentCopy); // Hammad, 99
 console.log(students); // will be same 
+
+
+//! Practice Task Spread Arrays 
+
+//? Task One 
+
+console.log("===Task One==="); 
+
+const bilalScores = [70, 85, 90]; 
+const faizanScores = [...bilalScores]; 
+
+faizanScores[0] = 100;
+
+console.log(bilalScores); // 70 85 90
+console.log(faizanScores); // 100, 84, 90
+
+//? Task Two 
+
+console.log("===Task Two==="); 
+
+const weekdayTasks = ["Code", "Study"]; 
+const weekendTasks = ["Rest", "Gym"];
+
+const allTasks = [...weekdayTasks, "Meeting", ...weekendTasks];
+
+console.log(allTasks);
+
+
+//? Task Three 
+
+console.log("===Task Three===");
+
+
+const friends = [
+    {name: "Hammad", city: "Abbottabad"}, 
+    {name: "Ali", city: "Manshera"}
+]; 
+
+const copyFriends = [...friends];
+
+copyFriends[0].city = "Balakot"; 
+
+console.log(friends); 
+console.log(copyFriends); 
+console.log(copyFriends === friends); // false keuke spread array new array return karta ha 
+
+console.log(copyFriends[0] === friends[0]); // true cuz dono objects ka reference same ha 

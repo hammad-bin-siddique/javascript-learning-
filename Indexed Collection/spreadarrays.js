@@ -95,3 +95,29 @@ console.log(copyFriends);
 console.log(copyFriends === friends); // false keuke spread array new array return karta ha 
 
 console.log(copyFriends[0] === friends[0]); // true cuz dono objects ka reference same ha 
+
+
+//! Part I Topic 2 Rest Parameters in Functions with Arrays.
+
+// Rest parameter function definition mein ... use karke variable number of arguments ko ek array mein collect karta hai. Hamesha function parameters ka aakhri parameter hota hai.
+
+//? Syntax
+
+// function example(a, b, ...rest) {
+// a aur b specific values lenge
+// rest baaki sab kuch array mein lega
+// }
+
+//? Code Example
+
+function profileInfo(name, email, ... remainingInfo) {
+
+    console.log("Name", name); 
+    console.log("Email", email); 
+    console.log("Remaining Info", remainingInfo);
+}; 
+
+profileInfo("Hammad", "hammad@gmail.com", "Pakistan", "KPK", "Abbottabad"); 
+
+
+//? Rest Paremeter Hamesha function ka akhiri parameter hona chaia 

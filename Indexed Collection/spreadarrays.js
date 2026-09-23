@@ -109,6 +109,7 @@ console.log(copyFriends[0] === friends[0]); // true cuz dono objects ka referenc
 // }
 
 //? Code Example
+console.log("===Spread Arrays With Rest Parameters==="); 
 
 function profileInfo(name, email, ... remainingInfo) {
 
@@ -121,3 +122,91 @@ profileInfo("Hammad", "hammad@gmail.com", "Pakistan", "KPK", "Abbottabad");
 
 
 //? Rest Paremeter Hamesha function ka akhiri parameter hona chaia 
+
+
+
+//! Combined Practice Tasks 
+
+//? Task One (Rest Sum Function); 
+
+console.log("===Task One===");
+
+
+function totalMarks(...marks) {
+    const total = marks.reduce((acc, crr) => {
+        return acc + crr;
+        
+    }, 0);
+    return total;
+};
+
+console.log(totalMarks(392, 842, 495));
+console.log(totalMarks(80)); // 80
+
+
+//? Task Two Rest + Normal Parameter Mix 
+
+console.log("==Task Two==="); 
+
+function classAverage(className, ...scores) {
+    console.log("Class Name:", className); 
+    const total = scores.reduce((acc, crr) => {
+        return acc + crr;
+        
+    }, 0);
+    const average = total / scores.length; 
+    console.log(average);
+    return total;
+};
+
+console.log(classAverage("Section B", 59,90, 95, 98, 84));
+
+
+//? Task Three Spread + Rest Combined
+
+console.log("===Task Three==="); 
+
+
+let mathScores = [80, 90]; 
+let scienceScores = [70, 85];
+
+let mergedArray = [...mathScores, ...scienceScores];
+
+function theTotalMarks(...allMarks) {
+    const total = allMarks.reduce((acc, crr) => {
+        return acc + crr
+    }, 0);
+
+    return total;
+}; 
+
+console.log(theTotalMarks(...mergedArray)); 
+
+
+//! Mini Project 
+
+console.log("===Mini Project==="); 
+
+
+//? Part 1: addScores Function
+
+function addScores(studentName, ...scores) {
+    if(scores.length === 0) {
+        console.log("No Score Available"); 
+        return;
+    };
+    console.log("Student:", studentName); 
+    console.log("Scores:", scores); 
+    console.log("Highest Score:", Math.max(...scores));
+}; 
+
+//? Part 2: Merge karna
+
+let bilalOld = [60, 70]; 
+let bilalNew = [80, 90];
+
+let combinedBilal = [...bilalOld, ...bilalNew]; 
+
+addScores("Bilal", ...combinedBilal);
+
+addScores("Hammad");

@@ -121,3 +121,27 @@ console.log("===Task Three===");
 let x = Array(3); 
 console.log(x.length); // 3
 console.log(0 in x); // false keuke exist he nahi karta ha wo index holes hain 
+
+
+
+//! Mini-Project Sparse Array Cleaner
+
+console.log("===Mini Project==="); 
+
+
+function cleanSparseArray(arr) {
+    let cleaned = []
+    for (let i = 0; i < arr.length; i++) {
+        if(i in arr) {
+
+            cleaned.push(arr[i]);
+        };
+    };
+
+    return cleaned;
+}; 
+
+let test = [1, 2, 3, undefined, , , 6, 7]; 
+console.log(test); // 1, 2, 3, undefined, <2 empty item>, 6, 7
+let clean = cleanSparseArray(test);
+console.log(clean); // 1, 2, 3, undefined, 6, 7

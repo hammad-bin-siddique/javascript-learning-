@@ -41,3 +41,83 @@ newArr[10] = 11; // ab yaha main ne 11 index per element add kia ha
 
 console.log(newArr.length); // 11 keuke total 11 index hain 0 se 10 tak 
 console.log(newArr); // 1, 2, 3, <7 empty item> 11;
+
+
+//! Part J Topic B Sparse Arrays
+
+// Sparse array wo array hai jismein kuch indices "missing" hon — matlab unpe koi value assign nahi hui, sirf gap hai memory mein.
+
+console.log("===Sparse Array===");
+
+let normalArr = [1, undefined, 3]; // yaha index 1 ko khali nahi chora hua ha waha per jan bohj kar undefined value di ha 
+
+let sparseArr = [1, , 3]; // Sparse Array yaha index one per koi slot he nahi ha mean ke wo khali ha 
+
+console.log(normalArr.length); // 3
+console.log(sparseArr.length); // 3
+
+console.log(1 in normalArr); // true keuke 1 index exist karta  khali nahi ha is lia true ai ga 
+console.log(1 in sparseArr); // false keuke 1 index exist he nahi karta ha 
+console.log(normalArr); 
+console.log(sparseArr); // 1 <1 empty item> 3 is tara ai ga 
+
+
+let loopArr = [1, 2, 3]; 
+loopArr[10] = 99;
+
+loopArr.forEach((val, index) => {
+    console.log(index, val);
+});
+
+console.log(loopArr.length); // 11
+
+console.log(loopArr.includes(undefined)); // true keuke includes holes ya nan ko undefined treat karta ha 
+
+//? Lekin agar ham for loop chalai ge to empty slots per bhi cale ge or undefined mile ga jabke for each skip kar deta ha 
+
+
+for (let i = 0; i < loopArr.length; i++) {
+    console.log(i, loopArr[i]);
+};
+
+
+//! Practice Tasks (Sparse Array + Array-vs-Object)
+
+
+//? Task One 
+
+console.log("===Task One==="); 
+
+let task1Arr = [1, 2, 3, 4, , 6]; 
+console.log(task1Arr.length); // 6 
+console.log(task1Arr); // 1, 2, 3, 4, <1 empty item>, 6
+task1Arr.forEach(x => console.log(x)); // ye sirf 5 bar chale ga keuke holes skip ho jate hain 
+
+
+//? Task Two 
+console.log("===Task Two===")
+
+let scores = [10, 20, 30]; 
+scores[7] = 100; 
+
+for(let i = 0; i < scores.length; i++) {
+    console.log(i, scores[i]);
+}; 
+
+// is main index 3 se 7 tak undefined ai ga 
+
+scores.forEach(element => {
+    console.log(element);
+}); 
+
+// ye loop sirf 4 bal chale ga or 10, 20, 30, 100 print kare ga or empty slots skip ho jai ga 
+
+console.log(scores); // 10, 20, 30, <4 empty items>, 100
+
+//? Task Three 
+
+console.log("===Task Three==="); 
+
+let x = Array(3); 
+console.log(x.length); // 3
+console.log(0 in x); // false keuke exist he nahi karta ha wo index holes hain 

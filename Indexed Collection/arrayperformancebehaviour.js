@@ -267,4 +267,30 @@ function tryMap() {
 }; 
 
 console.log(tryMap(1, 2, 3, 4)); // ab ye real array ha or output ho gi 4, 8 ,12, 16
+ 
 
+
+//! Mini Project 
+
+console.log("===Mini Project==="); 
+
+function safeArrayOperation() {
+    let cleanArr = [];
+    let realArr = [...arguments]; 
+    for (let i = 0; i < realArr.length; i++) {
+        if(i in realArr && realArr[i] !== undefined) {
+         cleanArr.push(realArr[i]);
+        };
+    }; 
+
+    return cleanArr.map((x) => x * 2);
+}; 
+
+
+console.log(safeArrayOperation(1, 2, 3, 4, 5,undefined, 5)); // undefined will be removed 
+
+// example of empty holes 
+
+let newArr1 = [1, 39, 59, 23, undefined, 84, , , , 893, 32]; 
+
+console.log(safeArrayOperation(...newArr1));  // Empty holes and undefined will be removed 

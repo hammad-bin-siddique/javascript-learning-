@@ -1,0 +1,90 @@
+//! Topic 1: Loose Equality ( == ).
+
+// Loose Equality Operator (==), jise Abstract Equality Comparison bhi kehte hain, do operands ko compare karta hai value ke liye. Agar dono operands ka data type alag ho, to JavaScript engine comparison se pehle type coercion (implicit conversion) perform karta hai — matlab dono values ko ek common type mein convert karta hai — aur uske baad unki values compare karta hai.
+
+
+console.log(5 == "5"); // true
+
+// Yahan 5 number hai aur "5" string hai. JS ne "5" ko andar hi andar number 5 mein convert kar diya, phir compare kiya. Isliye true aaya.
+
+//! == Operator kaam kaise karta hai
+
+// == (Loose Equality / Abstract Equality) ka rule simple hai:
+
+// Agar dono values ka type alag ho, to pehle unko convert karo (coerce karo) same type mein, phir compare karo.
+
+//? Surprising Cases 
+console.log("===Loose Equality===");
+
+console.log(0 == false); // true keuke false bhi 0 he count hota ha 
+console.log("" == 0); // true empty string bhi 0 count hote hain 
+console.log(null == undefined); // true special case null or undefined baki kisi ke sath bhi ai to false he ho ge but ye special case ha 
+
+console.log(NaN == NaN); // Not a number Mean ke invalid values hote to same nahi ho sakti hain is lia false 
+
+
+console.log("0" == false); // true cuz false ka type coercion hota ha false 0 ban jata ha "0" bhu number 0 ban jata or is lia true ata ha output 
+
+console.log(undefined == 0); // false sirf null or undefined main true ai ga baki null ya undefined kisi ke sath bhi ho ge to false ho ga 
+console.log("Bilal" == "Bilal"); // true
+console.log(null == false); // false
+
+
+//! Practice Tasks 
+
+//? Task 1 Predict & Verify
+
+console.log("===Task One==="); 
+
+console.log("5" == 5); // true cuz coercion ho gi "5" number se badle ga or 5 5 same ha is lia true
+console.log(false == undefined); // false keuke undefined kisi ke bhi sath ai ga to false he return kare ga siwai null ke 
+console.log(null == 0); // false 
+console.log(" " == 0); // space bhi empty string he count hoti or empty string coercion main number ban jati ha 0 or 0 0 same is lia true 
+
+console.log([] == false); // true empty bracket bhi coercion ho kar 0 ban jata ha or false bhi is lia true ai ga 
+
+console.log("Faizan" == "faizan"); // false type same ha but value same nahi ha is lia false ye == type check karta ha agar same ho to direct compare karta ha warna coercion karta ha 
+
+
+//? Task 2 
+
+console.log("===Task Two==="); 
+
+console.log(15 == "15"); // true cuz loose equality sirf value check karti ha naw ke type 
+
+console.log(true == 1); // true cuz true coercion ho kar 1 treat kia jata ha is lia true ai ga 
+
+console.log(null == 0); // false null undefined ke ilawa kisi ke sath bhi ai to false he return karta ha 
+
+console.log(NaN == "1"); // false ai ga keuke Nan invalid number ha agar NaN NaN ke sath bhi compare karo bhi phir bhi false he ai ga 
+
+
+
+//? Task 3 
+
+console.log("===Task Three==="); 
+
+let userId = "0";
+let isLoggedOut = false; 
+
+if(userId == isLoggedOut) {
+    console.log("Id Matched: User is Logged Out");
+}
+else {
+    console.log("Id Didn't Matched");
+}; 
+
+
+// yaha Id Matched ho jai gi keuke == type agar same naw to coercion karti ha or false coercion ho kar 0 ban jata ha or string "0" bhi coercion ho kar 0 ban jata ha is lia dono compare hote hain or true ata ha is lia if wali condition chal jati ha jo ke bug ha 
+
+
+//? Solution for this bug use Strict Equality === 
+
+if(userId === isLoggedOut) {
+    console.log("Id Matched: User is Logged Out");
+} 
+else {
+    console.log("Id Didn't Matched");
+}; 
+
+// yaha per else wali condition chale gi keuke === strict check karta ha or false or "0" same nahi ha is lia wo false return kare ga or yaha per id didn't matched ai ga or bug se bach jai ga warna real project main ye bug or user logged out ho ga he or system use logged out treat kare ga 

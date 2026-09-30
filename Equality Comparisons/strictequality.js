@@ -197,9 +197,7 @@ console.log("===Task Three===");
 // const t3ageInput = "18abc";
 // const t3ageInput = "18";
 //  const t3ageInput = "abc";
- const t3ageInput = "15";
-
-
+const t3ageInput = "15";
 
 let cleanAge = Number(t3ageInput);
 
@@ -211,7 +209,112 @@ if (Number.isNaN(cleanAge)) {
   console.log("Not 18");
 }
 
-
 console.log(Number(""));
 console.log(Number(" "));
 console.log(Number.isNaN(Number("")));
+
+//! ===== Mini Project: Login & Access Validator =====
+
+console.log("===Mini Project===");
+
+const userName = "hammad";
+const password = "js123";
+const ageInput = "20";
+const roleInput = "1";
+
+// STEP 1: Age validation
+const ageNumber = Number(ageInput);
+if (ageInput.trim() === "") {
+  console.log("Age Field Must Be Written");
+} else if (Number.isNaN(ageNumber)) {
+  console.log("Invalid Age");
+} else if (ageNumber < 18) {
+  console.log("Access Denied: You are a Minor");
+}
+
+// Yaha tak Ponch gia mean ke age thek ha ab next step
+else {
+  //  STEP 2: Username
+  if (userName !== "hammad") {
+    console.log("User Name is Invalid");
+  }
+
+  //  STEP 3: Password
+  else if (password !== "js123") {
+    console.log("Password is Wrong");
+  }
+
+  //  STEP 4: Role (switch)
+  else {
+    switch (Number(roleInput)) {
+      case 1:
+        console.log(`admin: Welcome, ${userName}! Role: admin`);
+        break;
+
+      case 2:
+        console.log(`editor: Welcome, ${userName}! Role: editor`);
+        break;
+
+      default:
+        console.log("Unknown role");
+        break;
+    }
+  }
+}
+
+//? Now make the function so we can check every possibility one by one without changing the variable values
+
+function validateLogin(userName, password, ageInput, roleInput) {
+  //Step 1: Age Validation
+
+  const ageNumber = Number(ageInput);
+
+  if (ageInput.trim() === "") {
+    console.log("Age Field Must Be Written");
+  } else if (Number.isNaN(ageNumber)) {
+    console.log("Invalid Age");
+  } else if (ageNumber < 18) {
+    console.log("Access Denied: You are a Minor");
+  } else {
+    // Step Two Username
+    if (userName !== "hammad") {
+      console.log("UserName is Invalid");
+    }
+    // Step 3: Password
+    else if (password !== "js123") {
+      console.log("Password is Wrong");
+    } else {
+      switch (Number(roleInput)) {
+        case 1:
+          console.log(`Welcome, ${userName}! Role: admin`);
+          break;
+        case 2:
+          console.log(`Welcome, ${userName}! Role: editor`);
+          break;
+        default:
+          console.log("Unknown role");
+          break;
+      }
+    }
+  }
+}
+
+
+
+// ===== 9 Test Cases 
+console.log("Row 1:"); validateLogin("hammad", "js123", "20", "1");
+console.log("Row 2:"); validateLogin("hammad", "js123", "", "1");
+console.log("Row 3:"); validateLogin("hammad", "js123", "   ", "1");
+console.log("Row 4:"); validateLogin("hammad", "js123", "abc", "1");
+console.log("Row 5:"); validateLogin("hammad", "js123", "16", "1");
+console.log("Row 6:"); validateLogin("Hammad", "js123", "20", "1");
+console.log("Row 7:"); validateLogin("hammad", "wrong", "20", "1");
+console.log("Row 8:"); validateLogin("hammad", "js123", "20", "2");
+console.log("Row 9:"); validateLogin("hammad", "js123", "20", "9");
+validateLogin("hammad", "js123", "20", "1.0");
+validateLogin("hammad", "js123", "20", "");
+
+console.log("" == 0);
+console.log("0" == 0);
+console.log("   " == 0);
+console.log("   ".trim() === "");

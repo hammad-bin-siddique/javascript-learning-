@@ -189,3 +189,29 @@ switch (Number(t2_roleFromForm)) {
   default:
     console.log("Access denied");
 }
+
+//? Task 3 Safe Age Checker
+
+console.log("===Task Three===");
+
+// const t3ageInput = "18abc";
+// const t3ageInput = "18";
+//  const t3ageInput = "abc";
+ const t3ageInput = "15";
+
+
+
+let cleanAge = Number(t3ageInput);
+
+if (Number.isNaN(cleanAge)) {
+  console.log("Invalid age");
+} else if (cleanAge === 18) {
+  console.log("Exactly 18");
+} else {
+  console.log("Not 18");
+}
+
+
+console.log(Number(""));
+console.log(Number(" "));
+console.log(Number.isNaN(Number("")));

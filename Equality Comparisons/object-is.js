@@ -184,3 +184,130 @@ console.log(deepEqual({ a: 1 }, { a: 2 }));     // false
 // Roz-marra code, conditions, if-else: === use karo. Ye sab ko samajh aata hai.
 // NaN dhoondna ho: Number.isNaN() behtar hai.
 // -0 ko pehchanna ho, ya "bilkul exact same value" chahiye (frameworks, utility libraries, deep-equal): Object.is().
+
+
+//! Comprehension check (predict-before-run)
+console.log("===Comprehension Check===");
+console.log(Object.is(10, 10));          // true type same 
+console.log(Object.is("10", 10));        // false type not same 
+console.log(Object.is(NaN, 0 / 0));      // true 0 / 0 = NaN or object is Nan vs Nan Mai true deta ha 
+console.log(NaN === NaN);                // false === NaN vs Nan Main false return karta ha keuke ye 2 different invalid number hain is lia
+console.log(Object.is(0, -0));           // false not same   Object.is sign bit dekhta hai, 0 aur -0 ka sign alag hai
+console.log(0 === -0);                   // true sign === ignore karta ha 
+console.log(Object.is(null, undefined)); // false same as ===
+console.log(Object.is([], []));          // false reference check hota ha 
+const p = { naam: "Faizan" };
+const q = p;
+console.log(Object.is(p, q));            // true reference same ha 
+console.log(Object.is(Math.round(-0.4), 0)); // false Math.round(-0.4) ka result -0 hota hai (0 nahi), isi liye Object.is(-0, 0) false aayaobject is
+console.log([NaN].indexOf(NaN));         // -1 Wajah: indexOf andar === use karta hai, aur NaN === NaN false hai, to nahi milta
+console.log([NaN].includes(NaN));        // true Wajah: includes SameValueZero use karta hai, jisme NaN, NaN ke barabar hota hai
+
+
+// Q14: React useState mein Object.is kyun use karta hai, aur agar tum array mein push karke setState karo to re-render kyun nahi hoga?
+
+
+// Agar React === use karta, to setState(NaN) har bar call hone par React ko lagta ke state badal gayi, aur unnecessary re-render hota.
+// "Infinite" tab hota jab tum setState(NaN) ko kisi useEffect mein bina condition ke call karte.\
+
+
+
+//! Practices Tasks 
+
+//? Task One 
+
+console.log("===Task One===");
+
+function isSameValue(a, b) {
+    if(a === b) {
+        // yani a b ke brabar ha but ab ye check karna ha ke kia in ke sath koi sign to nahi ha 
+
+        return a !== 0 || 1 / a === 1 / b; // yani agar a  0 nahi ha phir to thek ha or agar 0 ha phir ye check karna ha ke kia to 1 ke sath divide karo us parameter ko   kia ata ha mean ke sign change hota ha ke nahi 
+    }
+    else {
+        return a !== a && b !== b;
+    }
+};
+
+console.log(isSameValue(NaN, NaN));   // true hona chahiye
+console.log(isSameValue(0, -0));      // false
+console.log(isSameValue(-0, -0));     // true
+console.log(isSameValue(5, "5"));     // false
+console.log(isSameValue(null, null)); // true
+console.log(isSameValue({}, {}));     // false
+
+
+
+//? Task Two 
+console.log("===Task Two==="); 
+
+const data = [10, NaN, 30, -0, 50, NaN];
+
+// (a) Object.is aur findIndex se pehle NaN ki index
+
+console.log(data.findIndex((i) => Object.is(i, NaN)));
+
+// (b) -0 ki index (sirf -0, 0 nahi)
+
+console.log(data.findIndex((i) => Object.is(i, -0)));
+
+
+// (c) indexOf(NaN) aur includes(NaN) ka result, aur ek line mein wajah
+
+console.log(data.indexOf(NaN)); // ye === ke tara check karta ha is lia NaN ko check nahi karta ha is lia -1 answer deta ha 
+
+console.log(data.includes(NaN)); // or include SameValueZero algorithm use karta hai, jisme NaN apne aap ke barabar hota hai.
+
+
+//? Task Three
+
+console.log("===Task Three==="); 
+
+const withNaN = [88, 92, NaN, 75];
+const clean   = [88, 92, 75];
+
+if (withNaN.indexOf(NaN) !== -1) {
+  console.log("NaN mil gaya, data theek karo");
+} else {
+  console.log("Data bilkul theek hai");
+} // yaha per indexof Nan ko catch nahi kar sakta ha is lia -1 return karta ha or or condition lagai ha ke agar nan ka index -1 naw to phir Nan mil gia ha wala chalao but yaha Nan ka index -1 ke brabar ho ga keuke index of nan ka index nahi find kar sakta is lia yaha per phir second condition chale gi 
+
+//? Fix This Method One 
+
+if(withNaN.findIndex((i) => Object.is(i, NaN)) !== -1) {
+    console.log("Nan Has Found, Fix The Data");
+}
+else {
+    console.log("Data is Perfect");
+} // is bar first condition chale gi keuke findIndex or Ojbect.is ke help se ham Nan ka bhi index find kar sakte hain is lia yaha per first conditoin chale gi 
+
+
+//? Fix This Second Method
+
+if(withNaN.includes(NaN)) {
+    console.log("Nan Has Found, Fix The Data");
+}
+else {
+    console.log("Data is Perfect");
+}
+
+//! Without Nan
+console.log("===Without Nan===");
+//? Fix This Method One 
+
+if(clean.findIndex((i) => Object.is(i, NaN)) !== -1) {
+    console.log("Nan Has Found, Fix The Data");
+}
+else {
+    console.log("Data is Perfect");
+} // is bar first condition chale gi keuke findIndex or Ojbect.is ke help se ham Nan ka bhi index find kar sakte hain is lia yaha per first conditoin chale gi 
+
+
+//? Fix This Second Method
+
+if(clean.includes(NaN)) {
+    console.log("Nan Has Found, Fix The Data");
+}
+else {
+    console.log("Data is Perfect");
+}

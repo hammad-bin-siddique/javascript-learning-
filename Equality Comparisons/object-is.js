@@ -311,3 +311,107 @@ if(clean.includes(NaN)) {
 else {
     console.log("Data is Perfect");
 }
+
+
+
+//! Mini Project: React-style Change Detector
+console.log("===Mini Project===");
+
+function hasChanged(oldValue, newValue) {
+    if(Object.is(oldValue, newValue)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+console.log(hasChanged(5, 5)); // false keuke values nahi badli hain 
+console.log(hasChanged(5, 6)); // true keuke values badli hain 
+
+
+function makeState(initial) {
+    let current = initial; 
+
+    return {
+        get() {
+            return current;
+        },
+
+        set(newValue) {
+            if(hasChanged(current, newValue)) {
+                current = newValue;
+                console.log("RE-RENDER");
+            }
+            else {
+                console.log("No Change");
+            }
+        }
+    }
+};
+
+
+const count = makeState(0); // abhi make state ke dabbe main current main 0 gia 
+count.set(0);  // or ham set se new value add ki or phir ye compare ho gi current ke sath jo ke 0 ha to answer ai ga no change 
+count.set(-0);  // phir ye set se add ho gi new value or compare ho gi current ke sath or current abhi 0 ha or or ye same nahi ha keuke Object.is value ke sath sath sign bhi check karta ha or ye he main key difference ha === is se is lia Re Render ai ga 
+count.set(NaN);  // phir us ke set se new value gai or compare hui current se jo ke -0 ha or ye dono same nahi ha is lia ai ga Rerender
+count.set(NaN);  // phir set se Nan gia or current se compare hua jo ke NaN ha to ye dono same or ye he difference ha Object.is ka === ka is lia output ai ga No Change
+count.set(5);  // phir ye 5 add ho ga new value main or phir compare ho ga current se jo ke Nan ha or dono same nahi ha is lia output ai ga Re Render
+count.set("5");  // phir "5" add ho ga new value main or compare ho ga current main jo ke same nahi ha is lia output ai ga re render
+
+const list = makeState([1, 2]);  // yaha per ham ne makeState dabe main 1 array ka address store kia current main 
+const same = list.get();  // phir 1 new variable main list ka reference store kia 
+
+same.push(3); // phir same ke array main jo list ka he reference ha us main 3 push kia 
+list.set(same); // or yaha per list main set kia same ko or compare kia dono reference to dono same ha islia no change 
+list.set([...same, 4]) // yaha per ham ne reference he badal dia mean ke ...same ko spread array se new reference dia or us main value add ki is lia yaha per ai ga re render 
+
+
+
+/*
+
+ MINI PROJECT TRACE: React-style Change Detector (Object.is)
+ Rule: set(newValue) -> Object.is(current, newValue)
+       SAME  -> "No Change"   (dabba waisa hi rehta hai)
+       ALAG  -> "RE-RENDER"   (current = newValue)
+ Purani value = pichli call ke baad dabbe mein jo rakha tha
+
+
+ COUNT WALA DABBA (shuru mein current = 0)
+
+ #  | Call          | Purani | Nayi  | Object.is | Output     | Dabba ab
+
+ 1  | set(0)        | 0      | 0     | true      | No Change  | 0
+ 2  | set(-0)       | 0      | -0    | false     | RE-RENDER  | -0
+ 3  | set(NaN)      | -0     | NaN   | false     | RE-RENDER  | NaN
+ 4  | set(NaN)      | NaN    | NaN   | true      | No Change  | NaN
+ 5  | set(5)        | NaN    | 5     | false     | RE-RENDER  | 5
+ 6  | set("5")      | 5      | "5"   | false     | RE-RENDER  | "5"
+
+
+ LIST WALA DABBA (shuru mein current = address of [1, 2])
+
+ #  | Call                  | Purani      | Nayi           | Output
+
+ 7  | set(same)             | wohi address| wohi address   | No Change
+ 8  | set([...same, 4])     | purana addr | NAYA address   | RE-RENDER
+
+
+ WAJAH (har call ki)
+ 1: 0 aur 0 bilkul same value
+ 2: Object.is sign dekhta hai, 0 aur -0 alag (=== yahan true deta)
+ 3: -0 aur NaN alag values
+ 4: Object.is mein NaN, NaN ke barabar hai (=== yahan false deta)
+ 5: NaN aur 5 alag values
+ 6: 5 number hai, "5" string hai, Object.is type coercion nahi karta
+ 7: same.push(3) se content badla, lekin address wahi, Object.is sirf
+    address compare karta hai, is liye No Change
+    (React mein push karke setState yahi wajah se kaam nahi karta)
+ 8: spread [...same, 4] ne naya array (naya address) banaya
+
+ YAAD RAKHNE KI BAATEN
+ - set value "add" nahi karta, purani ko REPLACE karta hai
+ - "re-render" yahan sirf console.log hai, asli React mein screen dobara banti hai
+ - count aur list do alag dabbe hain, ek dusre ko nahi chhute
+
+*/

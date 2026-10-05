@@ -139,9 +139,9 @@ function reset(person) {
   person = { age: 0 };
 
 }
-const umar = { age: 20 };
-reset(umar);
-console.log(umar.age); // 20 the reason in my point of view ke yaha per variable shadow hui ha or function wale ko overwrite kar dia ha block se bahir wale variable ne is lia 0 ke jaga 20 ho ga 
+const umair = { age: 20 };
+reset(umair);
+console.log(umair.age); // 20 the reason in my point of view ke yaha per variable shadow hui ha or function wale ko overwrite kar dia ha block se bahir wale variable ne is lia 0 ke jaga 20 ho ga 
 
 // Q9: const aur array
 const scores = [1, 2];
@@ -238,3 +238,39 @@ console.log(compareKaro({}, {}));           // alag
 console.log(compareKaro(null, null));       // same value
 console.log(compareKaro(5, "5"));           // alag
 console.log(compareKaro(NaN, NaN));         // same value
+
+
+//? Task 2: Mutate vs Naya Object
+
+console.log("===Task Two==="); 
+
+function marksIncrease(student) {
+  student.marks  += 10;
+}; 
+
+
+
+
+function marksIncreaseSafe(student) {
+  return {...student, marks: student.marks + 10};
+}; 
+
+
+// A) mutation wala: marksIncrease
+const bilalStudent = { name: "Bilal", marks: 60 };
+const beforeBilal = bilalStudent;
+marksIncrease(bilalStudent);
+console.log(beforeBilal === bilalStudent); // true keuke reference same ha is lia dono main change ho gi 
+console.log(bilalStudent.marks);           // 70
+
+// B) safe wala: marksIncreaseSafe
+const umar = { name: "Umar", marks: 60 };
+const result = marksIncreaseSafe(umar);
+console.log(result === umar);   // false function ne naya object banaya, jis ka address alag hai, aur umar ka address kabhi chhua hi nahi gaya Reference "change" nahi hua, naya object bana hai. 
+console.log(umar.marks);        // 60
+console.log(result.marks);      // 70
+console.log(result.name);       // umar 
+
+// C) hard-code pakadne wala test
+const ali = { name: "Ali", marks: 85 };
+console.log(marksIncreaseSafe(ali).marks); // 95

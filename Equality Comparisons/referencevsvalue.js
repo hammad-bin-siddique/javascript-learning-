@@ -194,3 +194,47 @@ console.log(u.age); // yaha 50 ai ga keuke pehle u bana variable age 20 phir ham
 
 // function ko object pass karne per address ki copy pas hoti ha object ki 
 // or person.age address per ja kar andar se value change karta ha or bahir bhi show karwata ha or person ={...} local variable ko new address per lagi dia is se bahir wale per koi asar nahi hota ha 
+
+//! Practice Tasks 
+
+
+//? Task One Reference Detective
+console.log("===Task One===");
+
+function isObject(x) {
+  if(typeof x === "object" && x !== null) {
+    return true;
+  }
+  else {
+    return false;
+  }
+
+  //? or short way 
+  // return typeof x === "object" && x !== null;
+};
+
+function compareKaro(a, b) {
+  // Step 1: agar a aur b brabar hi nahi, to alag 
+
+  if(!Object.is(a, b)) {
+    return "alag";
+  }
+
+  if(isObject(a)) {
+    return "same reference";
+  }
+
+  return "same value";
+}  
+
+
+const fahad = { naam: "Fahad" };
+
+console.log(compareKaro(5, 5));             // same value
+console.log(compareKaro("Bilal", "Bilal")); // same value
+console.log(compareKaro([1, 2], [1, 2]));   // alag
+console.log(compareKaro(fahad, fahad));     // same reference
+console.log(compareKaro({}, {}));           // alag
+console.log(compareKaro(null, null));       // same value
+console.log(compareKaro(5, "5"));           // alag
+console.log(compareKaro(NaN, NaN));         // same value

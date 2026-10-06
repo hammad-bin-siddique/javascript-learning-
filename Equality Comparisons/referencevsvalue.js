@@ -274,3 +274,34 @@ console.log(result.name);       // umar
 // C) hard-code pakadne wala test
 const ali = { name: "Ali", marks: 85 };
 console.log(marksIncreaseSafe(ali).marks); // 95
+
+
+
+//? Task Three
+
+console.log("===Task Three===");
+
+const bilal1 = { id: 1, naam: "Bilal" };
+const umar2 = { id: 2, naam: "Umar" };
+const fahad2 = { id: 3, naam: "Fahad" };
+const friends = [bilal1, umar2, fahad2];
+
+
+console.log(friends.includes(umar2)); // true keuke umar2 ke andar jo address hai, wohi address list ke andar bhi hai, is liye address match ho gaya.
+console.log(friends.includes({id: 2, naam: "Umar"})); // false is lia ke includes jo ha wo strict equality se check karta ha or jab ham ye likhte hain {id 2} to is se object literal likhte he  new object ka address ban jata ha is lia false ata ha 
+
+const found = friends.some(f => f.id === 2); 
+console.log(found); // true keuke id num 2 wala object exist karta ha 
+
+const copy = [...friends]; 
+console.log(copy === friends); // false keuke reference same nahi ha spread new array return karta ha 
+
+console.log(copy[0] === friends[0]); // true keuke abhi ham ne array ke andar ke objects shalow copy ha is lia uper copy === friends false aya but un ke andar ke objects ka address same he ha 
+
+const copy2 = [...friends];
+
+copy2[0].naam = "Bilal Khan";
+console.log(friends[0].naam);   // Bilal khan ai ga wajha Inner objects copy hue hi nahi. Unka sirf address copy hua hai. Copy sirf upar wale array ki hui hai, is liye shallow kehte hain. jab ham ne compare kia the to true aya tha or yaha phir friends main bhi change ho ga 
+copy2.push({ id: 4, naam: "Faizan" });
+console.log(friends.length);    // 3 yaha per copy wale main push kia ha or parent array of object copy hua tha khali us ka inner objects shalow copy hue the ab ham ne push kia wo parent main kia naw ke inner objects main or outer array shallow copy nahi hue balke exact copy hue hain
+console.log(copy2.length);      // 4 is ke 4 is lia ke ye outer array exact copy hua ha or is main change karne se oriignal main change nahi ho ga 

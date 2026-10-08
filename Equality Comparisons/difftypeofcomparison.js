@@ -195,3 +195,149 @@ console.log(c === 10);                  // false type alag
 console.log(d == 7);                    //  valueOf() -> d khud wapas, nakaam
 // toString() -> "7"
 // "7" == 7 -> string ko number: 7 == 7 -> true
+
+//? Step 4: Array vs string / number
+console.log("===Array Vs String / Number===");
+// Array bhi ek object hai. To Step 3 ke rules hi lagte hain. Bas fark yeh hai ke array ka toString() special hai: yeh elements ko comma se jodta hai (join(",")).
+
+// [].toString()        // ""
+// [1].toString()       // "1"
+// [1, 2].toString()    // "1,2"
+// [null].toString()    // ""   (null aur undefined khali string ban jate hain)
+
+// Array ka valueOf() bhi array khud hi wapas karta hai, to hamesha toString() tak baat pahunchti hai.
+
+//? Flow
+// [1] == 1
+// Step 1: array vs number, to array ko primitive banao
+// Step 2: valueOf() -> array khud, nakaam
+// Step 3: toString() -> "1"
+// Step 4: "1" == 1 -> string ko number: 1 == 1 -> true
+
+console.log([1] == 1); // true
+
+// [] == 0
+// [] -> "" (toString)
+// "" == 0 -> Number("") = 0 -> 0 == 0 -> true
+
+console.log([] == 0); // true
+
+
+//? Sabse mashhoor example: [] == ![]
+
+// [] == ![]
+// Pehle ![] nikalo: array truthy hota hai, to ![] = false
+// Ab [] == false
+// false -> number: 0
+// ab [] == 0
+// [] -> "" -> 0
+// 0 == 0 -> true
+
+console.log([] == ![]); // true
+
+// Yaani "array khali" hona aur "array ka ulta" dono == mein barabar nikle. Yeh JavaScript ka mashhoor ajeeb result hai, aur dikhata hai ke == ko object/array ke saath kyun nahi use karte.
+
+//? === ke saath
+
+// console.log([] === "")      // false, type alag (object vs string)
+console.log([] == [])     // false, do alag address (Rule A)
+
+//? Comprehension check
+console.log("===Comprehension Check===");
+
+
+console.log([] == "");         // true [] == ""
+// [] -> toString() -> ""
+// "" == "" -> dono string, type same, seedha text compare -> true
+console.log([5] == 5);         // [5] string main convert hoga "5" phir "5" number main convert hoga 5 == 5 true ai ga
+console.log([1, 2] == "1,2");
+// true
+// Step 1: array vs string, type alag hai, to array ko primitive banao
+// Step 2: valueOf() -> array khud wapas (primitive nahi), nakaam
+// Step 3: toString() -> [1, 2].toString() = "1,2"
+// Step 4: "1,2" == "1,2" -> dono string, type same, seedha text compare -> true
+// Note: yahan number conversion hua hi nahi, kyunke dono taraf string ban gayi
+
+console.log([1, 2] == 1);
+// false
+// Step 1: array vs number, to array ko primitive banao
+// Step 2: valueOf() -> array khud wapas, nakaam
+// Step 3: toString() -> "1,2"
+// Step 4: ab "1,2" == 1 -> string vs number, to string ko number banao
+// Step 5: Number("1,2") = NaN (comma wali string poora number nahi)
+// Step 6: NaN == 1 -> false (NaN kisi ke barabar nahi)
+console.log([0] == false);     // true [] bana "0" or convert hokar 0 or dosri side wala bhi false se 0 bana 0 == 0 true 
+console.log([] == []);         // false reference not same 
+// console.log([] === "");        // false type not same 
+console.log([null] == "");     // [null] == "" true
+// Step 1: array vs string, to array ko primitive banao
+// Step 2: valueOf() -> array khud, nakaam
+// Step 3: toString() -> [null].toString() = ""   (null khali string ban jata hai)
+// Step 4: "" == "" -> true
+
+
+//? Step 5: All In One
+
+// Kya type alag hai?
+// ├── Nahi -> sab ek jaise (=== aur == ka result same), Object.is sirf NaN aur -0 mein farq
+// └── Haan
+//     ├── === / Object.is -> seedha false
+//     └── ==
+//         ├── null/undefined -> sirf aapas mein true, baaki sab false
+//         ├── boolean -> pehle number (true=1, false=0)
+//         ├── object/array -> valueOf, phir toString, phir aage ke rules
+//         └── string vs number -> string ko number banao
+
+
+/*
+=====================================================================
+ ! COMPARISON OF DIFFERENT TYPES: Combined Table
+=====================================================================
+
+ Expression                  ==      ===     Object.is   Wajah (== ki)
+ -------------------------------------------------------------------
+ "5"  , 5                    true    false   false       string -> number
+ ""   , 0                    true    false   false       Number("") = 0
+ false, 0                    true    false   false       boolean -> number
+ true , "true"               false   false   false       1 vs NaN
+ null , undefined            true    false   false       khaas rule
+ null , 0                    false   false   false       null sirf undefined ke barabar
+ NaN  , NaN                  false   false   true        IEEE 754 rule
+ 0    , -0                   true    true    false       sirf Object.is sign dekhta hai
+ []   , ""                   true    false   false       [] -> ""
+ [5]  , 5                    true    false   false       [5] -> "5" -> 5
+ [1,2], 1                    false   false   false       "1,2" -> NaN
+ []   , []                   false   false   false       do alag address
+ {}   , "[object Object]"    true    false   false       {}.toString()
+
+=====================================================================
+ FAISLA KAISE KAREIN (FLOW)
+=====================================================================
+
+ Kya type alag hai?
+ |-- Nahi -> == aur === ka result same, Object.is sirf NaN aur -0 mein farq
+ |-- Haan
+     |-- === / Object.is -> seedha false
+     |-- ==
+         |-- null/undefined -> sirf aapas mein true, baaki sab false
+         |-- boolean        -> pehle number (true = 1, false = 0)
+         |-- object/array   -> valueOf(), phir toString(), phir aage ke rules
+         |-- string vs number -> string ko number banao
+
+=====================================================================
+ Number(string) KA RULE
+=====================================================================
+
+ ""  ya sirf spaces   -> 0
+ Poora number text    -> wahi number ("5", " 12 ", "3.5")
+ Baaki sab            -> NaN ("abc", "true", "12px", "1,2")
+
+=====================================================================
+ USAGE KE USOOL
+=====================================================================
+
+ 1. Default === rakho. == sirf tab jab jaan boojh kar conversion chaho.
+ 2. Form input: trim() -> Number() -> Number.isNaN() check -> compare.
+ 3. NaN check: x === NaN kaam nahi karta. Number.isNaN(x) ya Object.is(x, NaN) use karo.
+ 4. Object/array ko == se primitive ke saath compare mat karo.
+*/

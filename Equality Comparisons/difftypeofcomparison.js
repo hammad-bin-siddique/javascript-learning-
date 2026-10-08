@@ -341,3 +341,39 @@ console.log([null] == "");     // [null] == "" true
  3. NaN check: x === NaN kaam nahi karta. Number.isNaN(x) ya Object.is(x, NaN) use karo.
  4. Object/array ko == se primitive ke saath compare mat karo.
 */
+
+
+
+//! Practice Tasks 
+
+//? Task 1: Predict 
+console.log("===Task One===");
+
+console.log("0" == false); // true 0 string se number main convert ho ga or 0 bane ga or false bhi convert hoga or 0 ban jai ga 0 == 0 true
+console.log([] == false); // true array convert ho kar string bane ga "" or phir string se 0 number main convert ho kar or false bhi 0 main cnvert ho ga 0 == 0 true
+console.log([1] == "1"); // true array "1" main convert ho ga or "1" == "1" true ai ga
+console.log(null == false); // false null undefined or khudke ilawa sab ke sath false return karta ha 
+console.log(Object.is([], [])); // false reference same nahi ha 
+
+//? Task 2
+
+console.log("===Task Two==="); 
+
+console.log([undefined] == "");  // true keuke undefined array main or string main convert ho ga "" ban jai ga or ""== "" true return kare ga 
+console.log([null] == null);  // false keuke array main jo null ha wo string main convert ho ga "" or "" == null is false 
+
+
+//? Task Three 
+console.log("===Task Three==="); 
+
+function smartEqual(a, b) {
+    if(a === b) return "strict"; 
+    if(a == b) return "loose"; 
+    return "different";
+}
+
+console.log(smartEqual(7, "7")); // loose 
+console.log(smartEqual([], "")); // loose 
+console.log(smartEqual(null, undefined)); // loose 
+console.log(smartEqual(NaN, NaN)); // different  keuke === bhi is ko false return karta ha 
+console.log(smartEqual([1, 2], 1)); // different 

@@ -165,6 +165,20 @@ function isAdult2(input) {
     return {ok: false, message: "Age Must Be a Number"};
   }
 
+  if(Number.isFinite(ageNumber)) {
+    return {ok: false, message: "Please Add Valid Age"};
+  }
+
+  if(ageNumber < 0 || ageNumber > 120) {
+    return {ok: false, message: "Please Select Age from 0 to 120"};
+  } 
+
+
+  if(!Number.isInteger(ageNumber)) {
+    return {ok: false, message: "Please Don't Use Decimals Numbers"};
+  }
+
+
   if(ageNumber >= 18) {
     return {ok: true, message: "Adult"};
   }
@@ -183,6 +197,11 @@ console.log(isAdult2("Infinity")); //  or infinity ka infinty he ata ha or is ka
 console.log(isAdult2("0x12")); // adult
 console.log(isAdult2("1e3")); // adult
 console.log(isAdult2()); // age must be filled
+
+console.log("===New Checks In Age:==="); 
+console.log(isAdult2(18.5)); // Please Don't Use Decimal Numbers 
+console.log(isAdult2(Infinity)); 
+console.log(isAdult2(123)); // Please Select Age from 0 to 120
 
 console.log(Number("0x12")); // uper is ka adult a raha tha to main ne check kia to neache is ka output 18 a raha ha is lia adult sahi ha 
 console.log(Number("1e3")); // is string ko agar number main convert kare to 1000 ata ha is lia yaha per adult ai ga uper 

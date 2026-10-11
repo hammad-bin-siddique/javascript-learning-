@@ -165,7 +165,7 @@ function isAdult2(input) {
     return {ok: false, message: "Age Must Be a Number"};
   }
 
-  if(Number.isFinite(ageNumber)) {
+  if(!Number.isFinite(ageNumber)) {
     return {ok: false, message: "Please Add Valid Age"};
   }
 

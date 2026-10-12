@@ -162,11 +162,15 @@ function isAdult2(input) {
   const ageNumber = Number(text); 
 
   if(Number.isNaN(ageNumber)) {
-    return {ok: false, message: "Age Must Be a Number"};
+    return {ok: false, message: "Age Must be a Number"};
   }
 
   if(!Number.isFinite(ageNumber)) {
     return {ok: false, message: "Please Add Valid Age"};
+  }
+
+   if(String(ageNumber) !== text) {
+    return {ok: false, message: "Age Must be a real Number"};
   }
 
   if(ageNumber < 0 || ageNumber > 120) {
@@ -178,6 +182,7 @@ function isAdult2(input) {
     return {ok: false, message: "Please Don't Use Decimals Numbers"};
   }
 
+ 
 
   if(ageNumber >= 18) {
     return {ok: true, message: "Adult"};
@@ -186,22 +191,25 @@ function isAdult2(input) {
   return {ok: true, message: "Minor"};
 };
 
-console.log(isAdult2("18"));    // true Adult 
-console.log(isAdult2(18));      // true adult
-console.log(isAdult2("abc"));   // false age must be a number
-console.log(isAdult2(""));      // false age must be filled
-console.log(isAdult2("  "));    // false age must be filled
-console.log(isAdult2(null));    // false age must be filled
-console.log(isAdult2(0));       // true minor
-console.log(isAdult2("Infinity")); //  or infinity ka infinty he ata ha or is ka mean ha boht bara number jo 18 se to bara he ha is lia output ai ga adult
-console.log(isAdult2("0x12")); // adult
-console.log(isAdult2("1e3")); // adult
-console.log(isAdult2()); // age must be filled
+console.log("===isAdult2 Full Test===");
 
-console.log("===New Checks In Age:==="); 
-console.log(isAdult2(18.5)); // Please Don't Use Decimal Numbers 
-console.log(isAdult2(Infinity)); 
-console.log(isAdult2(123)); // Please Select Age from 0 to 120
+console.log(isAdult2("18"));        // Adult
+console.log(isAdult2(18));          // Adult
+console.log(isAdult2("17"));        // Minor
+console.log(isAdult2(0));           // Minor
+console.log(isAdult2("Infinity"));  // Please Add Valid Age
+console.log(isAdult2("0x12"));      // Age Must be a real Number
+console.log(isAdult2("1e3"));       // Age Must be a real Number
+console.log(isAdult2(18.5));        // Please Don't Use Decimal Numbers
+console.log(isAdult2("-5"));        // Please Select Age from 0 to 120
+console.log(isAdult2("121"));       // Please Select Age from 0 to 120
+console.log(isAdult2("abc"));       // Age Must be a Number
+console.log(isAdult2(""));          // Age Must Be filled
+console.log(isAdult2(null));        // Age Must be filled
+console.log(isAdult2());            // Age Must be filled
+console.log(isAdult2("18.0")); // Age Must be a real Number
 
-console.log(Number("0x12")); // uper is ka adult a raha tha to main ne check kia to neache is ka output 18 a raha ha is lia adult sahi ha 
-console.log(Number("1e3")); // is string ko agar number main convert kare to 1000 ata ha is lia yaha per adult ai ga uper 
+console.log(isFinite("18"));            // true 
+console.log(Number.isFinite("18"));     // false
+console.log(Number.isFinite(Infinity)); // false
+console.log(Number.isInteger(18.5));    // false

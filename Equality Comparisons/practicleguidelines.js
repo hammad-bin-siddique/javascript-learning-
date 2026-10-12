@@ -213,3 +213,87 @@ console.log(isFinite("18"));            // true
 console.log(Number.isFinite("18"));     // false
 console.log(Number.isFinite(Infinity)); // false
 console.log(Number.isInteger(18.5));    // false
+
+
+//! Step 3: ESLint, jo == ko pakadta hai
+
+//! Step 3: ESLint, jo == ko pakadta hai
+
+//? Formal Definition
+
+// ESLint ek open-source static analysis tool (linter) hai JavaScript ke liye.
+// Yeh tumhara code chalaye baghair padhta hai, usay ek tree structure (AST) mein
+// tor kar dekhta hai, aur pehle se set kiye hue rules se match karta hai.
+// Jahan rule toota, wahan error ya warning deta hai.
+
+// Short mein: ESLint code ka "munshi" hai. Woh ghalti dikhata hai, khud kuch badalta nahi
+// (jab tak --fix na chalaya jaye).
+
+//? Rule kya hota hai?
+
+// Rule ek hukam hota hai jo ESLint ko batata hai ke kaun si cheez dhoondni hai.
+// Har rule ki 3 severity ho sakti hain:
+//   "off"   -> rule band
+//   "warn"  -> warning dikhao, par program na roko
+//   "error" -> error dikhao (exit code non-zero, CI fail ho sakti hai)
+
+//? eqeqeq Rule
+
+// Naam: eq + eq + eq = teen barabar (===)
+// Kaam: == aur != ko dhoondna aur error dena, taake hamesha === aur !== use ho.
+// Note: eqeqeq ESLint ki js.configs.recommended list mein shamil NAHI hai.
+// Isay config mein khud likhna parta hai.
+
+//? eqeqeq ke modes
+
+// 1. ["error", "always"]
+//    == aur != kahin bhi allowed nahi, == null bhi nahi.
+//
+// 2. ["error", "always", { null: "ignore" }]
+//    Sirf == null aur != null allowed hain. Baaki sab == / != error.
+//
+// 3. ["error", "smart"]
+//    Kuch special cases allowed (jaise typeof comparison aur null ke saath comparison).
+
+//? no-eq-null Rule
+
+// Yeh rule sirf == null aur != null ko flag karta hai.
+// Agar team ko woh jaiz case bhi nahi chahiye, to eqeqeq ke saath yeh rule laga ke
+// x === null || x === undefined likhwaya jata hai.
+
+//? Setup (jo maine kiya)
+
+// 1. Root folder mein: npm init -y
+// 2. npm install --save-dev eslint
+// 3. Root mein eslint.config.mjs banayi
+// 4. .gitignore mein node_modules/ add kiya
+// 5. Chalaya: npx eslint "Equality Comparisons/practicleguidelines.js"
+// Windows par npm.ps1 ka error aya to Set-ExecutionPolicy -Scope CurrentUser RemoteSigned chalaya.
+
+//? Config
+
+// export default [
+//   {
+//     rules: {
+//       eqeqeq: ["error", "always", { null: "ignore" }],
+//     },
+//   },
+// ];
+
+//? Meri file par results
+
+// Mode { null: "ignore" } -> 11 errors
+// Mode "always"           -> 17 errors
+// Farq 6 ka tha. Yeh woh 6 lines thin jahan == null likha tha
+// (lines 32, 50, 51, 52, 53, 59).
+
+//? Seekhi hui baatein
+
+// 1. ESLint code ka text dekhta hai, values nahi.
+//    a == b flag hua, halanke a null aur b undefined tha,
+//    kyunke null: "ignore" tabhi lagta hai jab ek taraf literally null likha ho.
+// 2. --fix tabhi khud theek karta hai jab behaviour nahi badalta
+//    (jaise "0" == "" jahan dono strings hon). Jahan types alag hon wahan khud soch kar theek karo.
+// 3. Parsing error ka matlab hai syntax toota hua hai, ESLint ne file padhna hi nahi shuru kiya.
+// 4. Rule ka naam, severity, aur mode teeno alag cheezein hain.
+

@@ -1,0 +1,24 @@
+{
+  "name": "javascript-learning-",
+  "version": "1.0.0",
+  "description": "A structured JavaScript learning repository by **Hammad Siddique** — documenting hands-on practice, concept notes, and tasks built from solid foundations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammad-bin-siddique/javascript-learning-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hammad-bin-siddique/javascript-learning-/issues"
+  },
+  "homepage": "https://github.com/hammad-bin-siddique/javascript-learning-#readme",
+  "devDependencies": {
+    "eslint": "^10.12.0"
+  }
+}

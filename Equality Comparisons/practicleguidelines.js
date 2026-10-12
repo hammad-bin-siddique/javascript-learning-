@@ -297,3 +297,10 @@ console.log(Number.isInteger(18.5));    // false
 // 3. Parsing error ka matlab hai syntax toota hua hai, ESLint ne file padhna hi nahi shuru kiya.
 // 4. Rule ka naam, severity, aur mode teeno alag cheezein hain.
 
+console.log(NaN === NaN);              // false === main Nan Nan ke barabar bhi nahi ha 
+console.log(Object.is(NaN, NaN));      // true Ojbect is Nan or Nan ko true return karta ha or ye main case ha jis se object is === se different ha 
+console.log(0 === -0);                 //  true === signs ko ignore karta ha 
+console.log(Object.is(0, -0));         //  false ye sign ko bhi compare karta ha or ye dosra case ha jis main object is === se different ha 
+console.log("" == 0);                  //  true "" convert ho kar number banta ha 0 phir 0 == 0 true return karta ha
+console.log(null == undefined);        // true special case ha null or undefined apas main true return karta ha == main 
+console.log([1] == [1]);               //  false refrence compare hota ha naw ke value 

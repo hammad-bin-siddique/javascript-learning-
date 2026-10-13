@@ -1,25 +1,23 @@
 //! Topic 7: Combined Practice + Mini Project
 
-
 //? Combined Task 1 (smartCompare)
 
-console.log("===Task One==="); 
+console.log("===Task One===");
 
 function smartCompare(a, b) {
-
-    return {loose: a == b, strict: a === b, ObjectIS: Object.is(a, b)};
+  return { loose: a == b, strict: a === b, ObjectIS: Object.is(a, b) };
 }
 
-console.table([smartCompare(5, "5")]); // true, false, false, 
-console.table([smartCompare(null, undefined)]); // true, false, false, 
+console.table([smartCompare(5, "5")]); // true, false, false,
+console.table([smartCompare(null, undefined)]); // true, false, false,
 console.table([smartCompare(NaN, NaN)]); // false, false, true
-console.table([smartCompare(0, -0)]);  // true, true, false
-console.table([smartCompare("", false)]);  // true, false, false
-console.table([smartCompare([1], [1])]);  // false, false, false, reference change 
-const obj = {name: "Bilal"}; 
-const obj2 = obj; 
-console.table([smartCompare(obj,  obj2)]);  // true, true, true, reference same 
-console.table([smartCompare("abc", "abc")]);  // true, true, true
+console.table([smartCompare(0, -0)]); // true, true, false
+console.table([smartCompare("", false)]); // true, false, false
+console.table([smartCompare([1], [1])]); // false, false, false, reference change
+const obj = { name: "Bilal" };
+const obj2 = obj;
+console.table([smartCompare(obj, obj2)]); // true, true, true, reference same
+console.table([smartCompare("abc", "abc")]); // true, true, true
 
 //? ===== Task 1 Summary Table (smartCompare) =====
 //  #  | a        | b         | loose | strict | objectIs | Kyun?
@@ -38,66 +36,68 @@ console.table([smartCompare("abc", "abc")]);  // true, true, true
 // 2) objectIs true, strict false => sirf NaN
 // 3) objectIs false, strict true => sirf 0 aur -0
 
-
 //? Task 2: typeSafeCompare(a, b)
 
-console.log("===Task Two==="); 
+console.log("===Task Two===");
 
 function getType(x) {
-    if(x === null) return "null"; 
-    if(Array.isArray(x)) return "array";
-    return typeof x;
+  if (x === null) return "null";
+  if (Array.isArray(x)) return "array";
+  return typeof x;
 }
 
 function typeSafeCompare(a, b) {
-    const typeA = getType(a); 
-    const typeB = getType(b); 
- 
-    if(typeA !== typeB) {
-        return {equal: false, reason: `type mismatch: ${typeA} vs ${typeB}`};
-    }
+  const typeA = getType(a);
+  const typeB = getType(b);
 
+  if (typeA !== typeB) {
+    return { equal: false, reason: `type mismatch: ${typeA} vs ${typeB}` };
+  }
 
-    if(typeA === "object" || typeA === "array") {
-        const same = a === b; 
-        return {equal: same, reason: same ? "same reference" : "different reference"};
-    }
-
-    if(typeA === "number") {
-        const same = Object.is(a, b);
-        return {
-            equal: same, 
-            reason: same  ?   "same number value (Object.is, NaN bhi barabar)" : "different number value (Object.is, 0 aur -0 alag)"
-        }
-    }
-
-    const same = a === b; 
+  if (typeA === "object" || typeA === "array") {
+    const same = a === b;
     return {
-        equal: same,
-        reason: same ? `same ${typeA} value` : `different ${typeA} value`
-    }; 
-};
+      equal: same,
+      reason: same ? "same reference" : "different reference",
+    };
+  }
+
+  if (typeA === "number") {
+    const same = Object.is(a, b);
+    return {
+      equal: same,
+      reason: same
+        ? "same number value (Object.is, NaN bhi barabar)"
+        : "different number value (Object.is, 0 aur -0 alag)",
+    };
+  }
+
+  const same = a === b;
+  return {
+    equal: same,
+    reason: same ? `same ${typeA} value` : `different ${typeA} value`,
+  };
+}
 
 const arr = [1];
-console.log(typeSafeCompare(5, "5"));       // { equal: false, reason: 'type mismatch: number vs string' }
-console.log(typeSafeCompare([1], [1]));     // { equal: false, reason: 'different reference' }
-console.log(typeSafeCompare(arr, arr));     // { equal: true, reason: 'same reference' }
-console.log(typeSafeCompare({}, {}));       // { equal: false, reason: 'different reference' }
-console.log(typeSafeCompare([], {}));       // { equal: false, reason: 'type mismatch: array vs object' }
-console.log(typeSafeCompare(null, null));   // 'same null value'
-
+console.log(typeSafeCompare(5, "5")); // { equal: false, reason: 'type mismatch: number vs string' }
+console.log(typeSafeCompare([1], [1])); // { equal: false, reason: 'different reference' }
+console.log(typeSafeCompare(arr, arr)); // { equal: true, reason: 'same reference' }
+console.log(typeSafeCompare({}, {})); // { equal: false, reason: 'different reference' }
+console.log(typeSafeCompare([], {})); // { equal: false, reason: 'type mismatch: array vs object' }
+console.log(typeSafeCompare(null, null)); // 'same null value'
 
 const pairs = [
-    [5, "5"],
-    [null, undefined],
-    [null, null],
-    [NaN, NaN],
-    [0, -0],
-    [[1], [1]],
-    [arr, arr],
-    [{}, {}],
-    [[], {}],
-    [true, 1]
+  [5, "5"],
+  [null, undefined],
+  [null, null],
+  [NaN, NaN],
+  [0, -0],
+  [[1], [1]],
+  [arr, arr],
+  [{}, {}],
+  [[], {}],
+  [true, 1],
 ];
 
 const results = pairs.map(([a, b]) => ({ a, b, ...typeSafeCompare(a, b) }));
@@ -117,3 +117,40 @@ console.table(results);
 // │ 8       │ []    │ {}        │ false │ 'type mismatch: array vs object'                    │
 // │ 9       │ true  │ 1         │ false │ 'type mismatch: boolean vs number'                  │
 // └─────────┴───────┴───────────┴───────┴─────────────────────────────────────────────────────┘
+
+//! Mini Project: Login Validator
+console.log("===Mini Project===");
+
+function validateInput(username, password) {
+  function getType(x) {
+    if (x === null) return "null";
+    if (Array.isArray(x)) return "array";
+    return typeof x;
+  }
+  if (getType(username) !== "string") {
+    return {
+      ok: false,
+      message: `username ka type string hona chahiya, mila: ${getType(username)}`,
+    };
+  }
+  if (getType(password) !== "string") {
+    return {
+      ok: false,
+      message: `password ka type string hona chahiya, mila: ${getType(password)}`,
+    };
+  }
+  if (username.trim() === "") {
+    return { ok: false, message: "username khali ha" };
+  }
+  if (password.trim() === "") {
+    return { ok: false, message: "password khali ha" };
+  }
+  return { ok: true, message: "input valid ha" };
+}
+
+console.log(validateInput("bilal", "pass123"));
+console.log(validateInput("", "pass123"));
+console.log(validateInput("bilal", ""));
+console.log(validateInput(null, "pass123"));
+console.log(validateInput("bilal", 12345));
+console.log(validateInput(undefined, undefined));

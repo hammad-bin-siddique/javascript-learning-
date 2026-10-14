@@ -1,5 +1,6 @@
 //! Topic 7: Combined Practice + Mini Project
 
+
 //? Combined Task 1 (smartCompare)
 
 console.log("===Task One===");
@@ -122,11 +123,6 @@ console.table(results);
 console.log("===Mini Project===");
 
 function validateInput(username, password) {
-  function getType(x) {
-    if (x === null) return "null";
-    if (Array.isArray(x)) return "array";
-    return typeof x;
-  }
   if (getType(username) !== "string") {
     return {
       ok: false,
@@ -154,3 +150,31 @@ console.log(validateInput("bilal", ""));
 console.log(validateInput(null, "pass123"));
 console.log(validateInput("bilal", 12345));
 console.log(validateInput(undefined, undefined));
+
+
+const storedUsername = "bilal"; 
+const storedPassword = "pass123"; 
+
+function login(username, password) {
+  const check = validateInput(username, password); 
+
+  if(check.ok === false) {
+    return check;
+  }
+
+  const userMatch = typeSafeCompare(username.toLowerCase(), storedUsername.toLowerCase()); 
+  const passMatch = typeSafeCompare(password, storedPassword);
+
+  if(userMatch.equal === true && passMatch.equal === true) {
+    return {ok: true, message: "login kamiyab"}; 
+  }
+  return {ok: false, message: "username ya password ghalat ha"}
+};
+
+console.log(login("bilal", "pass123")); // login kamiyab  
+console.log(login("bilal", "wrong")); // username ya password ghalata 
+console.log(login("Bilal", "pass123")); // login kamiyab  
+console.log(login("", "pass123")); // username khali ha 
+console.log(login("bilal", 123)); // password ka type string hona chaia mila number
+console.log(login("Bilal", "pass123"));  // login kamiyab  
+console.log(login("BILAL", "Pass123")); // { ok: false, message: 'username ya password ghalat ha' }

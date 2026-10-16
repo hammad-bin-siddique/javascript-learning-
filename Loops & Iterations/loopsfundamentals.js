@@ -139,3 +139,124 @@ while (page <= 4) {
 // Condition har iteration se pehle check hoti hai.
 // Update har iteration ke end par chalta hai, aur + 1 ke ilawa + 2 ya - 1 bhi ho sakta hai.
 // Start aur Update badalne se iterations ki ginti badal jati hai, lekin loop ka dhancha wahi rehta hai.
+
+//? Step 4: Infinite Loop aur us se kaise bachte hain
+
+console.log("===Infinite Loop==="); 
+
+//! Definition
+
+// Infinite loop wo loop hai jis ki condition kabhi false nahi hoti, is liye wo kabhi ruk’ta nahi.
+
+// Programming mein yeh bohot nuksan karta hai:
+
+// Node.js terminal: program chalta rehta hai aur terminal par output ka dher laga deta hai.
+// Browser (aage DOM mein): poora tab freeze ho jata hai, aur user ko page band karna parta hai.
+
+
+//! Infinite loop ki 3 aam wajahein
+//? Wajah 1: Update likhna bhool gaye
+
+// let count1 = 1;
+
+// while (count1 <= 3) {
+//   console.log("Salam!");
+// count1 = count1 + 1;  <- bhool gaye
+// }
+
+// count hamesha 1 rehta hai, to 1 <= 3 hamesha true hai.
+
+//? Wajah 2: Update ulti taraf ja raha hai
+
+// let count2 = 1;
+
+// while (count2 <= 3) {
+//   console.log("Salam!");
+//   count2 = count2 - 1;   barhna tha, ghat raha hai
+// }
+
+
+// count 1, 0, -1, -2... hota jata hai. Yeh kabhi 3 se bara nahi hoga, to condition hamesha true rehti hai.
+
+
+//? Wajah 3: Condition boundary ko “skip” kar deti hai
+
+
+// let n1 = 10;
+
+// while (n1 !== 3) {
+//     console.log("Hello")
+//   n1 = n1 - 2;
+// }
+
+
+//? Infinite loop se bachne ka checklist
+
+// Loop likhne ke baad yeh 3 sawal khud se poochho:
+
+// Update likha hai? (counter badal raha hai?)
+// Update sahi taraf ja raha hai? (barh raha hai to </<= wali condition, ghat raha hai to >/>= wali)
+// Counter boundary tak pohanch sakta hai? (condition kabhi false ho sakti hai?)
+
+// Agar in teeno ka jawab “haan” hai, to loop ruk jayega.
+
+
+//? Agar terminal mein infinite loop chal jaye to
+
+// Node.js mein chalte hue program ko rokne ke liye:
+
+// Ctrl + C dabao.
+
+//! Comprehension Check
+
+// A
+// let i = 1;
+// while (i <= 3) {
+//   console.log(i);
+// } 
+//? Ye infinite loop bane ga keuke ya update nahi kia ha or counter badal nahi raha ha 
+
+// B
+// let i = 5;
+// while (i > 0) {
+//   console.log(i);
+//   i = i - 1;
+// }
+
+//? Ye Infinite nahi ha ha keuke yaha update kia ha counter or bounce bhi nahi ho raha mean ke skip nahi ho raha ha or condition bhi true ho rahi ha loop ki or sahi taraf ja rahi ha 
+
+// C
+// let i = 1;
+// while (i <= 3) {
+//   console.log(i);
+//   i = i - 1;
+// }
+
+//? Ye infinite loop ha yaha update to hua ha but ulti taraf ho raha wo 3 tak ponch he nahi raha ha balke wo -1 -2 and so on ja raha ha is lia infinite loop ha 
+
+// D
+// let i = 10;
+// while (i !== 3) {
+//   i = i - 2;
+// }
+
+//? Ye bhi infinite loop ha keuke yaha condition boundry ko skip kar deti ha mean ke 10 se 8 1 iteration per phir 6 phir 4 phir 2 beach main se 3 skip ho jai ga is lia ye infinite ban jai ga 
+
+
+//! Safe Demo 
+
+let count3 = 1; 
+let safety = 0; 
+
+while(count3 <= 3 && safety < 10) {
+    console.log("Hello! Count:", count3);
+    safety++; 
+}
+
+console.log("After the Loop: count =", count3, "safety =", safety);
+
+// Infinite loop wo hai jis ki condition kabhi false nahi hoti.
+// Teen aam wajahein: update bhool jana, update ulti taraf jana, aur !== ke saath boundary skip ho jana.
+// Checklist: update hai? Sahi taraf ja raha hai? Counter boundary tak pohanch sakta hai?
+// Ctrl + C terminal mein loop rokta hai.
+// Ghatne wale loop mein > ya >=, aur barhne wale mein < ya <= istemal hota hai. Exact match (!==) se bachna behtar hai, range check (<, >) zyada safe hai.

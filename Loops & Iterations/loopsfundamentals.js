@@ -1,5 +1,7 @@
 //! Loop Fundamentals
 
+const { RuleTester } = require("eslint");
+
 // Loop kya hai, aur iteration ka matlab
 // Bina loop ke repeat code ka masla
 // Loop ke 3 hisse: start, condition, update
@@ -260,3 +262,102 @@ console.log("After the Loop: count =", count3, "safety =", safety);
 // Checklist: update hai? Sahi taraf ja raha hai? Counter boundary tak pohanch sakta hai?
 // Ctrl + C terminal mein loop rokta hai.
 // Ghatne wale loop mein > ya >=, aur barhne wale mein < ya <= istemal hota hai. Exact match (!==) se bachna behtar hai, range check (<, >) zyada safe hai.
+
+
+//? Step 5: Off-by-one error (< aur <= ka farq)
+console.log("===Off By One Error==="); 
+//! Definition
+
+// Off-by-one error wo ghalti hai jis mein loop 1 iteration zyada ya 1 iteration kam chalta hai, kyunke:
+
+// < ki jagah <= likh diya (ya ulta), ya
+// Start 0 ki jagah 1 rakha (ya ulta).
+
+// < aur <= ka asal farq 
+
+// Operator	            Matlab	                         Boundary khud loop mein chalti hai?
+
+// i < 5	            i 5 se chhota ho	             Nahi. 5 < 5 false hai
+
+// i <= 5	            i 5 se chhota ya barabar ho	     Haan. 5 <= 5 true hai
+
+//? Dono loops ko trace karo
+// Loop 1: i < 5
+
+let a = 1; 
+
+while(a < 5) {
+    console.log("a:", a); 
+    a = a + 1; 
+} // loop one total 4 bar iterate hota ha keuke 5 se jab tak i chota ho tab tak 5 < 5 false he keuke wo chota nahi ha brabar ha 
+console.log("a last value:", a); // 5
+// Loop 2: i <= 5
+
+let b = 1; 
+
+while(b <= 5) {
+    console.log("b:", b); 
+    b = b + 1; 
+}
+console.log("b last value:", b); // 6
+// or loop b 5 bar iterate hota ha keuke yaha condition ye ha ke ya to 5 se chota ho ya 5 ke barabar ho to 5 < 5 true ha keuke wo 5 se chota nahi but barabar ha is lia 1 or bar iteration hoti ha or total 5 bar iterate hota ha c
+
+// Dono mein boundary 5 hi hai, lekin < ne 5 ko bahar rakha aur <= ne andar.
+
+
+//! Comprehension Check
+console.log("===Comprehension Check==="); 
+
+// Q1
+let i = 1;
+while (i < 4) {
+  console.log(i);
+  i = i + 1;
+} // is main 3 iteration ho gi 1 2 3 print ho ga or loop ke bad i ke value 4 ho gi 
+console.log("i last value", i); // 4
+
+// Q2
+let j = 1;
+while (j <= 4) {
+  console.log(j);
+  j = j + 1;
+}
+// is main total 4 iteration ho gi 1 2 3 4 print ho ga or loop ke bad j ke value 5 ho gi 
+console.log("j last value", j); // 5
+
+// Q3
+let k = 0;
+while (k <= 4) {
+  console.log(k);
+  k = k + 1;
+}
+// is main total 5 iteration ho gi 0 1 2 3 4 print ho ga or loop ke bad k ke value 5 ho gi 
+console.log("k last value", k);
+
+//Q4 
+
+let n1 = 10; 
+
+while(n1 <= 20) {
+    console.log(n1); 
+    n1 = n1 + 1; 
+} // total 11 bar iterate ho 10 or 20 dono shamil ho ge or loop ke bad n1 ke last value 21 ho gi 
+console.log("n1 last value", n1); // 21
+
+//Q5
+
+let rollNum = 0; 
+
+while(rollNum < 5) {
+    console.log(rollNum); 
+    rollNum = rollNum + 1;
+}
+
+// loop main 5 iteration ho gi or values 0 1 2 3 4 ho gi or last value 5 ho gi keuke 0 se start hua ha or 5 iteration karni thi is lia rollNum < 5 kia ha agar <= use karta to iteration 6 ho jati 
+
+console.log("roll num last value", rollNum); // 5
+
+// Off-by-one error wo hai jis mein loop 1 iteration zyada ya kam chalta hai, < / <= ya start 0 / 1 ki ghalti se.
+// < boundary ko bahar rakhta hai, <= andar.
+// Iterations ka formula: < ke liye b - s, <= ke liye b - s + 1. Shak ho to trace table banao.
+// 0 se shuru karne par aksar < istemal hota hai (Arrays mein yehi hoga).

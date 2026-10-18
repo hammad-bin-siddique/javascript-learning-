@@ -39,3 +39,45 @@ while(c <= 20) {
 console.log("c after the loop", c); // 22
 
 
+//? Practice Task 3 
+
+console.log("===Task Three==="); 
+
+let num = 7; 
+let multiplier = 1; 
+
+while(multiplier <= 10) {
+    console.log(num, "x", multiplier, "=", num * multiplier); 
+    multiplier++; 
+}
+
+// total 10 bar iteration ho gi or last value multiplier ke 11 ho gi loop ke bad 
+
+
+//! Mini Project Saving Tracker 
+
+console.log("===Mini Project==="); 
+
+
+let monthlySaving = 500; 
+let target = 5000; 
+let total = 0; 
+let month = 0; 
+
+while(total < target) {
+    month++
+    console.log("Month", month, ":"); 
+    total = total + monthlySaving; 
+    console.log("Total", total);    
+}
+
+console.log(`Target: ${target} ${month} month main poora hua`);
+
+let x = 5;
+console.log(x++);   // 5
+console.log(x);     // 6
+
+let y = 5;
+console.log(++y);   // 6
+console.log(y);     // 6
+

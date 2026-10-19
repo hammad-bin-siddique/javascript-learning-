@@ -396,3 +396,91 @@ while(left < right) {
 // Dono milte nahi, ek doosre se guzar jate hain (cross). Isliye condition
 // left < right hai, left != right nahi, warna 6 != 5 true rehta aur loop
 // kabhi na rukta.
+
+
+//! while Loop, Kab Use Karein
+
+//? Definition
+
+// while loop wahan use hota hai jahan loop ke ruknay ki shart (stopping condition) pata ho, lekin loop kitni baar chalega ye pehle se pata na ho.
+// Yani loop iterations ki ginti par nahi, balkay condition ke sach ya jhoot hone par chalta hai. Jab tak condition true hai loop chalta hai, aur jis lamhe false hoti hai wo ruk jata hai.
+
+//? Example
+console.log("===When to Use While Loop==="); 
+
+let money = 0; 
+let months = 0; 
+
+while(money < 10000) {
+    money += 1500; 
+    months++; 
+}
+
+console.log("Months:", months); // 7
+console.log("Money:", money); // 10500
+
+
+//! While kahan use hota hai
+
+// Rule: ginti pata ho -> for. Ruknay ki shart pata ho, ginti nahi -> while.
+//
+// 1. PIN sahi hone tak dobara poochna
+//    Kyun while: pata nahi user kitni baar galat dalega
+//
+// 2. Number guess game
+//    Kyun while: pata nahi kitni koshish mein sahi guess hoga
+//
+// 3. Number ke digits ginna (jaise 48213)
+//    Kyun while: digits ki tadaad pehle se nahi pata
+//
+// 4. Value ko baar baar aadha karna jab tak 1 na ho jaye
+//    Kyun while: kitni dafa aadha hoga, wohi to nikalna hai
+//
+// 5. Server se data lena jab tak data khatam na ho
+//    Kyun while: total data pehle se nahi pata
+
+//! 5. Comprehension Check
+
+//? Part A: for ya while? Wajah ke saath likho.
+
+// Class ke 40 students ke naam print karna to for ka use kare ge keuke hame tadad ka pata ha 
+
+// User se password maangna jab tak wo sahi na ho jaye to while ka use kare ge keuke hame condition ka pata ha ke password ka sahi hona lekin counting ka nahi kia pata user kitne attempts main sahi password enter kare 
+
+// 1 se 100 tak numbers ka sum yaha for ka use kare keuke hame ginti ka pata ha 
+
+// Number 48213 mein kitne digits hain, ye ginna (shuru mein tumhein digits ki tadaad nahi pata) while ka use kare ga keuke hame digit ke tadad ka nahi pata ha 
+
+let sum = 0; 
+let i2 = 0; 
+
+while(sum <= 1000) {
+    sum += i2; 
+    i2++; 
+    console.log(sum);
+}
+
+console.log("Sum", sum);  // 
+console.log("i2", i2); // 46
+
+
+let x1 = 1; 
+while(x1 < 50) {
+    x1 *= 3; 
+}
+
+console.log(x1);
+
+// loop sirf 4 iteration ho gi choti per condition 4 bar true ho or 5 bar  false ho jai gi or keuke 27 * 3 is 81 or loop ke last value 81 ho gi 
+
+let y1 = 100;
+while (y1 > 10) {
+  y1 -= 30;
+}
+console.log(y1);
+
+// Check # | y   | y > 10 | Action
+//   1     | 100 | true   | y = 70
+//   2     | 70  | true   | y = 40
+//   3       40  | true   | y = 10
+//   4       10  | false  | y = 10

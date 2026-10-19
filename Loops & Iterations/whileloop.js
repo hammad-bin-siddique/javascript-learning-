@@ -11,9 +11,9 @@
 
 
 
-//? while Loop, Point 1: Syntax aur Flow
+//! while Loop, Point 1: Syntax aur Flow
 
-//! Formal Definition
+//? Formal Definition
 
 // while loop ek code block ko baar baar chalata hai, jab tak condition true rehti hai. Jis lamhe condition false hoti hai, loop ruk jata hai.
 
@@ -198,3 +198,201 @@ console.log("After Loop:", num2);
 //  11     | 77   | false      | body skip, loop khatam
 //
 // Body 10 baar, condition 11 baar, final num2 = 77
+
+
+//! while Loop,  Counter Update aur Infinite Loop
+
+
+
+//? Kyun while mein zyada hota hai?
+
+// Point 1 mein dekha tha ke while mein teen hisse alag alag jagah hote hain:
+
+// let i = 1;              // START   (bahar)
+// while (i <= 3) {        // CONDITION (bracket mein)
+//   console.log(i);
+//   i++;                  // UPDATE  (body ke andar, khud likhna hai)
+// }
+
+// for mein update bracket ke andar hi likhna parta hai, to bhoolna mushkil hai. while mein update body ke andar hota hai, isliye bhool jana bohat aasan hai.
+
+//! Formal Definition
+// Agar loop ki condition kabhi false na ho, to wo infinite loop hai. while mein ye teen wajahon se hota hai:
+
+//? 1: Update bhool gaye
+
+// let i = 1;
+// while (i <= 3) {
+//   console.log("i =", i);
+// i++ bhool gaye!
+// }
+
+// i hamesha 1 rehta hai, 1 <= 3 hamesha true, loop kabhi nahi rukta.
+
+
+//? 2: Update ulti taraf hai
+
+// let i = 1;
+// while (i <= 3) {
+//   console.log("i =", i);
+//   i--;      // 1, 0, -1, -2... ye 3 se door jaa raha hai
+// }
+
+// i ghat raha hai aur condition kehti hai “3 se chhota ya barabar ho to chalo”. i 3 se kabhi bara nahi hoga, to condition hamesha true.
+
+//? 3: Condition wala variable alag, update wala alag
+
+// let i = 1;
+// let j = 1;
+// while (i <= 3) {
+//   console.log("i =", i);
+//   j++;      // j badh raha hai, lekin condition i dekh rahi hai
+// }
+
+
+// Update chal raha hai, lekin galat variable ka. Condition i ko dekh rahi hai jo kabhi nahi badalta. Typo (count vs count3) se bhi ye ho jata hai, jaisa tumhare saath pehle hua tha.
+
+
+console.log("===Infinite Loop===");
+//? Safe Demo
+
+let i1 = 1; 
+let guard = 0; 
+
+while(i <= 3 && guard < 5) {
+    console.log("i =", i1); 
+    guard++; 
+    //  i1++ ye likhna bhool gay 
+}
+
+// i har baar 1 hi rehta hai. Sirf guard ki wajah se 5 baar ke baad ruka. guard hata do to ye hamesha chalta rahega.
+
+
+//! Comprehension Check
+
+//? Q1
+
+let x = 10 ; 
+while(x > 4) {
+    console.log(x);
+    x -= 2;
+}
+
+// finite ha yaha per last value loop ke bad 4 ho gi finite is lia ha ke update bhi sahi ho raha direction bhi sahi ha 
+console.log("After Loop x value:", x); // 
+
+
+//? Q2
+
+// let y = 1; 
+// while(y <= 5) {
+//     console.log(y); 
+//     y--;
+// }
+
+// infinite ha keuke update ulti tara ho raha ha 
+
+//? Q3
+
+let w = 1; 
+let z = 10; 
+
+while(w < z) {
+    console.log(w); 
+    z--;
+}
+
+// yaha per z-- ulta ha or w update nahi ho raha but 1 per a kar z w ke barabar ho jata ha is lia finite ha or ruk jata ha 
+
+//? Q4
+
+let e = 3;
+while (e <= 3) {
+  console.log("Faizan");
+  e++;
+}
+
+// yaha per sirf 1 bar iterate ho ga < agar ye laga de to <= ki jaga to first iteration per he condition false ho jai gi or loop ruk jai ga sirf 1 bar faizain print ho ga 
+
+console.log("e after loop", e);  // 4
+
+
+//! Practice Tasks 
+
+
+//? Task One 
+
+console.log("===Task One===");
+
+
+// A
+// let n1 = 5;
+// while (n1 > 0) {
+//   console.log(n);
+// }
+//? ye infinite loop ha keuke n1 0 se hamasha bara he rahe ga or condition kabhi false nahi ho gi is lia infinite ha 
+// B
+// let count = 1;
+// let total = 0;
+// while (count <= 5) {
+//   total += count;
+//   total++;
+// }
+
+//? ye bhi infinite loop ha keuke yaha ham count ko update kar he nahi ha is lia ye bhi infinite loop bane ga 
+
+// C
+// let k = 10;
+// while (k >= 0) {
+//   console.log(k);
+//   k++;
+// } 
+
+// ye bhi infinite loop ha keuke k 0 ke barabar ya chota ho nahi sakta k start se he 0 se bara ha 
+
+//? Task 2: Countdown
+
+console.log("===Task Two==="); 
+
+let countNum = 10; 
+while(countNum >= 1) {
+    console.log(countNum); 
+    countNum--;
+}
+console.log("Liftoff!");
+
+// countdown main 11 bar condition chali or 10 bar print kia total 
+console.log("countNum after loop:", countNum); // 0
+
+//? Task Three 
+
+console.log("===Task Three==="); 
+
+let left = 1; 
+let right = 10; 
+
+while(left < right) {
+    console.log(right); 
+    console.log(left); 
+    right--; 
+    left++;
+}
+
+// Task 3 trace: left = 1, right = 10, condition left < right
+// Har iteration mein pehle right print hota hai, phir left,
+// uske baad right-- aur left++ dono chalte hain.
+//
+// Check # | left | right | left < right | Print        | Update ke baad
+// --------|------|-------|--------------|--------------|----------------------
+//   1     |  1   |  10   | true         | 10, 1        | right = 9, left = 2
+//   2     |  2   |   9   | true         |  9, 2        | right = 8, left = 3
+//   3     |  3   |   8   | true         |  8, 3        | right = 7, left = 4
+//   4     |  4   |   7   | true         |  7, 4        | right = 6, left = 5
+//   5     |  5   |   6   | true         |  6, 5        | right = 5, left = 6
+//   6     |  6   |   5   | false        | -            | loop khatam
+//
+// Body 5 baar, condition 6 baar.
+// Final values: left = 6, right = 5
+// Dono milte nahi, ek doosre se guzar jate hain (cross). Isliye condition
+// left < right hai, left != right nahi, warna 6 != 5 true rehta aur loop
+// kabhi na rukta.

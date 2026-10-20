@@ -651,3 +651,112 @@ console.log("Final m:", m);
 // Output: 6 10
 // Final m: 14
 // 14 print isliye nahi hua ke break console.log(m) se pehle chal gaya
+
+//! While Loop, Array ko Traverse Karna
+
+//? Formal Definition
+
+// Traversal ka matlab hai array ke har element par ek ek karke guzarna, pehle index se aakhri tak. while ke saath teen cheezein chahiye:
+
+// Start: index ko 0 se shuru karo
+// Condition: i < array.length
+// Update: body ke andar i++
+
+//? Syntax aur Example
+console.log("====Array Traverse with While===");
+
+const fruits = ["Apple", "Mango", "Orange"]; 
+
+let i3 = 0; 
+
+while(i3 < fruits.length) {
+    console.log(i3, fruits[i3]); 
+    i3++;
+}
+
+console.log("Final i3:", i3); // 
+
+//? Important < Likho, <= Nahi
+
+// Array ka aakhri index length - 1 hota hai, length nahi. Isliye condition i < fruits.length hoti hai.
+
+// Agar <= likh do:
+// to i = 3 par bhi condition true hogi, aur fruits[3] undefined hai. Loop crash nahi hota, balkay chupchap undefined print kar deta hai. Ye bug dhoondna mushkil hota hai isliye khaas dhyan do.
+
+//? Ulti Taraf Se Traverse Karna
+
+let j = fruits.length - 1; 
+
+while(j >= 0) {
+    console.log(fruits[j]); 
+    j--;
+}
+console.log("Final J:", j); 
+
+// Yahan teeno cheezein ulti hain: start length - 1, condition j >= 0, update j--. Ye wohi “sahi direction” ka asool hai.
+
+
+//? Traversal ka Checklist
+// Start 0 se hai (ya ulti taraf ke liye length - 1 se)?
+// Condition < hai, <= to nahi (ya ulti taraf ke liye >= 0)?
+// Update body ke andar hai, aur sahi direction mein?
+
+// Comprehension Check
+
+console.log("===Comprehesnion Check==="); 
+
+//? Q1
+
+console.log("===Q1==="); 
+
+const nums = [4, 7, 1, 9]; 
+
+let index = 0; 
+
+while(index < nums.length) {
+    console.log(index, nums[index]); 
+    index++;
+}
+
+// yaha loop 4 iterate hua or condition 5 bar check hui or last value of index is 4
+
+console.log("Final Index:", index); // 4
+
+
+//? Q2 
+
+console.log("===Q2==="); 
+
+const names = ["Ali", "Sara", "Bilal"]; 
+
+let j1 = names.length - 1; 
+
+while(j1 >= 0) {
+    console.log(names[j1]); 
+    j1--; 
+}
+// output Bilal Sara Ali
+console.log("Final J1:", j1); // -1
+
+//? Q3
+
+console.log("===Q3===");
+
+const colors = ["red", "green", "blue"]; 
+
+let cl = 0; 
+let cl2 = 0;
+ while( cl2 <= colors.length) {
+    console.log(colors[cl2]);
+    cl2++;
+ } // agar ham <= likhe ge to ye cl = 3 per bhi condition true ho gi loop crash to nahi ho but undefined return kare ga or is se bug dhondna tuff ho ga 
+
+
+//? Fix 
+
+while(cl < colors.length) {
+    console.log(colors[cl]); 
+    cl++; 
+}
+
+console.log("Final cl:", cl); // 3

@@ -484,3 +484,170 @@ console.log(y1);
 //   2     | 70  | true   | y = 40
 //   3       40  | true   | y = 10
 //   4       10  | false  | y = 10
+
+
+//! While Loop,  while (true) aur break
+
+//? Formal Definition
+
+// while (true) aisa loop hai jis ki condition hamesha true hai, yani wo jaan boojh kar infinite banaya gaya hai. Is se bahar nikalne ke liye break statement use hoti hai, jo loop ko foran rok deti hai aur code loop ke baad wali line par chala jata hai.
+
+// while (true) {
+   // kaam
+//   if (ruknay ki shart) {
+//     break;      // foran loop se bahar
+//   }
+// }
+
+//? Flow
+
+// true hamesha true hai, to body hamesha chalti hai (condition check ka koi faisla nahi)
+// Body ke andar if check karta hai: “ab rukna hai?”
+// false ho to body baqi lines chala kar wapas upar jati hai
+// true ho to break chalta hai aur loop wahin khatam, baqi body ki lines skip ho jati hain
+
+
+//? Example:
+
+let num1 = 1; 
+while(true) {
+    if(num1 % 5 === 0 && num1 % 7 === 0) {
+        console.log("First Number:", num1);
+        break; 
+    }
+    num1++; 
+}
+
+console.log("After The Loop Num:", num1);
+
+// num1 ki final value 35 hai, 36 nahi. Pehle wale loops mein final value hamesha aage nikal jati thi, kyunke update chalta tha. Yahan break ne num1++ ko skip kar diya, kyunke wo break ke baad likha tha aur break ke saath hi loop khatam ho gaya.
+
+
+// Upar wala kaam while (num1 % 35 !== 0) se bhi ho sakta tha. while (true) + break tab behtar hota hai jab:
+
+// Ruknay ka faisla body ke darmiyan (kuch kaam ke baad) aata hai
+// Ruknay ki ek se zyada wajahein hon (ya ye ya wo)
+// Condition lambi aur uljhi hui ho aur if mein alag likhna saaf lage
+
+//? break Ka Raasta Zaroor Ho
+
+// while (true) mein agar break kabhi chal hi na paye to asli infinite loop ban jata hai. Point 2 ka checklist yahan bhi lagta hai:
+
+// Kya koi break hai?
+// Kya if ki shart kabhi true ho sakti hai?
+// Kya jo variable if mein check hota hai wo body mein badalta hai, aur sahi direction mein?
+
+
+//! Comprehension Check
+
+//! Point 4: while (true) aur break, Comprehension Check
+
+//? Q1
+// Trace: n2 = 1, if (n2 * n2 > 30) to break, warna n2++
+//
+// Check # | n2 | n2 * n2 | n2 * n2 > 30 | Action
+// --------|----|---------|--------------|----------------------
+//   1     | 1  |   1     | false        | n2++ -> 2
+//   2     | 2  |   4     | false        | n2++ -> 3
+//   3     | 3  |   9     | false        | n2++ -> 4
+//   4     | 4  |  16     | false        | n2++ -> 5
+//   5     | 5  |  25     | false        | n2++ -> 6
+//   6     | 6  |  36     | true         | break (n2++ nahi chala)
+//
+// if 6 baar check hua, n2++ 5 baar chala, final n2 = 6
+// break ne n2++ ko skip kar diya, isliye n2 6 par ruk gaya
+console.log("===Q1===");
+
+let n2 = 1;
+while (true) {
+  if (n2 * n2 > 30) {
+    break;
+  }
+  n2++;
+}
+console.log(n2); // 6
+
+
+//? Q2
+// Is dafa update (k -= 3) if se PEHLE hai, to pehle k badle ga, phir check hoga.
+//
+// Round | k (shuru) | k -= 3 ke baad | k < 0 | Print
+// ------|-----------|----------------|-------|------------------
+//   1   | 10        | 7              | false | 7
+//   2   | 7         | 4              | false | 4
+//   3   | 4         | 1              | false | 1
+//   4   | 1         | -2             | true  | break, print nahi hua
+//
+// Output: 7 4 1, phir Final k: -2
+// -2 print isliye nahi hua ke break console.log(k) se pehle chal gaya
+// aur break loop ki baqi lines skip kar deta hai.
+// Lekin -2 loop ke BAAD wali line mein nazar aata hai.
+console.log("===Q2===");
+
+let k = 10;
+while (true) {
+  k -= 3;
+  if (k < 0) {
+    break;
+  }
+  console.log(k);
+}
+console.log("Final k:", k); // -2
+
+
+//? Q3
+// Jawab: INFINITE. Checklist ka sawal fail: jo variable if mein check hota hai
+// (t), wo body mein badalta hi nahi.
+//
+// Round | t | t > 5 | Action
+// ------|---|-------|----------
+//   1   | 1 | false | print 1
+//   2   | 1 | false | print 1
+//   3   | 1 | false | print 1
+//  ...  | 1 | false | hamesha 1
+//
+// t hamesha 1 rehta hai, 1 > 5 kabhi true nahi hota, break kabhi nahi chalta.
+// Chalane par terminal mein Ctrl + C dabao.
+
+// let t = 1;
+// while (true) {
+//   if (t > 5) {
+//     break;
+//   }
+//   console.log(t);
+// }
+
+// Fix: console.log(t) ke baad t++ lagao
+console.log("===Q3===");
+
+let t = 1;
+while (true) {
+  if (t > 5) {
+    break;
+  }
+  console.log(t);
+  t++;
+}
+// Output: 1 2 3 4 5, final t = 6
+console.log(t);
+
+console.log("===Q4===");
+let m = 2;
+while (true) {
+  m += 4;
+  if (m > 12) {
+    break;
+  }
+  console.log(m);
+}
+console.log("Final m:", m);
+
+// Round | m (shuru) | m += 4 ke baad | m > 12 | Print
+// ------|-----------|----------------|--------|------
+//   1   | 2         | 6              | false  | 6
+//   2   | 6         | 10             | false  | 10
+//   3   | 10        | 14             | true   | -   (break, print nahi hua)
+//
+// Output: 6 10
+// Final m: 14
+// 14 print isliye nahi hua ke break console.log(m) se pehle chal gaya

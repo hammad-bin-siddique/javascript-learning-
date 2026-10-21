@@ -760,3 +760,159 @@ while(cl < colors.length) {
 }
 
 console.log("Final cl:", cl); // 3
+
+//! while Loop,  Real Examples
+
+// Is point mein 4 examples hain: sum, factorial, number reverse, digit count. Do do ke do hisson mein parhenge:
+
+// 6A (ab): sum aur factorial, jo ek hi pattern hain
+// 6B (agla): digit count aur number reverse, jo ek doosra pattern hain
+
+//? 6A: Accumulator Pattern
+
+// Programming mein ye accumulator kehlata hai: ek variable jo har round mein kuch jama karta rehta hai, aur loop ke end par us mein final jawab hota hai.
+
+// accumulator ko starting value do (loop se pehle)
+// loop mein: accumulator ko update karo
+// loop ke baad: accumulator mein jawab
+
+//? Example 1: Sum (1 se 50 tak)
+
+let i4 = 1; 
+let sum1 = 0; 
+
+while(i4 <= 50) {
+    sum1 += i4; 
+    i4++; 
+}
+
+console.log("Sum:", sum1); // 1275
+console.log("i:", i4); // 51
+
+//! Example 2: Factorial (5!)
+
+let num3 = 5;  
+let fact = 1; 
+let i5 = 1; 
+
+while(i5 <= num3) {
+    fact *= i5; // fact = fact * i5
+    i5++;
+}
+
+console.log("5! =", fact);
+
+
+// Agar factorial ko fact = 0 se shuru karo to 0 × koi bhi number = 0, aur jawab hamesha 0 aaye ga. Agar sum ko 1 se shuru karo to jawab hamesha 1 zyada aaye ga.
+
+// Aur ek aur nukta: order matter karta hai. Agar i++ ko sum += i se pehle likh do:
+
+// while (i <= 5) {
+//   i++;
+//   sum += i;   // ab 2+3+4+5+6 = 20, 15 nahi
+// }
+
+
+//! Comprehension Check 
+
+//! Point 6A: Accumulator Pattern (sum aur factorial)
+
+// Rule: jama karna (+=) -> accumulator 0 se shuru
+//       guna karna (*=)  -> accumulator 1 se shuru
+
+//? Q1: total (jama), i6 (counter)
+// Trace: i6 = 2, total = 0, condition i6 <= 8, update i6 += 2
+//
+// Check # | i6 | total (shuru) | i6 <= 8 | Action
+// --------|----|---------------|---------|-------------------------------
+//   1     | 2  | 0             | true    | total = 0 + 2 = 2,   i6 = 4
+//   2     | 4  | 2             | true    | total = 2 + 4 = 6,   i6 = 6
+//   3     | 6  | 6             | true    | total = 6 + 6 = 12,  i6 = 8
+//   4     | 8  | 12            | true    | total = 12 + 8 = 20, i6 = 10
+//   5     | 10 | 20            | false   | loop khatam
+//
+// Body 4 baar, condition 5 baar.
+// Output: 20 10
+// (2 + 4 + 6 + 8 = 20, aur i6 aakhri number 8 se aage 10 par ruka)
+console.log("===Q1===");
+
+let i6 = 2;
+let total = 0;
+while (i6 <= 8) {
+  total += i6;
+  i6 += 2;
+}
+console.log(total, i6); // 20 10
+
+
+//? Q2: fact1 (guna), k1 (counter)
+// Trace: fact1 = 1, k1 = 1, condition k1 <= 4, update k1++
+//
+// Check # | k1 | fact1 (shuru) | k1 <= 4 | Action
+// --------|----|---------------|---------|-------------------------------
+//   1     | 1  | 1             | true    | fact1 = 1 * 1 = 1,  k1 = 2
+//   2     | 2  | 1             | true    | fact1 = 1 * 2 = 2,  k1 = 3
+//   3     | 3  | 2             | true    | fact1 = 2 * 3 = 6,  k1 = 4
+//   4     | 4  | 6             | true    | fact1 = 6 * 4 = 24, k1 = 5
+//   5     | 5  | 24            | false   | loop khatam
+//
+// Body 4 baar, condition 5 baar.
+// Output: 24 5
+// (4! = 4 * 3 * 2 * 1 = 24)
+console.log("===Q2===");
+
+let fact1 = 1;
+let k1 = 1;
+while (k1 <= 4) {
+  fact1 *= k1;
+  k1++;
+}
+console.log(fact1, k1); // 24 5
+
+
+//? Q3: fact2 galat (0 se shuru), fact3 sahi (1 se shuru)
+// Galat version: fact2 = 0, i7 = 1, condition i7 <= 5
+//
+// Check # | i7 | fact2 (shuru) | i7 <= 5 | Action
+// --------|----|---------------|---------|-------------------------------
+//   1     | 1  | 0             | true    | fact2 = 0 * 1 = 0, i7 = 2
+//   2     | 2  | 0             | true    | fact2 = 0 * 2 = 0, i7 = 3
+//   3     | 3  | 0             | true    | fact2 = 0 * 3 = 0, i7 = 4
+//   4     | 4  | 0             | true    | fact2 = 0 * 4 = 0, i7 = 5
+//   5     | 5  | 0             | true    | fact2 = 0 * 5 = 0, i7 = 6
+//   6     | 6  | 0             | false   | loop khatam
+//
+// Body 5 baar, condition 6 baar. Output: 0
+// Wajah: 0 ko jis bhi number se guna karo, jawab 0 hi aata hai.
+// Loop bilkul theek chala (counter bhi sahi), lekin accumulator ki
+// starting value galat thi, isliye jawab galat aaya.
+console.log("===Q3===");
+
+let fact2 = 0;
+let i7 = 1;
+while (i7 <= 5) {
+  fact2 *= i7;
+  i7++;
+}
+console.log(fact2); // 0
+
+// Fix: fact3 = 1 se shuru
+//
+// Check # | i8 | fact3 (shuru) | i8 <= 5 | Action
+// --------|----|---------------|---------|--------------------------------
+//   1     | 1  | 1             | true    | fact3 = 1 * 1 = 1,   i8 = 2
+//   2     | 2  | 1             | true    | fact3 = 1 * 2 = 2,   i8 = 3
+//   3     | 3  | 2             | true    | fact3 = 2 * 3 = 6,   i8 = 4
+//   4     | 4  | 6             | true    | fact3 = 6 * 4 = 24,  i8 = 5
+//   5     | 5  | 24            | true    | fact3 = 24 * 5 = 120, i8 = 6
+//   6     | 6  | 120           | false   | loop khatam
+//
+// Body 5 baar, condition 6 baar. Output: 120 (5! = 120)
+
+let fact3 = 1;
+let i8 = 1;
+while (i8 <= 5) {
+  fact3 *= i8;
+  i8++;
+}
+console.log(fact3); // 120

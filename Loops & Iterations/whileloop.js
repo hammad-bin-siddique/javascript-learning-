@@ -916,3 +916,175 @@ while (i8 <= 5) {
   i8++;
 }
 console.log(fact3); // 120
+
+
+//! While Loop: Digit Count
+
+console.log("===Digit Count==="); 
+
+// Is point mein do examples hain: digit count aur number reverse. Dono mein ek hi naya tool chahiye, to pehle tool seekhte hain aur digit count karte hain. Number reverse agla hissa (6C) hoga.
+
+//? Tool 1: % 10 (aakhri digit nikalna)
+
+// % ko remainder kehte hain, yani bhaag dene ke baad jo bach jaye.
+
+// 48213 ko 10 se bhaag do: 10 poori 4821 baar aata hai (4821 × 10 = 48210), aur 3 bach jata hai.
+
+
+console.log(341471 % 10); // 1
+console.log(48213 % 10);   // 3  
+console.log(725 % 10);     // 5
+console.log(90 % 10);      // 0
+
+
+//? Tool 2: Math.floor(n / 10) (aakhri digit hatana)
+
+// 48213 / 10 = 4821.3. Math.floor ka kaam hai point ke baad ka hissa kaat dena (neeche ke qareeb poore number par le aana).
+
+console.log(Math.floor(48213 / 10));   // 4821
+console.log(Math.floor(725 / 10));     // 72
+console.log(Math.floor(7 / 10));       // 0   (0.7 -> 0)
+
+
+// % 10 aakhri digit deta hai, Math.floor(n / 10) aakhri digit hata deta hai.
+
+//? Digit Count Code
+console.log("===Digit Count Part Two==="); 
+let num4 = 43296; 
+
+let temp = num4;  // copy li ha num4 ke safe rahe ga orignial 
+
+let count1 = 0; 
+
+while(temp > 0) {
+    count1++; 
+    console.log(temp)
+    temp = Math.floor(temp / 10); 
+}
+
+console.log("Digits:", count1); // 5
+console.log("Temp:", temp); // 0 
+console.log("Num:", num4); // 43296
+
+
+//! Comprhension Check 
+
+console.log("===Comprehension Check==="); 
+
+
+//? Q1
+console.log("===Q1==="); 
+
+console.log(725 % 10); // 5
+console.log(Math.floor(725 / 10)); // 72
+console.log(90 % 10); // 0
+console.log(Math.floor(7 / 10));  // 0
+
+//? Q2
+console.log("===Q2==="); 
+
+let num5 = 9051;
+let temp1 = num5;
+let count2 = 0;
+while (temp1 > 0) {
+  count2++;
+  temp1 = Math.floor(temp1 / 10);
+}
+console.log(count2, temp1);
+
+// count 4 time or temp 1 = 0  pehle iteration per  9051 0 se bara ha to 905 ho jai phir dosri main 905 > 0 true phir 90 > 0 true phir 9 > 0 true or last 0 0 false loop ruk jai ga final value 0 
+
+
+// let temp3 = 52;
+// while (temp3 >= 0) {
+//   temp3 = Math.floor(temp3 / 10);
+// }
+
+//? temp ghat kar 0 par pohonch jata hai, lekin 0 par ruk jata hai, 0 se neeche nahi jata. Aur 0 >= 0 hamesha true hai, to condition kabhi false nahi hoti. Fix: > use karo, >= nahi (while (temp > 0)).
+
+
+//! Number Reverse
+
+// temp % 10 se aakhri digit nikalo 
+// Is digit ko naye number rev ke end mein jodo.
+// Math.floor(temp / 10) se aakhri digit hata do (6B ka tool 2).
+// Jab tak temp > 0 hai, ye dohrao.
+
+//? Naya number kaise banta hai: rev = rev * 10 + digit
+
+// Yahi is point ki sab se zaroori line hai. Maan lo rev abhi 4 hai aur naya digit 3 aaya, jo 4 ke baad lagna chahiye (43).
+
+// rev * 10 = 40, yani units ki jagah khali ho gayi.
+// + digit = 40 + 3 = 43, naya digit units ki jagah mein baith gaya.
+
+// Sirf rev + digit likhoge to 4 + 3 = 7 aayega, jo ghalat hai.
+
+
+let n3 = 348104; 
+let temp3 = n3; 
+let reverse = 0; 
+
+
+while(temp3 > 0) {
+    let digit = temp3 % 10;  // temp  ka last element nikalo or digit varibale main store karo 
+    reverse = reverse * 10 + digit;  // 0 * 10 + 4 = 4 is tara ye cycle chalta rahe ga phir 4 * 10 + 0 = 40 phir 40 * 10 + 1 = 401 phir 401 * 10 + 8 = 4018 and so on 
+    temp3 = Math.floor(temp3 / 10);  // last main math.floor se temp ke last digit ko remove karte jao 
+}
+console.log("Orignal:", n3)
+console.log("Reverse:", reverse); // 401843
+
+//! Comprehension Check
+
+console.log("===Comprehension Check==="); 
+
+//? Q1 
+console.log("===Q1==="); 
+
+let n4 = 6280; 
+let temp4 = n4; 
+let rev = 0; 
+
+while(temp4 > 0) {
+    let digit = temp4 % 10; 
+    rev = rev * 10 + digit; 
+    temp4 = Math.floor(temp4 / 10);
+}; 
+
+console.log(temp4); // 0 
+console.log(n4); // 6280
+console.log(rev); // 826
+
+// n = 6280, temp = 6280, rev = 0
+//
+// Chakkar | temp (start) | digit | rev = rev * 10 + digit | temp (update) | temp > 0 ?
+//    1    |    6280      |   0   |  0 * 10 + 0 = 0        |       628     |  true
+//    2    |    628       |   8   |  0 * 10 + 8 = 8        |       62      |  true
+//    3    |     62       |   2   |  8 * 10 + 2 = 82       |       6       |  true  
+//    4    |      6       |   6   |  82 * 10 + 6 = 826     |       0        | false
+
+//? Q2 
+
+console.log("===Q2===");
+
+
+let temp5 = 123; 
+let rev1 = 0; 
+
+while(temp5 > 0) {
+    temp5 = Math.floor(temp5 / 10); 
+    let digit = temp5 % 10; 
+    rev1 = rev1 * 10 + digit; 
+}
+console.log(rev1);
+
+//210
+
+// temp5 = 123, rev1 = 0
+//
+// Chakkar | temp5 (start) | temp5 (update, pehli line) | digit = temp5 % 10 | rev1 = rev1 * 10 + digit | temp5 > 0 ?
+//    1    |     123       |            12              |         2          |    0 * 10 + 2 = 2        |   12 > 0 true
+//    2    |      12       |             1              |         1          |    2 * 10 + 1 = 21       |   1 > 0 true
+//    3    |       1       |             0              |         0          |    21 * 10 + 0 = 210     |   0 > 0 false
+//
+// Natija: rev1 = 210, body 3 dafa, condition 4 dafa
+

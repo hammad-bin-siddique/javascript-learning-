@@ -1088,3 +1088,148 @@ console.log(rev1);
 //
 // Natija: rev1 = 210, body 3 dafa, condition 4 dafa
 
+//! Nested while (while ke andar while)
+
+//? Rules:
+
+// Outer ka ek chakkar chalta hai, to inner loop apna poora chakkar (condition false hone tak) khatam karta hai.
+// Inner khatam ho kar outer ki agli line par wapis aata hai, phir outer ka update hota hai.
+// Body kul outer chakkar x inner chakkar dafa chalti hai.
+// Inner ka counter outer ke andar, inner while se pehle, dobara set karna zaroori hai. Tumne pehle seekha tha ke counter loop ke baad apni aakhri value par rehta hai aur khud reset nahi hota. Agar reset na kiya to inner doosre chakkar mein shuru hi nahi hoga.
+console.log("===Nested Loop==="); 
+
+let row = 1;                         // outer counter
+while (row <= 2) {
+  let col = 1;                       // inner counter, har outer chakkar mein naya
+  while (col <= 3) {
+    console.log("row", row, "col", col);
+    col++;                           // inner update
+  }
+  row++;                             // outer update
+}
+
+// row = 1
+//
+// Step | row | col      | row <= 2 | col <= 3 | print        | update
+//  1   |  1  |  1       |  true    |  true    | row 1 col 1  | col = 2
+//  2   |  1  |  2       |   -      |  true    | row 1 col 2  | col = 3
+//  3   |  1  |  3       |   -      |  true    | row 1 col 3  | col = 4
+//  4   |  1  |  4       |   -      |  false   | (inner band) | row = 2
+//  5   |  2  |  1 reset |  true    |  true    | row 2 col 1  | col = 2
+//  6   |  2  |  2       |   -      |  true    | row 2 col 2  | col = 3
+//  7   |  2  |  3       |   -      |  true    | row 2 col 3  | col = 4
+//  8   |  2  |  4       |   -      |  false   | (inner band) | row = 3
+//  9   |  3  |  -       |  false   |   -      | (outer band) |
+//
+// Total prints = 2 x 3 = 6
+// Outer condition 3 dafa check hui (2 true + 1 false)
+// Inner condition 8 dafa check hui (har outer chakkar mein 4, yani 3 + 1)
+
+//! Comprehension Check
+
+console.log("===Comprehension Check==="); 
+
+//? Q1 
+
+console.log("===Q1==="); 
+
+let row1 = 1; 
+
+
+while(row1 <= 3) {
+    let col1 = 1; 
+    while(col1 <= 4){
+        console.log("row", row1, "col", col1); 
+        col1++;
+    }
+    row1++;
+}
+
+// Body        = 3 x 4 = 12 dafa
+// Outer cond  = 3 true + 1 false = 4 dafa
+// Inner cond  = har outer chakkar mein (4 + 1) = 5, to 3 x 5 = 15 dafa
+
+
+//?Q2
+console.log("===Q2===");
+
+let row2 = 1;
+while (row2 <= 3) {
+  let col2 = 1;
+  while (col2 <= row2) {
+    console.log("row", row2, "col", col2);
+    col2++;
+  }
+  row2++;
+}
+
+// Step | row | col | col <= row | print        | update
+//  1   |  1  |  1  |   true     | row 1 col 1  | col = 2
+//  2   |  1  |  2  |   false    | -            | row = 2
+//  3   |  2  |  1  |   true     | row 2 col 1  | col = 2
+//  4   |  2  |  2  |   true     | row 2 col 2  | col = 3
+//  5   |  2  |  3  |   false    | -            | row = 3
+//  6   |  3  |  1  |   true     | row 3 col 1  | col = 2
+//  7   |  3  |  2  |   true     | row 3 col 2  | col = 3
+//  8   |  3  |  3  |   true     | row 3 col 3  | col = 4
+//  9   |  3  |  4  |   false    | -            | row = 4 -> outer band
+//
+// Total 6 lines: row 1 par 1, row 2 par 2, row 3 par 3 (1 + 2 + 3)
+// Wajah: inner ki limit `row` hai, jo har chakkar mein badalti hai
+
+
+//? Q3
+console.log("===Q3===");
+
+let row3 = 1;
+let col3 = 1;                         // yahan le gaye
+while (row3 <= 2) {
+  while (col3 <= 3) {
+    console.log("row", row3, "col", col3);
+    col3++;
+  }
+  row3++;
+}
+
+// Step | row | col | col <= 3 | print        | update
+//  1   |  1  |  1  |  true    | row 1 col 1  | col = 2
+//  2   |  1  |  2  |  true    | row 1 col 2  | col = 3
+//  3   |  1  |  3  |  true    | row 1 col 3  | col = 4
+//  4   |  1  |  4  |  false   | -            | row = 2
+//  5   |  2  |  4  |  false   | -            | row = 3  (col reset nahi hua!)
+//  6   |  3  |  4  |  -       | outer band
+//
+// Sirf 3 lines print hongi (row 1 ki), row 2 par kuch nahi
+// Wajah: col 4 par atka reh gaya, aur 4 <= 3 hamesha false
+
+
+
+//! Common Mistakes 
+
+
+// 1) Update bhool jana ya ghalat variable/direction -> infinite loop
+//    while (i < 5) { console.log(i); }          // i kabhi nahi badla
+
+// 2) Off-by-one: < aur <= ka farq
+//    while (i <= arr.length)                    // undefined aata hai, sahi hai i < arr.length
+
+// 3) Accumulator ki ghalat shuruaat
+//    let fact = 0; ... fact *= i;               // hamesha 0, sahi hai fact = 1
+
+// 4) Counter reset na karna (nested mein)
+//    let col = 1 ko outer ke upar rakhna        // inner doosre chakkar mein chalta hi nahi
+
+// 5) Update ka ghalat order
+//    temp ko digit nikalne se pehle badalna     // digit chhoot jata hai, silent bug
+
+// 6) Condition mein = ki jagah ===
+//    while (x = 5)                              // assignment hai, 5 truthy hai, infinite loop
+//    sahi: while (x === 5)
+
+// 7) while ke baad semicolon
+//    while (i < 3);                             // ; ka matlab khali body, infinite loop
+//    { console.log(i); i++; }                   // ye block loop ka hissa hi nahi
+
+// 8) Asal variable ko modify karna
+//    n ko hi / 10 karte jana                    // asal number kho gaya, copy temp par kaam karo
+

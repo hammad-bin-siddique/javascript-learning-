@@ -48,3 +48,60 @@ else{
     console.log(foundIndex);  // 3 
     console.log(marks[foundIndex]); // 90
 } 
+
+
+//? Task Three 
+
+console.log("===Task Three==="); 
+
+let nums = 90417; 
+let temp = nums; 
+let sum1 = 0; 
+// let n = 12321; 
+let n = 1234;
+let temp1 = n;
+
+
+while(temp > 0) {
+    let digit = temp % 10; 
+    sum1 = sum1 + digit; 
+    temp = Math.floor(temp / 10);
+}
+
+console.log("Sum:", sum1); // 21
+console.log(temp); // 0
+
+
+// Now make the reverse to check palindrome 
+
+let reverse = 0; 
+
+while(temp1 > 0) {
+    let digit = temp1 % 10; 
+    reverse = reverse * 10 +  digit; 
+    temp1 = Math.floor(temp1 / 10);
+
+   
+}
+ if(n === reverse) {
+        console.log("Palindrome Ha"); 
+    }
+    else {
+        console.log("Palindrome Nahi ha");
+    }
+
+//? Task Four 
+console.log("===Task Four==="); 
+
+let row = 1; 
+
+while(row <= 4) {
+    let col = 1; 
+    let line = "";
+    while(col <= row) {
+        line = line + "*";
+        col++;
+    }
+    console.log(line);
+    row++;
+}

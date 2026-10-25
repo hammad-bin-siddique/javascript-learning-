@@ -13,95 +13,124 @@ while (i <= 50) {
   sum += i; // sum of even number
   count++; // total number of even
   i = i + 2;
-} 
+}
 
 console.log("Sum:", sum); // 650
 console.log("Last Value of I", i); // 52
-console.log(count); // 26 wese total 25 hain ye abhi last value count ki 26 keuke <= use kia ha 
+console.log(count); // 26 wese total 25 hain ye abhi last value count ki 26 keuke <= use kia ha
 
+//? Task Two
+console.log("===Task Two===");
 
-//? Task Two 
-console.log("===Task Two==="); 
-
-// find the first in the array which is greater than 80 
+// find the first in the array which is greater than 80
 
 let marks = [45, 78, 32, 90, 60, 90, 70];
-let i1 = 0; 
-let foundIndex = -1; 
- 
-while(true) {
-    if(i1 >= marks.length) {
-        break; 
-    }
+let i1 = 0;
+let foundIndex = -1;
 
-    if(marks[i1] > 80) {
-        foundIndex = i1;
-        break; 
-    }
-    i1++;
+while (true) {
+  if (i1 >= marks.length) {
+    break;
+  }
+
+  if (marks[i1] > 80) {
+    foundIndex = i1;
+    break;
+  }
+  i1++;
 }
 
-if(foundIndex === -1) {
-    console.log("Nahi Mila");
+if (foundIndex === -1) {
+  console.log("Nahi Mila");
+} else {
+  console.log(foundIndex); // 3
+  console.log(marks[foundIndex]); // 90
 }
-else{
-    console.log(foundIndex);  // 3 
-    console.log(marks[foundIndex]); // 90
-} 
 
+//? Task Three
 
-//? Task Three 
+console.log("===Task Three===");
 
-console.log("===Task Three==="); 
-
-let nums = 90417; 
-let temp = nums; 
-let sum1 = 0; 
-// let n = 12321; 
+let nums = 90417;
+let temp = nums;
+let sum1 = 0;
+// let n = 12321;
 let n = 1234;
 let temp1 = n;
 
-
-while(temp > 0) {
-    let digit = temp % 10; 
-    sum1 = sum1 + digit; 
-    temp = Math.floor(temp / 10);
+while (temp > 0) {
+  let digit = temp % 10;
+  sum1 = sum1 + digit;
+  temp = Math.floor(temp / 10);
 }
 
 console.log("Sum:", sum1); // 21
 console.log(temp); // 0
 
+// Now make the reverse to check palindrome
 
-// Now make the reverse to check palindrome 
+let reverse = 0;
 
-let reverse = 0; 
-
-while(temp1 > 0) {
-    let digit = temp1 % 10; 
-    reverse = reverse * 10 +  digit; 
-    temp1 = Math.floor(temp1 / 10);
-
-   
+while (temp1 > 0) {
+  let digit = temp1 % 10;
+  reverse = reverse * 10 + digit;
+  temp1 = Math.floor(temp1 / 10);
 }
- if(n === reverse) {
-        console.log("Palindrome Ha"); 
-    }
-    else {
-        console.log("Palindrome Nahi ha");
-    }
+if (n === reverse) {
+  console.log("Palindrome Ha");
+} else {
+  console.log("Palindrome Nahi ha");
+}
 
-//? Task Four 
-console.log("===Task Four==="); 
+//? Task Four
+console.log("===Task Four===");
 
-let row = 1; 
+let row = 1;
 
-while(row <= 4) {
-    let col = 1; 
-    let line = "";
-    while(col <= row) {
-        line = line + "*";
-        col++;
-    }
-    console.log(line);
-    row++;
+while (row <= 4) {
+  let col = 1;
+  let line = "";
+  while (col <= row) {
+    line = line + "*";
+    col++;
+  }
+  console.log(line);
+  row++;
+}
+
+//! Mini Project
+
+console.log("===Mini Project===");
+
+let numbers = [121, 4059, 1001, 90, -5, 7];
+let i2 = 0;
+
+while (i2 < numbers.length) {
+  let number = numbers[i2];
+
+  if (number < 0) {
+    console.log("Number Can't Be Negative");
+    break;
+  }
+
+  let temp = number;
+  let count = 0;
+  let sum = 0;
+  let reverse = 0;
+
+  while (temp > 0) {
+    let digit = temp % 10;
+    count++;
+    sum = sum + digit;
+    reverse = reverse * 10 + digit;
+    temp = Math.floor(temp / 10);
+  }
+
+  let result = 'No';
+  if (number === reverse) {
+    result = "Yes"
+  }
+
+  console.log(`${number} -> digits: ${count}, sum: ${sum}, reverse: ${reverse}, palindrome: ${result}`);
+  i2++;
 }

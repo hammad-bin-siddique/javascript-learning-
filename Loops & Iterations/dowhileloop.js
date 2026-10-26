@@ -97,3 +97,89 @@ console.log("Y Final Value:", y);
 // ------|-----------|------------------|-----------------|---------------
 //   1   |    10     | do-while: 10     |       11        | false → STOP
 // Output: do-while: 10 | Final y = 11
+
+
+//? Q1
+
+let p = 3; 
+while(p < 3) {
+    p++;
+}
+console.log("Final P value:", p); // 3 he ho gi keuke condition first time he false ho gai ha is lia 3 he rahe ga 
+
+let q = 3; 
+do {
+    q++
+} while (q < 3); 
+
+console.log("Final q value", q); // yaha q ke final value 4 ho gi keuke do while main pehle body chalti ha or bad main condition check hoti ha 
+
+//? Q2
+
+let m = 1;
+while (m < 4) {
+  console.log(m);
+  m++;
+}
+
+let k = 1;
+do {
+  console.log(k);
+  k++;
+} while (k < 4);
+
+// in dono ka output same ho keuke first iteration per dono ke condition false nahi ho rahi the chai body pehle chalti ya phir condition pehle check hoti 
+
+
+//! Point 3: Semicolon ka Problem
+
+// do...while ke baad ; “zaroori” hai. Zyada sahi yeh hai ke JavaScript kuch jagah khud ; laga deta hai (ASI, Automatic Semicolon Insertion), to bina ; ke bhi chal sakta hai. Lekin aadat yahi rakho ke hamesha likho, kyunke yeh is statement ka hissa hai.
+
+//? Do alag cheezein, jin mein confusion hota hai
+
+// 1. do...while mein ; sahi aur zaroori jagah par hai
+
+// do {
+// body
+// } while (condition);   // ← yeh ; is statement ka hissa hai
+
+// 2. Normal while mein ; lagana bug hai (asli masla):
+
+// let i = 0;
+// while (i < 3);      // ← yeh ; ek KHALI body ban gayi
+// {
+//   console.log(i);
+//   i++;
+// }
+
+// JavaScript isay aise padhta hai: while (i < 3) ki body khali statement ; hai. Neeche wala { ... } loop ki body nahi, ek alag block hai jahan tak program kabhi pahunchta hi nahi.
+
+// Check | i | i < 3 ? | Body        | i badla?
+// ------|---|---------|-------------|---------
+//   1   | 0 | true    | khali (;)   | Nahi
+//   2   | 0 | true    | khali (;)   | Nahi
+//   3   | 0 | true    | khali (;)   | Nahi   ... hamesha ke liye
+// → INFINITE LOOP. Console par kuch print nahi hoga, program atak jayega.
+// Rokne ke liye: Ctrl + C
+
+// A
+do {
+  console.log("hi");
+} while (false);
+
+// ye sirf 1 time body chale gi 
+
+// B
+// let c = 0;
+// while (c < 2);
+// {
+//   c++;
+// } 
+// yaha per program hang ho jai ga keuke yaha semicolon ha or javascript neache wale block ko alag treat kar raha ha is lia ye infinite loop rahe ga fix (c < 2) ke bad semicolon nahi lagani ha take neache wala block while ke sath he treat ho 
+
+// C
+let d = 0;
+do {
+  d++;
+} while (d < 2);
+console.log(d); // 2 final value 

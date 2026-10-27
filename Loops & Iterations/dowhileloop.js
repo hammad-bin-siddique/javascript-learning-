@@ -183,3 +183,33 @@ do {
   d++;
 } while (d < 2);
 console.log(d); // 2 final value 
+
+
+//! Point 4A: Real example, Menu
+
+// JazzCash ya Easypaisa app khulti hai to menu pehle screen par aata hai, phir aap option dabate ho. Menu kam az kam ek dafa dikhna hi hai, aur aap “Exit” dabao tabhi band hota hai. Isi wajah se yahan do...while fit baithta hai.
+
+// Node mein abhi keyboard input mushkil hai (readline baad mein seekhenge), is liye “user ke options” ko ek array mein simulate karte hain:
+
+const choices = [1, 2, 5, 0]; // User ne in main se Koi option choose kia 
+let pos = 0; // array main kaha tak ponche
+let choice; 
+do{
+  console.log("\n===Menu===");
+  console.log("1. Balance 2. Deposit 0. Exit");
+
+  choice = choices[pos]; 
+  pos++;
+  console.log("User ne dabaya:", choice);
+
+  if(choice === 1) {
+    console.log("Balance: 5000"); 
+  }
+  else if(choice === 2) {
+    console.log("Deposit ho gaya");
+  }
+  else if(choice !== 0) {
+    console.log("Wrong Option"); 
+  }
+} while (choice !== 0); 
+console.log("Allah hafiz");

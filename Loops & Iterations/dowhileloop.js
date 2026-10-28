@@ -228,7 +228,8 @@ console.log("Allah hafiz");
 
 //! Point 4B: Input Validation
 
-//? ATM ka PIN
+//? ATM PIN Validation 
+
 console.log("===ATM PIN Validation===");
 const entries = ["12", "abc", "1234"];
 const correctPin = "1234";
@@ -245,3 +246,39 @@ do {
   }
 } while (pin !== correctPin);
 console.log("Pin is Correct", idx);
+
+
+
+//? ATM PIN Validation With Attempts Limits
+console.log("===Atm Pin Validation With Attempts Limit===");
+
+const entries1 = ["12", "abc", "99", "1234"]; 
+const correctPin1 = "1234"; 
+const maxAttempts = 3; 
+let attempts = 0; 
+let pin1; 
+
+do {
+  pin1 = entries1[attempts]; 
+  attempts++; 
+  console.log("Try", attempts, ":", pin1); 
+
+  if(pin1 !== correctPin1) {
+    console.log("Wrong Pin");
+  }
+} while (pin1 !== correctPin1 && attempts < maxAttempts); 
+
+if(pin1 === correctPin1) {
+  console.log("Make Transaction");
+}
+else {
+  console.log("Card Block!");
+}
+
+// Round | attempts (start) | pin    | Output                     | pin !== correct && attempts < 3 ?
+// ------|------------------|--------|----------------------------|----------------------------------
+//   1   |        0         | "12"   | Koshish 1 : 12 + Galat PIN | true  && (1<3 true)  → dobara
+//   2   |        1         | "abc"  | Koshish 2 : abc + Galat PIN| true  && (2<3 true)  → dobara
+//   3   |        2         | "99"   | Koshish 3 : 99 + Galat PIN | true  && (3<3 false) → STOP
+// Body 3 dafa. Final attempts = 3. "1234" (index 3) kabhi padha hi nahi.
+// Aakhri line: Card block!

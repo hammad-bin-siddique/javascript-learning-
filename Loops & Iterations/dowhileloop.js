@@ -282,3 +282,49 @@ else {
 //   3   |        2         | "99"   | Koshish 3 : 99 + Galat PIN | true  && (3<3 false) → STOP
 // Body 3 dafa. Final attempts = 3. "1234" (index 3) kabhi padha hi nahi.
 // Aakhri line: Card block!
+
+
+//! Point 5: while kab behtar, do...while kab
+
+// “Kya kaam ek dafa zaroor hona chahiye, chahe halat kuch bhi ho?”
+
+// Haan → do...while
+// Nahi, pehle dekhna hai ke karna bhi hai ya nahi → while
+
+
+//! Real-world examples
+
+//? while (pehle check, phir kaam):
+
+// Doctor ka clinic: jab tak marize intezar mein hain, doctor ek ek ko bulata hai. Koi marize na ho to doctor kuch nahi karta (0 dafa).
+// Download queue: jab tak queue mein files hain, agli file download karo. Queue khali ho to kuch nahi.
+// Cart ke items bill mein jodna: cart khali ho sakta hai.
+
+//? do...while (pehle kaam, phir check):
+
+// ATM PIN / OTP: pehle input lena hi hai.
+// Menu (JazzCash, Easypaisa): menu pehle dikhna hi hai.
+// Game ke baad “dobara khelna hai?”: game pehle ek dafa khelna hi hai.
+
+//? Galat loop chunne ka nuqsan
+
+const queue = []; // Empty Queue 
+
+// do while khali queue per bhi 1 dafa chal gaya 
+
+do {
+  console.log("Processing:", queue[0]); 
+  queue.shift();
+} while (queue.length > 0);
+
+// Ouptut: Processing: undefined BUG
+
+//? While khali queue per kuch nahi karta ha 
+while (queue.length > 0) {
+  console.log("Processing:", queue[0]); 
+  queue.shift();
+}
+
+//Output Kuch Nahi
+
+// Khali queue mein koi file hi nahi, to do...while ne ek dafa undefined ko process kar diya. Yahan while sahi hai

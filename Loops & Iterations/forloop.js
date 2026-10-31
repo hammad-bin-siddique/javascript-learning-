@@ -135,3 +135,219 @@ for (let i = 10; i >= 4; i -= 3) {
 
 // 5 < 1 pehle hi false hai, to body 0 dafa chalegi.
 
+
+
+//! Point 3: Optional Parts (for(;;))
+
+// Rule teeno parts optional hain, lekin dono ; zaroori hain
+
+// for (;;) { }      // sahi (teeno khali)
+// for (;) { }       // SyntaxError (ek semicolon kam)
+
+
+//! Jo part khali ho, uska kaam aap ko khud karna hota hai.
+
+//? 1. Init khali: counter pehle se bahar bana hua
+let i = 1;
+for (; i <= 3; i++) {
+  console.log(i);
+}
+console.log(i);   // 4
+
+// Pichle point mein bataya tha ke for (let i...) ka i loop ke bahar nahi milta. Agar aap ko loop ke baad bhi counter chahiye, to usay bahar declare karo aur init khali chhoro.
+
+// Real-world: list mein pehla ghalat entry dhoondna hai. Loop jahan ruke wahan ka number (position) baad mein bhi chahiye.
+
+
+//? 2. Update khali: update body ke andar
+
+for (let i = 1; i <= 10; ) {
+  console.log(i);
+  i += 3;
+}
+Output: 1, 4, 7, 10
+
+// Ye tab kaam aata hai jab update kisi shart par depend kare. Lekin yaad rakho: update bhoole to infinite loop.
+
+//? 3. Condition khali: matlab hamesha true
+
+let attempts = 0;
+for (;;) {
+  attempts++;
+  console.log("Try", attempts);
+  if (attempts === 3) break;
+}
+
+// for (;;) bilkul while (true) ke barabar hai. Ise break se rokna zaroori hai, warna Ctrl+C. Real-world: menu ya game jo “exit” dabane tak chalta rahe.
+
+
+//? 4. Ek se zyada variables (comma)
+
+for (let i = 1, j = 10; i < j; i++, j--) {
+  console.log(i, j);
+}
+
+// init: i = 1, j = 10
+// check 1: 1 < 10 true  → print "1 10" → update: i = 2, j = 9
+// check 2: 2 < 9  true  → print "2 9"  → update: i = 3, j = 8
+// check 3: 3 < 8  true  → print "3 8"  → update: i = 4, j = 7
+// check 4: 4 < 7  true  → print "4 7"  → update: i = 5, j = 6
+// check 5: 5 < 6  true  → print "5 6"  → update: i = 6, j = 5
+// check 6: 6 < 5  false → khatam
+// Body 5, condition 6, update 5
+
+//! Rules:
+
+// init mein let ek hi dafa likho, aur variables comma se alag karo: let i = 1, j = 10. (Pehle let n = 5, fact = 1 mein comma sahi tha, yahan bhi wahi baat hai.)
+// update mein bhi comma: i++, j--.
+// condition mein ek hi expression hota hai. Do shartein chahiye to && ya || use karo.
+// Parts ke darmiyan ;, variables ke darmiyan ,. Ye mat milana.
+
+//! Comprehension Check: Optional Parts and Multiple Variables
+
+//? Q1
+console.log("===Q1===");
+
+for (let a = 1, b = 8; a < b; a += 2, b--) {
+  console.log(a, b);
+}
+// init:    a = 1, b = 8
+// check 1: 1 < 8 true  → print "1 8" → update: a = 3, b = 7
+// check 2: 3 < 7 true  → print "3 7" → update: a = 5, b = 6
+// check 3: 5 < 6 true  → print "5 6" → update: a = 7, b = 5
+// check 4: 7 < 5 false → loop ends
+// Output: 1 8 / 3 7 / 5 6
+// Body 3, condition 4, update 3
+
+
+//? Q2
+console.log("===Q2===");
+
+let n = 1;
+for (; n < 20; ) {
+  n *= 3;
+}
+console.log(n);
+// init:    empty (n = 1 was declared outside)
+// check 1: 1 < 20 true  → body: n = 3
+// check 2: 3 < 20 true  → body: n = 9
+// check 3: 9 < 20 true  → body: n = 27
+// check 4: 27 < 20 false → loop ends
+// update part empty, so nothing runs after the body
+// Only the last console.log prints → Output: 27
+// Body 3, condition 4
+
+
+//? Q3
+console.log("===Q3===");
+
+let total = 0;
+let num = 5;
+for (;;) {
+  total += num;
+  if (total > 12) break;
+  num--;
+}
+console.log(total, num);
+// condition part empty → never checked, treated as true
+// Round 1: total = 0 + 5 = 5   → 5 > 12 no  → num-- → num = 4
+// Round 2: total = 5 + 4 = 9   → 9 > 12 no  → num-- → num = 3
+// Round 3: total = 9 + 3 = 12  → 12 > 12 no → num-- → num = 2
+// Round 4: total = 12 + 2 = 14 → 14 > 12 yes → break
+//          num-- is SKIPPED, so num stays 2
+// Output: 14 2
+// Body 4, num-- ran 3 times, condition checks: 0
+
+
+//? Q4 (model answer)
+console.log("===Q4===");
+
+let word = "level";
+let isPalindrome = true;
+for (let i = 0, j = word.length - 1; i < j; i++, j--) {
+  if (word[i] !== word[j]) {
+    isPalindrome = false;
+    break;
+  }
+}
+if (isPalindrome) {
+  console.log("palindrome");
+} else {
+  console.log("not palindrome");
+}
+// init:    i = 0, j = 4
+// check 1: 0 < 4 true  → word[0] "l" vs word[4] "l" equal → update: i = 1, j = 3
+// check 2: 1 < 3 true  → word[1] "e" vs word[3] "e" equal → update: i = 2, j = 2
+// check 3: 2 < 2 false → loop ends (middle letter needs no check)
+// isPalindrome is still true → Output: palindrome
+// Body 2, condition 3, update 2
+
+//! Point 4: for Loop with Arrays (Traversal, Searching, Sum, Max/Min)
+
+// Array par for loop ka sabse zyada istemal hota hai. Chaar patterns hain, aur har pattern ka structure yaad rakho.
+
+//? Real-world example
+
+
+// Traversal: har item ko ek ek karke dekhna.
+// Sum: bill ka total.
+// Max/Min: sabse mehnga ya sasta item.
+// Searching: koi khaas price list mein hai ya nahi, aur kis position par.
+
+
+//? Pattern 1: Traversal
+console.log("===For Loop Traversal==="); 
+
+let prices = [450, 123, 840, 283, 898]; 
+for (let i = 0; i < prices.length; i++) {
+  console.log(i, prices[i]);
+}
+
+
+//? Pattern 2: Sum (Accumulator Pattern)
+
+let totall = 0; 
+for (let i = 0; i < prices.length; i++) {
+  totall += prices[i];
+}
+
+console.log("Total:",totall);
+
+
+//? Pattern 3: Max / Min (Comparison Pattern)
+
+let max = prices[0]; 
+for (let i = 1; i < prices.length; i++) {
+  if(prices[i] > max) {
+    max = prices[i];
+  }
+}
+
+console.log("Max Item Price:", max); // 898
+
+//? Min Now 
+
+let min = prices[0]; 
+for (let i = 1; i < prices.length; i++) {
+  if(prices[i] < min) {
+    min = prices[i]
+  }
+}
+
+console.log("Min Item Price:", min); // 123
+
+
+//? Pattern 4: Searching (Linear Search)
+
+
+let target = 840; 
+let foundIndex = -1; 
+
+for(let i = 0; i < prices.length; i++) {
+  if(prices[i] === target) {
+    foundIndex = i;
+    break;
+  }
+}
+
+console.log("Found Index:", foundIndex); // 2

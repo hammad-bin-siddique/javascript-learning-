@@ -351,3 +351,144 @@ for(let i = 0; i < prices.length; i++) {
 }
 
 console.log("Found Index:", foundIndex); // 2
+
+//! Point 5: Nested for Loops (Tables and Patterns)
+
+console.log("===Nested For Loops===");
+
+//? Concept: loop ke andar loop
+
+// Real-world: cinema ke seats. Row 1 mein seat 1, 2, 3, 4. Phir Row 2 mein seat 1, 2, 3, 4. Row (bahar wala loop) ek dafa badalti hai, aur seat (andar wala loop) har row ke liye shuru se aakhir tak chalta hai.
+
+// Terms:
+
+// Outer loop: bahar wala (row)
+// Inner loop: andar wala (column / seat)
+
+// Sab se zaroori usool: outer loop ke har ek iteration mein inner loop poora chalta hai.
+
+//? Example 1: Multiplication Table
+
+for (let row = 1; row <= 3; row++) {
+  for (let col = 1; col <= 3; col ++) {
+    console.log(row,"x", col, "=",  row * col);
+  }
+}
+
+// outer init: row = 1
+//   inner init: col = 1
+//   col = 1: print "1 x 1 = 1"
+//   col = 2: print "1 x 2 = 2"
+//   col = 3: print "1 x 3 = 3"
+//   col = 4: 4 <= 3 false → inner ends
+// outer update: row = 2
+//   inner init AGAIN: col = 1   ← har dafa naya
+//   "2 x 1 = 2", "2 x 2 = 4", "2 x 3 = 6" → inner ends
+// outer update: row = 3
+//   "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9" → inner ends
+// outer update: row = 4 → 4 <= 3 false → khatam
+// Inner body total = 3 x 3 = 9
+
+//? while se farq
+
+// while mein inner counter ko outer loop ke andar khud reset karna parta tha (let col = 1 andar likhna). for (let col = 1; ...) mein init har outer round mein khud dobara chalta hai, to reset ka masla nahi rehta.
+
+//? Example 2: Triangle Pattern (inner outer par depend karta hai)
+
+for(let row = 1; row <= 5; row++) {
+  let line = ""; 
+  for(let col = 1; col <= row; col++) {
+    line += "*";
+  }
+  console.log(line);
+}
+
+//! Important Rules: 
+
+// line ko outer loop ke andar reset karo (let line = "" inner loop se pehle). Bahar likha to har row pichli row ke stars ke saath jud jayegi.
+// console.log(line) inner loop ke BAAD, outer loop ke andar. Inner ke andar likha to har ek star alag line par aayega.
+// Do alag naam use karo (row/col). Dono mein i mat rakho, kyunke ye confusing hai aur var ke saath infinite loop bana sakta hai.
+
+//? break nested loop mein
+
+// break sirf usi loop ko rokta hai jis ke andar ho. Inner mein break likha to sirf inner ruke ga, outer chalta rahega.
+
+
+//! Comprehension Check: Nested for Loops
+
+//? Q1
+console.log("===Q1===");
+
+for (let r = 1; r <= 3; r++) {
+  for (let c = 1; c <= 4; c++) {
+    console.log(r, c);
+  }
+}
+// r = 1: c = 1,2,3,4 → "1 1", "1 2", "1 3", "1 4" → c = 5: 5 <= 4 false → inner ends
+// r = 2: c = 1,2,3,4 → "2 1", "2 2", "2 3", "2 4" → c = 5 false → inner ends
+// r = 3: c = 1,2,3,4 → "3 1", "3 2", "3 3", "3 4" → c = 5 false → inner ends
+// r = 4: 4 <= 3 false → outer ends
+// Inner body:      3 x 4 = 12
+// Inner condition: per outer round 4 true + 1 false = 5 → 3 x 5 = 15
+// Outer body 3, outer condition 4
+
+
+//? Q2
+console.log("===Q2===");
+
+for (let r = 1; r <= 3; r++) {
+  let line = "";
+  for (let c = r; c <= 3; c++) {
+    line += c;
+  }
+  console.log(line);
+}
+// r = 1: line = "" → c = 1: "1" → c = 2: "12" → c = 3: "123" → c = 4 false → print "123"
+// r = 2: line = "" → c = 2: "2" → c = 3: "23"            → c = 4 false → print "23"
+// r = 3: line = "" → c = 3: "3"                          → c = 4 false → print "3"
+// r = 4: 4 <= 3 false → outer ends
+// Output: 123 / 23 / 3
+// Inner body:      3 + 2 + 1 = 6
+// Inner condition: 4 + 3 + 2 = 9 (each round = body count + 1)
+// Outer body 3, outer condition 4
+
+
+//? Q3
+console.log("===Q3===");
+
+for (let r = 1; r <= 3; r++) {
+  for (let c = 1; c <= 3; c++) {
+    if (c === 2) break;
+    console.log(r, c);
+  }
+}
+// r = 1: c = 1: 1 === 2 no → print "1 1" → update c = 2
+//        c = 2: 2 === 2 yes → break (inner ends, console.log skipped)
+// r = 2: c = 1 → print "2 1" → c = 2 → break
+// r = 3: c = 1 → print "3 1" → c = 2 → break
+// r = 4: 4 <= 3 false → outer ends
+// Output: 1 1 / 2 1 / 3 1
+// break only stops the INNER loop; outer loop runs all 3 rounds
+// Inner body entered 2 times per round = 6 (but printed only 3 times)
+// Outer body 3, outer condition 4
+
+
+//? Q4 
+console.log("===Q4===");
+for (let row = 1; row <= 4; row++) {
+  let line = "";
+  for (let col = 4; col >= row; col--) {
+    line += "*";
+  }
+  console.log(line);
+}
+
+
+// row = 1: line = "" → col = 4,3,2,1 (col >= 1) → 4 stars → col = 0: 0 >= 1 false → print "****"
+// row = 2: line = "" → col = 4,3,2   (col >= 2) → 3 stars → col = 1: 1 >= 2 false → print "***"
+// row = 3: line = "" → col = 4,3     (col >= 3) → 2 stars → col = 2: 2 >= 3 false → print "**"
+// row = 4: line = "" → col = 4       (col >= 4) → 1 star  → col = 3: 3 >= 4 false → print "*"
+// row = 5: 5 <= 4 false → outer ends
+// Inner body:      4 + 3 + 2 + 1 = 10
+// Inner condition: 5 + 4 + 3 + 2 = 14 (each round = body count + 1)
+// Outer body 4, outer condition 5

@@ -499,7 +499,7 @@ for (let row = 1; row <= 4; row++) {
 
 console.log("===Let vs Var in Loops and setTimeout trap===");
 
-setTimeout(function () { console.log("baad mein"); }, 0);
+// setTimeout(function () { console.log("baad mein"); }, 0);
 console.log("pehle");
 // Output: pehle, baad mein
 
@@ -517,11 +517,11 @@ console.log("pehle");
 //! Famous Trap
 console.log("===Famous Trap===");
 
-for (var k = 0; k < 3; k++) {
-  setTimeout(function () {
-    console.log(k);
-  }, 0);
-}
+// for (var k = 0; k < 3; k++) {
+//   setTimeout(function () {
+//     console.log(k);
+//   }, 0);
+// }
 // Output: 3, 3, 3   (0, 1, 2 nahi!)
 
 // Loop chalta hai (setTimeout sirf function ko "baad ke liye" rakhta hai):
@@ -538,11 +538,11 @@ for (var k = 0; k < 3; k++) {
 //! setTimout With Let
 console.log("===setTimout with let===");
 
-for (let i = 0; i < 3; i++) {
-  setTimeout(function () {
-    console.log(i);
-  }, 0);
-}
+// for (let i = 0; i < 3; i++) {
+//   setTimeout(function () {
+//     console.log(i);
+//   }, 0);
+// }
 // Output: 0, 1, 2
 
 // let har iteration ke liye NAYA alag i banata hai:
@@ -584,10 +584,10 @@ console.log(a);
 //? Q2
 console.log("===Q2===");
 
-for (let k = 0; k < 3; k++) {
-  setTimeout(function () { console.log(k); }, 0);
-}
-console.log("done");
+// for (let k = 0; k < 3; k++) {
+//   setTimeout(function () { console.log(k); }, 0);
+// }
+// console.log("done");
 // k = 0 → function #1 queued (keeps its own k = 0)
 // k = 1 → function #2 queued (keeps its own k = 1)
 // k = 2 → function #3 queued (keeps its own k = 2)
@@ -600,9 +600,9 @@ console.log("done");
 //? Q3
 console.log("===Q3===");
 
-for (var x = 1; x <= 3; x++) {
-  setTimeout(function () { console.log(x * 10); }, 0);
-}
+// for (var x = 1; x <= 3; x++) {
+//   setTimeout(function () { console.log(x * 10); }, 0);
+// }
 // x = 1 → function #1 queued
 // x = 2 → function #2 queued
 // x = 3 → function #3 queued
@@ -615,3 +615,102 @@ for (var x = 1; x <= 3; x++) {
 //* Final order in the terminal (normal code first, then the queue):
 // ===Q1=== / 3 / ===Q2=== / done / ===Q3===
 // then the queue in the order it was filled: 0 / 1 / 2 / 40 / 40 / 40
+
+
+
+//!  Point 7: Building Arrays, Strings and Objects Inside Loops
+console.log("===Building Arrays, String, Object Inside Loops===");
+
+// Rule 1: Container loop se BAHAR banao
+// Cheez	                                              Kahan banani hai
+// Final result ka container (array / string / object)	Loop se pehle
+// Har row ka alag temporary (jaise line)             	Outer loop ke andar
+
+//? Agar final container loop ke andar banaya, to har round par naya khali ho jata hai aur pichla sab ghayab.
+
+
+//? 1. Building an Array (push)
+
+
+let nums = [1, 2, 3, 4, 5]; 
+const evenSquares = []; 
+
+for(let i = 0; i < nums.length; i++) {
+  if(nums[i] % 2 === 0) {
+    evenSquares.push(nums[i] * nums[i]);
+  }
+}
+
+console.log(evenSquares);
+
+// i = 0: 1 % 2 === 0? no  → skip
+// i = 1: 2 % 2 === 0? yes → push 4  → [4]
+// i = 2: 3 → skip
+// i = 3: 4 → push 16 → [4, 16]
+// i = 4: 5 → skip
+// Body 5 dafa, push 2 dafa
+
+
+//? 2. Building a String (+= aur comma wala masla)
+
+const fruits = ["Apple", "Mango", "Kiwi"]; 
+let text = ""; 
+
+for(let i = 0; i < fruits.length; i++) {
+  text += fruits[i];
+  if(i < fruits.length - 1) {
+    text += ", ";
+  }
+}
+
+console.log(text);
+
+// i = 0: text = "apple"        → 0 < 2 yes → text = "apple, "
+// i = 1: text = "apple, mango" → 1 < 2 yes → text = "apple, mango, "
+// i = 2: text = "apple, mango, kiwi" → 2 < 2 no → comma nahi
+
+//! Rule
+
+// element hamesha add hota hai, comma shart se. Agar if poore element ko ghere mein le le to elements hi ghayab ho jayenge. Bina shart ke text += fruits[i] + ", " likha to aakhir mein extra ", " reh jata hai.
+
+// const text = "" mein += error deta hai (TypeError), kyunke string ko dobara assign karna parta hai. Strings ke liye let.
+
+
+//? 3. Building an Object (Frequency Counter)
+
+let word1 = "pakpatanshareef"; 
+
+const count = {}; 
+
+for(let i = 0; i < word1.length; i++) {
+  let ch = word1[i]; 
+  if(count[ch] === undefined) {
+    count[ch] = 1; 
+  } else {
+    count[ch]++;
+  }
+}
+
+console.log(count);
+
+//? 4. Array of Objects (reference ka trap)
+
+let names = ["Ali", "Sara"]; 
+const users = []; 
+for(let i = 0; i < names.length; i++) {
+  users.push({id: i + 1, name: names[i]});  // har round NAYA object
+}
+console.log(users)
+// [{ id: 1, name: "Ali" }, { id: 2, name: "Sara" }]
+
+// Galat tareeqa: object loop se bahar bana kar usi ko badalte jao aur push karte jao:
+
+const user = {}; 
+for(let i = 0; i < names.length; i++) {
+  user.name = names[i];
+  users.push(user);
+}
+
+console.log(user);
+
+// [{ name: "Sara" }, { name: "Sara" }]  → dono ek hi address, jo aakhir mein "Sara" ban gaya

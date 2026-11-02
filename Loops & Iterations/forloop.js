@@ -492,3 +492,126 @@ for (let row = 1; row <= 4; row++) {
 // Inner body:      4 + 3 + 2 + 1 = 10
 // Inner condition: 5 + 4 + 3 + 2 = 14 (each round = body count + 1)
 // Outer body 4, outer condition 5
+
+//! Point 6: let vs var in Loops (and the setTimeout Trap)
+
+// setTimeout(function, ms) ka matlab hai: “ye function abhi nahi, baad mein chalao.” Pehle JavaScript ka baaqi saara code poora chalta hai, phir ye function chalta hai. 0 milliseconds likho tab bhi wo ruk kar baari ka intezar karta hai. (Iska poora andar ka nizam Async topic mein aayega, abhi sirf ye rule kaafi hai.)
+
+console.log("===Let vs Var in Loops and setTimeout trap===");
+
+setTimeout(function () { console.log("baad mein"); }, 0);
+console.log("pehle");
+// Output: pehle, baad mein
+
+
+// var vs let: scope ka farq
+//                           var	                                      let
+// Scope	                   Function scope (block { } ko nahi maanta)	Block scope ({ } ke andar hi zinda)
+// Loop mein	               Ek hi variable poore loop ke liye	        Har iteration ka apna alag copy
+// Loop ke baad              Bahar bhi milta hai	                      ReferenceError
+
+// for (var i = 0; i < 3; i++) { }
+// console.log(i);   // 3  (var bahar leak ho gaya)
+
+
+//! Famous Trap
+console.log("===Famous Trap===");
+
+for (var k = 0; k < 3; k++) {
+  setTimeout(function () {
+    console.log(k);
+  }, 0);
+}
+// Output: 3, 3, 3   (0, 1, 2 nahi!)
+
+// Loop chalta hai (setTimeout sirf function ko "baad ke liye" rakhta hai):
+// i = 0 → function #1 rakha gaya
+// i = 1 → function #2 rakha gaya
+// i = 2 → function #3 rakha gaya
+// i = 3 → 3 < 3 false → loop khatam
+// Ab baari aayi. var ki wajah se SIRF EK hi i hai, aur wo ab 3 hai
+// function #1 → i padhta hai → 3
+// function #2 → i padhta hai → 3
+// function #3 → i padhta hai → 3
+
+
+//! setTimout With Let
+console.log("===setTimout with let===");
+
+for (let i = 0; i < 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, 0);
+}
+// Output: 0, 1, 2
+
+// let har iteration ke liye NAYA alag i banata hai:
+// iteration 1 ka i = 0 → function #1 isi 0 ko yaad rakhta hai
+// iteration 2 ka i = 1 → function #2 isi 1 ko yaad rakhta hai
+// iteration 3 ka i = 2 → function #3 isi 2 ko yaad rakhta hai
+// Baad mein sab apni apni copy padhte hain → 0, 1, 2
+
+
+//? Rule
+
+// Loops mein hamesha let use karo, var nahi. const bhi nahi chalta for (const i = 0; ...; i++) mein, kyunke i++ se value badalni hai, to TypeError aata hai. (for...of mein const theek hai, wo aage aayega.)
+
+
+//? Point 5 se link: var ke saath nested loops mein dono ke liye same naam ho to ek hi variable donon loops bandhta hai, aur loop kabhi nahi rukta:
+
+// for (var r = 0; r < 5; r++) {
+//   for (var r = 0; r < 2; r++) {   // wahi r dobara
+//     console.log("hi");
+//   }
+// }
+
+//! Comprehension Check: let vs var in Loops
+
+//? Q1
+console.log("===Q1===");
+
+for (var a = 0; a < 3; a++) { }
+console.log(a);
+// a = 0: 0 < 3 true → empty body → a = 1
+// a = 1: 1 < 3 true → empty body → a = 2
+// a = 2: 2 < 3 true → empty body → a = 3
+// a = 3: 3 < 3 false → loop ends
+// var is function scoped, so `a` lives on after the loop → prints 3
+// With let: `a` exists only inside the for block
+//           → console.log(a) throws ReferenceError: a is not defined
+
+
+//? Q2
+console.log("===Q2===");
+
+for (let k = 0; k < 3; k++) {
+  setTimeout(function () { console.log(k); }, 0);
+}
+console.log("done");
+// k = 0 → function #1 queued (keeps its own k = 0)
+// k = 1 → function #2 queued (keeps its own k = 1)
+// k = 2 → function #3 queued (keeps its own k = 2)
+// k = 3 → 3 < 3 false → loop ends
+// console.log("done") runs right away → "done"
+// Queue runs only after ALL normal code of the file is finished
+// Queue output (later): 0, 1, 2
+
+
+//? Q3
+console.log("===Q3===");
+
+for (var x = 1; x <= 3; x++) {
+  setTimeout(function () { console.log(x * 10); }, 0);
+}
+// x = 1 → function #1 queued
+// x = 2 → function #2 queued
+// x = 3 → function #3 queued
+// x = 4 → 4 <= 3 false → loop ends (x stays 4)
+// var → only ONE shared x, now 4
+// Queue: #1 → 4 * 10 = 40, #2 → 40, #3 → 40
+// Fix: use let (each iteration gets its own x: 10, 20, 30)
+
+
+//* Final order in the terminal (normal code first, then the queue):
+// ===Q1=== / 3 / ===Q2=== / done / ===Q3===
+// then the queue in the order it was filled: 0 / 1 / 2 / 40 / 40 / 40

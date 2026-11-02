@@ -714,3 +714,82 @@ for(let i = 0; i < names.length; i++) {
 console.log(user);
 
 // [{ name: "Sara" }, { name: "Sara" }]  → dono ek hi address, jo aakhir mein "Sara" ban gaya
+
+
+//! Comprehension Check: Building Arrays, Strings and Objects
+
+//? Q1
+console.log("===Q1===");
+
+let nums1 = [3, 8, 5, 10];
+const doubled = [];
+for (let i = 0; i < nums1.length; i++) {
+  if (nums1[i] > 4) {
+    doubled.push(nums1[i] * 2);
+  }
+}
+console.log(doubled);
+// i = 0: 3 > 4? no  → skip
+// i = 1: 8 > 4? yes → push 16 → [16]
+// i = 2: 5 > 4? yes → push 10 → [16, 10]
+// i = 3: 10 > 4? yes → push 20 → [16, 10, 20]
+// i = 4: 4 < 4 false → loop ends
+// Output: [ 16, 10, 20 ]
+// Body 4, push 3, condition 5, update 4
+
+
+//? Q2
+console.log("===Q2===");
+
+let tags = ["js", "css", "html"];
+let text1 = "";
+for (let i = 0; i < tags.length; i++) {
+  text1 += tags[i] + ", ";
+}
+console.log(text1);
+// i = 0: text1 = "js, "
+// i = 1: text1 = "js, css, "
+// i = 2: text1 = "js, css, html, "
+// Output: "js, css, html, "  ← aakhir mein extra ", "
+// Bug: comma har element ke saath bina shart ke add ho raha hai
+
+
+//? Fix (naya variable, kyunke text1 pehle se bhara hua hai)
+let text2 = "";
+for (let i = 0; i < tags.length; i++) {
+  text2 += tags[i];
+  if (i < tags.length - 1) {
+    text2 += ", ";
+  }
+}
+console.log(text2);
+// i = 0: text2 = "js"            → 0 < 2 yes → "js, "
+// i = 1: text2 = "js, css"       → 1 < 2 yes → "js, css, "
+// i = 2: text2 = "js, css, html" → 2 < 2 no → comma nahi
+// Output: "js, css, html"
+// Old mistake: reusing text1 would give "js, css, html, js, css, html"
+
+
+//? Q3
+console.log("===Q3===");
+
+let letters = "abca";
+const count1 = {};
+for (let i = 0; i < letters.length; i++) {
+  let ch = letters[i];
+  if (count1[ch] === undefined) {
+    count1[ch] = 1;
+  } else {
+    count1[ch]++;
+  }
+}
+console.log(count1);
+// i = 0: ch = "a" → undefined → count1 = { a: 1 }
+// i = 1: ch = "b" → undefined → { a: 1, b: 1 }
+// i = 2: ch = "c" → undefined → { a: 1, b: 1, c: 1 }
+// i = 3: ch = "a" → already 1, not undefined → else → count1.a++ → { a: 2, b: 1, c: 1 }
+// (a) Output: { a: 2, b: 1, c: 1 }
+// (b) i = 3: "a" pehle se mojood tha, to else chala aur 1 se 2 hua
+// (c) count1.ch likhte to key hamesha literal "ch" hoti:
+//     i = 0: undefined → ch = 1, i = 1: ch = 2, i = 2: ch = 3, i = 3: ch = 4
+//     Output: { ch: 4 }  (letters ki ginti nahi, sirf "ch" naam ki ek key)

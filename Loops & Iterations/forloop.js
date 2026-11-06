@@ -793,3 +793,104 @@ console.log(count1);
 // (c) count1.ch likhte to key hamesha literal "ch" hoti:
 //     i = 0: undefined → ch = 1, i = 1: ch = 2, i = 2: ch = 3, i = 3: ch = 4
 //     Output: { ch: 4 }  (letters ki ginti nahi, sirf "ch" naam ki ek key)
+
+
+//! Point 8: Caching the Length (Performance)
+
+//* for (let i = 0; i < arr.length; i++) { }
+
+// Yahan arr.length har condition check par dobara padha jata hai. Iska hal caching hai: ek dafa value nikal kar variable mein rakh lo.
+
+//* for (let i = 0, len = arr.length; i < len; i++) { }
+
+// Ye wahi Point 3 wala multiple loop variables (comma) pattern hai. Init sirf ek dafa chalta hai, to arr.length bhi ek hi dafa padha jata hai.
+
+// Real-world: teacher har baar poori class dobara ginne ke bajaye shuru mein ek dafa gin kar number yaad rakh leta hai.
+
+//? Example 1: Condition mein mehnga kaam (function call)
+console.log("====Topic 8: Caching The Length==="); 
+
+let calls = 0; 
+function getLimit() {
+  calls++; 
+  return 3; 
+}
+
+for(let i = 0; i < getLimit(); i++) {};
+
+console.log(calls); // 4
+
+// i = 0: getLimit() call #1 → 0 < 3 true  → body → i = 1
+// i = 1: getLimit() call #2 → 1 < 3 true  → body → i = 2
+// i = 2: getLimit() call #3 → 2 < 3 true  → body → i = 3
+// i = 3: getLimit() call #4 → 3 < 3 false → loop ends
+// Function condition ki tarah har check par chala: body 3, calls 4
+
+//? Cache Karo 
+
+const limit = getLimit(); 
+for(let i = 0; i < limit; i++) { };
+
+//? Example 2: Loop ke andar array ka size badalta ho
+
+// let arr = [1, 2, 3]; 
+// for(let i = 0; i  < arr.length; i++) {
+//   arr.push(i);
+// }
+
+//* Yahan har round arr.length barhta hai, to i kabhi usay pakar nahi pata: infinite loop (rukne ke liye Ctrl+C). Cache karo to loop sirf asal size tak chalta hai:
+
+let list = [1, 2, 3]; 
+for(let i = 0, len = list.length; i < len; i++ ) {
+  list.push(i);
+}
+console.log(list); // 1, 2, 3, 0, 1, 2
+
+
+// init: i = 0, len = 3 (cache hua, ab nahi badlega)
+// i = 0: 0 < 3 → push 0 → list = [1, 2, 3, 0]
+// i = 1: 1 < 3 → push 1 → [1, 2, 3, 0, 1]
+// i = 2: 2 < 3 → push 2 → [1, 2, 3, 0, 1, 2]
+// i = 3: 3 < 3 false → ends (list ab 6 ka hai, par len abhi bhi 3)
+
+
+//* Ulta khatra: jab naye size ko dekhna chahiye  
+
+// Agar loop ke andar items nikalte jao (splice) aur chahte ho ke loop naya size dekhe, to cached len purana reh jata hai aur loop us se aage chala jata hai (undefined milta hai). Is liye caching sirf tab karo jab size loop ke dauran badalna na ho, ya badalne par bhi purana size hi chahiye.
+
+//? Reverse loop khud cache ho jata hai
+
+//* for (let i = arr.length - 1; i >= 0; i--) { }
+
+// arr.length yahan sirf init mein ek dafa padha gaya, condition mein nahi. Isi liye reverse loop caching ka asaan raasta hai.
+
+
+//! Comprehension Check 
+
+//? Q1
+
+console.log("===Q1==="); 
+
+let calls1 = 0;
+function size() {
+  calls1++;
+  return 4;
+}
+
+// for (let i = 0; i < size(); i++) { }
+// console.log(calls1); // 5
+
+const n1 = size();
+for(let i = 0; i < n1; i++) {}
+console.log(calls1); // 1
+
+
+
+//? Q2
+console.log("===Q2==="); 
+
+let list1 = [1, 2, 3];
+for (let i = 0, len = list1.length; i < len; i++) {
+  list1.push(i * 10);
+}
+console.log(list1); // body  3 dafa chali condition 4 bar check hui len ke bagair infinite loop ban jata abhi output ho ga 1, 2, 3, 0, 10, 20

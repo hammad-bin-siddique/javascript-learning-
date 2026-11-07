@@ -865,11 +865,10 @@ console.log(list); // 1, 2, 3, 0, 1, 2
 // arr.length yahan sirf init mein ek dafa padha gaya, condition mein nahi. Isi liye reverse loop caching ka asaan raasta hai.
 
 
-//! Comprehension Check 
+//! Comprehension Check: Caching the Length
 
 //? Q1
-
-console.log("===Q1==="); 
+console.log("===Q1===");
 
 let calls1 = 0;
 function size() {
@@ -879,18 +878,34 @@ function size() {
 
 // for (let i = 0; i < size(); i++) { }
 // console.log(calls1); // 5
+// i = 0: size() call #1 → 0 < 4 true  → body → i = 1
+// i = 1: size() call #2 → 1 < 4 true  → body → i = 2
+// i = 2: size() call #3 → 2 < 4 true  → body → i = 3
+// i = 3: size() call #4 → 3 < 4 true  → body → i = 4
+// i = 4: size() call #5 → 4 < 4 false → loop ends
+// Body 4, condition 5, so size() ran 5 times → calls1 = 5
 
 const n1 = size();
-for(let i = 0; i < n1; i++) {}
-console.log(calls1); // 1
-
+for (let i = 0; i < n1; i++) {}
+console.log(calls1);
+// size() ran ONCE (outside the loop) → n1 = 4 → calls1 = 1
+// Note: agar dono loops ek hi file mein uncomment karo to calls1 = 5 + 1 = 6 aayega,
+//       kyunke calls1 shared hai. Dusre loop se pehle calls1 = 0; reset karo.
 
 
 //? Q2
-console.log("===Q2==="); 
+console.log("===Q2===");
 
 let list1 = [1, 2, 3];
 for (let i = 0, len = list1.length; i < len; i++) {
   list1.push(i * 10);
 }
-console.log(list1); // body  3 dafa chali condition 4 bar check hui len ke bagair infinite loop ban jata abhi output ho ga 1, 2, 3, 0, 10, 20
+console.log(list1);
+// init: i = 0, len = 3 (cached, ab nahi badlega)
+// i = 0: 0 < 3 true  → push 0  → [1, 2, 3, 0]
+// i = 1: 1 < 3 true  → push 10 → [1, 2, 3, 0, 10]
+// i = 2: 2 < 3 true  → push 20 → [1, 2, 3, 0, 10, 20]
+// i = 3: 3 < 3 false → loop ends (list ab 6 ka hai, len abhi bhi 3)
+// Output: [ 1, 2, 3, 0, 10, 20 ]
+// Body 3, condition 4, update 3
+// Without len (i < list1.length): length har round barhti, i kabhi pakar nahi pata → infinite loop

@@ -87,3 +87,68 @@ console.log(count); // 2
 // (c) Condition: 3 dafa check hui (loop break se khatam hua, false se nahi)
 // (d) i++: 2 dafa chala (teesre round mein break ne skip kar diya)
 // (e) 90 aur 55 kabhi check hi nahi hue
+
+//! Point 2: continue
+
+console.log("===Point Two Continue==="); 
+
+//? Definition
+
+// Jab JavaScript continue par pohanchti hai to:
+
+// Is round ki baaki body skip ho jati hai.
+// Loop band nahi hota.
+// for loop mein control seedha update part (i++) par jata hai, phir condition check hoti hai, phir agla round shuru.
+
+// Yaad rakho: break mein i++ skip hota tha, lekin continue mein for loop ka i++ chalta hai.
+
+
+//! Code Example
+
+let marks1 = [70, 85, 40, 90, 55]; 
+
+let count1 = 0; 
+
+for(let i = 0; i < marks1.length; i++) {
+    if(marks1[i] < 50) {
+        continue;
+
+    }
+    count1++;
+    console.log(marks1[i]);
+}
+
+console.log(count1);
+
+// Pichli dafa break ke saath jawab 2 tha. Ab continue ke saath 4 hai. Farq yehi hai: break ne 90 aur 55 ko dekhne hi nahi diya, jab ke continue ne sirf 40 ko chhoda.
+
+//?
+// continue = sirf is round ki baaki body skip. Loop chalta rehta hai.
+// for loop mein continue ke baad i++ CHALTA hai (break mein nahi).
+
+let nums = [5, -2, 8, 0, 12, -7, 3];
+let sum = 0;
+
+for (let i = 0; i < nums.length; i++) {
+  if (nums[i] < 0) {
+    continue;
+  }
+  if (nums[i] === 0) {
+    break;
+  }
+  sum += nums[i];
+}
+
+console.log(sum); // 13
+
+// Round | i | nums[i] | < 0?  | === 0? | Kya hua        | sum
+//   1   | 0 |    5    | false | false  | sum += 5       | 5
+//   2   | 1 |   -2    | true  |  --    | continue       | 5
+//   3   | 2 |    8    | false | false  | sum += 8       | 13
+//   4   | 3 |    0    | false | true   | break          | 13
+//
+// (a) Output: 13
+// (b) Body: 4 dafa (round 4 mein break hua, par body shuru ho chuki thi)
+// (c) Condition: 4 dafa (i = 0, 1, 2, 3)
+// (d) i++: 3 dafa (round 2 mein continue ke baad bhi chala, round 4 mein break ne skip kiya)
+// (e) 12, -7, 3 kabhi check nahi hue
